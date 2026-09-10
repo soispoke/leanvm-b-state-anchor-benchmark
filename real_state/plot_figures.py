@@ -119,6 +119,9 @@ def export(fig, path, description):
         if box.x0 < -1 or box.y0 < -1 or box.x1 > width+1 or box.y1 > height+1:
             raise ValueError(f'Text exceeds figure bounds: {text.get_text()!r}')
     fig.savefig(path.with_suffix('.svg'), metadata={'Date': None, 'Description': description})
+    # Matplotlib leaves trailing spaces in multiline SVG path attributes.
+    svg = path.with_suffix('.svg')
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
     fig.savefig(path.with_suffix('.pdf'), metadata={
         'Title': description, 'Creator': 'real_state.plot_figures; Matplotlib',
         'CreationDate': None, 'ModDate': None,
