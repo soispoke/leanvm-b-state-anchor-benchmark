@@ -22,6 +22,10 @@ jobs:
       - run: python -m pip install -r requirements-lock.txt
       - run: python verify_evidence.py
       - run: python -m real_state.verify_artifacts
+      - name: Regenerate publication figures from raw evidence
+        run: |
+          python -m pip install -r real_state/figure-requirements.txt
+          python -m real_state.plot_figures --check
       - name: Check native hashes and inclusion relations
         run: |
           git clone https://github.com/ethereum/remerkleable.git local-runs/remerkleable
