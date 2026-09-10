@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+vendor/
+target/
+node_modules/
+local-runs/
+.env
+.env.*

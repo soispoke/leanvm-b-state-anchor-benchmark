@@ -1,0 +1,23 @@
+Command:
+python3 prototypes/leanvm-b-state-anchor-benchmark/analyze_fixtures.py
+
+Result:
+VALIDATION block=0x18bd000 hash=0xa6f6dd4116ea6caf55549f1617943485fc9e56c164d68e21ebd32d2bdcb39863 state_root=0xae8de9c5c3a339068cafbaa4687bad7bc66f63dc5a04cd65c468677675831ce5 rlp_header_bytes=634 rlp_bridge_hashes=20 ssz_bridge_hashes=5 proofs=6 negative_tests=101
+
+All six account proofs and all nine storage proofs were verified against the
+pinned state root with the real Keccak Merkle Patricia trie rules. The current
+RLP header reproduced the pinned block hash. Contract calls and raw storage
+matched the authenticated proof values for WETH, BAYC, Safe, and Tornado Cash.
+The analyzer also recomputed every mapping and array slot used by those cases.
+
+Negative checks changed the state root and account key, then changed one byte
+in each of the 99 proof node occurrences. Every change was rejected.
+
+Thirteen focused MPT unit tests passed. They cover canonical short embedded and
+hashed children, including the exact 32 byte boundary. They reject invalid raw
+child references, empty extension paths, empty leaf values, adjacent extension
+or leaf nodes, and branches that should have been collapsed.
+
+Independent checkpoint:
+ethereum-rpc.publicnode.com returned the same block hash and state root for
+block 0x18bd000 on 2026-09-09.

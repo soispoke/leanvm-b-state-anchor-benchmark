@@ -1,0 +1,21 @@
+leanVM-b commit: 8494c5d5df323f2b97ed89272942a4bee6247078
+Machine: Apple M5 Max, 18 cores, 128 GB
+OS: macOS 26.5, Darwin 25.5.0, arm64
+Rust: rustc 1.97.1, cargo 1.97.1
+Threads: RAYON_NUM_THREADS=11
+Batch: 400
+Method: one discarded warmup, three measured and verified proofs, then tampered-root rejection
+
+RESULT variant=direct_app_root batch=400 auth_hashes=33 state_hashes=0 header_hashes=0 hashes_per_tx=33 total_hashes=13200 cycles=316820 committed=9437248 proof_bytes=661376 prove_ms_mean=460.164 verify_ms_mean=6.547 prove_ms_samples=[459.829375, 459.551916, 461.109625] verify_ms_samples=[6.605625, 6.776834, 6.259709]
+maximum resident set size: 3287711744 bytes
+
+RESULT variant=direct_state_root batch=400 auth_hashes=33 state_hashes=217 header_hashes=0 hashes_per_tx=250 total_hashes=100000 cycles=2400024 committed=75497536 proof_bytes=791848 prove_ms_mean=2767.226 verify_ms_mean=7.317 prove_ms_samples=[2751.112042, 2755.667000, 2794.898625] verify_ms_samples=[7.391208, 7.307167, 7.252333]
+maximum resident set size: 22676275200 bytes
+
+RESULT variant=eip7807_ssz_block_hash batch=400 auth_hashes=33 state_hashes=217 header_hashes=5 hashes_per_tx=255 total_hashes=102000 cycles=2448024 committed=75497536 proof_bytes=793608 prove_ms_mean=2831.851 verify_ms_mean=7.816 prove_ms_samples=[2804.928334, 2836.962000, 2853.663834] verify_ms_samples=[8.082834, 7.456333, 7.908500]
+maximum resident set size: 22692610048 bytes
+
+RESULT variant=rlp_block_hash batch=400 auth_hashes=33 state_hashes=217 header_hashes=20 hashes_per_tx=270 total_hashes=108000 cycles=2592024 committed=75497536 proof_bytes=795816 prove_ms_mean=2916.136 verify_ms_mean=7.799 prove_ms_samples=[2906.111083, 2923.941500, 2918.354625] verify_ms_samples=[7.897375, 7.651333, 7.849750]
+maximum resident set size: 22716317696 bytes
+
+Correctness smoke test: 4 variants passed at batch 8. Every measured proof verified. Each variant rejected a public root with one changed field element.

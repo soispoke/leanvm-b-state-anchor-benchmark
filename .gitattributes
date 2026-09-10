@@ -1,0 +1,4 @@
+# Preserve exact evidence bytes, including CSV line endings, on every platform.
+* -text
+# The recorded CSV exports include CRLF and a historical final blank line.
+*.csv whitespace=cr-at-eol,-blank-at-eof
