@@ -4,7 +4,7 @@ Two publication figures for the real account-and-storage experiment. Both are 18
 
 ## Figure 1 | One real claim through three anchor paths
 
-![Three anchor paths authenticate a common state root, followed by account and storage trie verification](figure-1-proof-paths.svg)
+![Three anchor paths authenticate a common state root, followed by account and storage trie verification](figure-1-proof-paths.png)
 
 [Vector PDF](figure-1-proof-paths.pdf) · [Editable SVG](figure-1-proof-paths.svg) · [600 dpi PNG](figure-1-proof-paths.png)
 
@@ -14,7 +14,7 @@ Size: **183 × 115 mm**. Diagram numbers come from the recorded fixture, public 
 
 ## Figure 2 | Real proof measurements
 
-![Raw proving and verification samples, VM instructions, committed cells, proof size, and macOS memory footprint](figure-2-measured-results.svg)
+![Raw proving and verification samples, VM instructions, committed cells, proof size, and macOS memory footprint](figure-2-measured-results.png)
 
 [Vector PDF](figure-2-measured-results.pdf) · [Editable SVG](figure-2-measured-results.svg) · [600 dpi PNG](figure-2-measured-results.png) · [Source data CSV](source-data.csv)
 

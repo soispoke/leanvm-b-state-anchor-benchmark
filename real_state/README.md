@@ -2,7 +2,7 @@
 
 This experiment proves the Safe account's slot 0 value through three anchor paths. The program computes Ethereum Keccak-256, verifies canonical RLP and Merkle Patricia trie links, extracts the account's storage root, verifies the storage value, and binds the claim to its public anchor. The SSZ variant additionally computes the five SHA-256 branch hashes required by EIP-7807's proposed container.
 
-![Three public anchors and the shared account-and-storage inclusion relation](figures/figure-1-proof-paths.svg)
+![Three public anchors and the shared account-and-storage inclusion relation](figures/figure-1-proof-paths.png)
 
 **Figure 1. One real claim through three anchor paths.** Anchor authentication converges on the same mainnet state root. The account proof supplies the storage root used for the storage proof. All depicted encoding and hashing checks run inside leanVM-b for the public fixed shape. [Full caption and PDF/SVG/PNG exports](figures/README.md#figure-1--one-real-claim-through-three-anchor-paths).
 
@@ -20,7 +20,7 @@ The value is the Safe singleton address. It is the same account-and-storage fixt
 
 ## Measured results
 
-![All measured proof runs with execution, commitment, proof size, and memory comparisons](figures/figure-2-measured-results.svg)
+![All measured proof runs with execution, commitment, proof size, and memory comparisons](figures/figure-2-measured-results.png)
 
 **Figure 2. Real proof measurements.** Individual fresh-process samples, medians, and observed ranges accompany deterministic instruction counts, commitment size, and proof size. Measurements used battery power. These ranges are not confidence intervals. [Full caption, source data, and vector exports](figures/README.md#figure-2--real-proof-measurements).
 

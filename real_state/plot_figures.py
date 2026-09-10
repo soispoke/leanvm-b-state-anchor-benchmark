@@ -32,7 +32,7 @@ MM = 1 / 25.4
 MARKERS = ('o', '^', 's')
 STEMS = ('figure-1-proof-paths', 'figure-2-measured-results')
 plt.rcParams.update({
-    'font.family': 'DejaVu Sans', 'font.size': 6.5,
+    'font.family': ['DejaVu Sans', 'Arial', 'Helvetica', 'sans-serif'], 'font.size': 6.5,
     'axes.labelsize': 6.5, 'axes.titlesize': 7,
     'xtick.labelsize': 6, 'ytick.labelsize': 6.5,
     'text.color': INK, 'axes.labelcolor': INK,

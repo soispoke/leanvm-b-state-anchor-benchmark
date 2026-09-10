@@ -4,7 +4,7 @@ Real Ethereum account-and-storage proofs through three anchor paths, with all Ke
 
 The claim is the Safe account `0xb235f9b71000a39c25476f7ba40aaa3763287685`'s slot 0 value at mainnet block **25,939,968**. All nine proof runs verified, three per anchor. The three saved proofs also verified in separate processes without the witness files, and the VM rejected all 76 altered-witness cases.
 
-![Real proof results: individual proving and verification measurements, instruction counts, committed cells, proof size, and peak memory footprint](real_state/figures/figure-2-measured-results.svg)
+![Real proof results: individual proving and verification measurements, instruction counts, committed cells, proof size, and peak memory footprint](real_state/figures/figure-2-measured-results.png)
 
 **Real proof results.** Every measured run is shown. The RLP and SSZ paths execute about 13% more instructions than the direct path, while commitment size is identical. Thin lines show observed ranges and black ticks show medians, not confidence intervals. [Figure gallery, full captions, and PDF/SVG/600 dpi PNG downloads](real_state/figures/README.md).
 
@@ -20,7 +20,7 @@ The programs prove the complete inclusion claim for a **fixed public encoding sh
 
 Read the [real proof report](real_state/README.md) for the exact statement, trust boundary, measured ranges, and reproduction commands. It includes [saved proofs](real_state/proofs/), [raw results](real_state/results/), [program hashes](real_state/programs.json), and the [guest relation](real_state/statement.py).
 
-![The three public anchors converge on the same real account-and-storage claim](real_state/figures/figure-1-proof-paths.svg)
+![The three public anchors converge on the same real account-and-storage claim](real_state/figures/figure-1-proof-paths.png)
 
 **Proof paths.** Each anchor authenticates the same state root before the VM verifies the account and storage trie paths. The SSZ summary is hypothetical; its state root is from the mainnet fixture. [Full caption and vector exports](real_state/figures/README.md#figure-1--one-real-claim-through-three-anchor-paths).
 

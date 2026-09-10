@@ -246,70 +246,70 @@ L 297.637795 154.488189
 " clip-path="url(#pe6c3887029)" style="fill: none; stroke: #202124; stroke-width: 0.65; stroke-linecap: square"/>
    </g>
    <g id="text_1">
-    <text style="font-weight: 700; font-size: 6.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #202124" x="90.708661" y="59.195169" transform="rotate(-0 90.708661 59.195169)">Direct state root</text>
+    <text style="font-weight: 700; font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #202124" x="90.708661" y="59.195169" transform="rotate(-0 90.708661 59.195169)">Direct state root</text>
    </g>
    <g id="text_2">
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(50.14206 107.379451)">State root bound directly</text>
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(60.484677 115.892776)">to the public claim</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(50.14206 107.379451)">State root bound directly</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(60.484677 115.892776)">to the public claim</text>
    </g>
    <g id="text_3">
-    <text style="font-weight: 700; font-size: 6.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #202124" x="259.370079" y="59.195169" transform="rotate(-0 259.370079 59.195169)">Historical RLP block hash</text>
+    <text style="font-weight: 700; font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #202124" x="259.370079" y="59.195169" transform="rotate(-0 259.370079 59.195169)">Historical RLP block hash</text>
    </g>
    <g id="text_4">
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(223.871954 103.122789)">Canonical RLP header</text>
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(231.101172 111.636113)">Extract stateRoot</text>
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(222.260157 120.149438)">Keccak-256; 634 bytes</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(223.871954 103.122789)">Canonical RLP header</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(231.101172 111.636113)">Extract stateRoot</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(222.260157 120.149438)">Keccak-256; 634 bytes</text>
    </g>
    <g id="text_5">
-    <text style="font-weight: 700; font-size: 6.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #202124" x="428.031496" y="59.169778" transform="rotate(-0 428.031496 59.169778)">Proposed SSZ summary root*</text>
+    <text style="font-weight: 700; font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #202124" x="428.031496" y="59.169778" transform="rotate(-0 428.031496 59.169778)">Proposed SSZ summary root*</text>
    </g>
    <g id="text_6">
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(377.956105 103.122789)">State-root branch at gindex 41</text>
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(391.04091 111.636113)">5 SHA-256 pair hashes</text>
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(390.204035 120.149438)">18-field activity bitmap</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(377.956105 103.122789)">State-root branch at gindex 41</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(391.04091 111.636113)">5 SHA-256 pair hashes</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(390.204035 120.149438)">18-field activity bitmap</text>
    </g>
    <g id="text_7">
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #202124" x="259.370079" y="175.415641" transform="rotate(-0 259.370079 175.415641)">Same authenticated mainnet state root</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #202124" x="259.370079" y="175.415641" transform="rotate(-0 259.370079 175.415641)">Same authenticated mainnet state root</text>
    </g>
    <g id="text_8">
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(48.090062 251.94638)">State</text>
-    <text style="font-size: 6.5px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(50.178695 260.459705)">root</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(48.090062 251.94638)">State</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(50.178695 260.459705)">root</text>
    </g>
    <g id="text_9">
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(161.478026 247.99986)">Account MPT</text>
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(143.89812 256.120261)">10 nodes: RLP + Keccak</text>
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(145.743104 264.240663)">Key = Keccak(address)</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(161.478026 247.99986)">Account MPT</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(143.89812 256.120261)">10 nodes: RLP + Keccak</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(145.743104 264.240663)">Key = Keccak(address)</text>
    </g>
    <g id="text_10">
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(317.770553 247.99986)">Storage MPT</text>
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(301.776007 256.120261)">2 nodes: RLP + Keccak</text>
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(308.238053 264.240663)">Key = Keccak(slot)</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(317.770553 247.99986)">Storage MPT</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(301.776007 256.120261)">2 nodes: RLP + Keccak</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(308.238053 264.240663)">Key = Keccak(slot)</text>
    </g>
    <g id="text_11">
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(446.52989 252.060061)">Slot 0 value</text>
-    <text style="font-size: 6.2px; font-family: 'DejaVu Sans'; fill: #202124" transform="translate(443.756843 260.180462)">0x29fc...c762</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(446.52989 252.060061)">Slot 0 value</text>
+    <text style="font-size: 6.2px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #202124" transform="translate(443.756843 260.180462)">0x29fc...c762</text>
    </g>
    <g id="text_12">
-    <text style="font-size: 5.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #202124" x="259.370079" y="223.937008" transform="rotate(-0 259.370079 223.937008)">storageRoot</text>
+    <text style="font-size: 5.5px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #202124" x="259.370079" y="223.937008" transform="rotate(-0 259.370079 223.937008)">storageRoot</text>
    </g>
    <g id="text_13">
-    <text style="font-size: 6px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #202124" x="17.007874" y="300.472441" transform="rotate(-0 17.007874 300.472441)">Mainnet block 25,939,968  |  Safe 0xb235...7685  |  Fixed public encoding shape</text>
+    <text style="font-size: 6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="17.007874" y="300.472441" transform="rotate(-0 17.007874 300.472441)">Mainnet block 25,939,968  |  Safe 0xb235...7685  |  Fixed public encoding shape</text>
    </g>
    <g id="text_14">
-    <text style="font-size: 5.6px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #202124" x="17.007874" y="314.645669" transform="rotate(-0 17.007874 314.645669)">*Hypothetical SSZ summary containing the real state root. Every encoding and hash check shown is enforced in the VM.</text>
+    <text style="font-size: 5.6px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="17.007874" y="314.645669" transform="rotate(-0 17.007874 314.645669)">*Hypothetical SSZ summary containing the real state root. Every encoding and hash check shown is enforced in the VM.</text>
    </g>
   </g>
   <g id="text_15">
-   <text style="font-weight: 700; font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #202124" x="14.173228" y="19.215374" transform="rotate(-0 14.173228 19.215374)">a</text>
+   <text style="font-weight: 700; font-size: 8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="14.173228" y="19.215374" transform="rotate(-0 14.173228 19.215374)">a</text>
   </g>
   <g id="text_16">
-   <text style="font-weight: 700; font-size: 7px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #202124" x="28.346457" y="18.939437" transform="rotate(-0 28.346457 18.939437)">Three public anchors authenticate the same state root</text>
+   <text style="font-weight: 700; font-size: 7px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="28.346457" y="18.939437" transform="rotate(-0 28.346457 18.939437)">Three public anchors authenticate the same state root</text>
   </g>
   <g id="text_17">
-   <text style="font-weight: 700; font-size: 8px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #202124" x="14.173228" y="209.136634" transform="rotate(-0 14.173228 209.136634)">b</text>
+   <text style="font-weight: 700; font-size: 8px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="14.173228" y="209.136634" transform="rotate(-0 14.173228 209.136634)">b</text>
   </g>
   <g id="text_18">
-   <text style="font-weight: 700; font-size: 7px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #202124" x="28.346457" y="208.833353" transform="rotate(-0 28.346457 208.833353)">A shared account-and-storage inclusion relation</text>
+   <text style="font-weight: 700; font-size: 7px; font-family: 'DejaVu Sans', 'Arial', 'Helvetica', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="28.346457" y="208.833353" transform="rotate(-0 28.346457 208.833353)">A shared account-and-storage inclusion relation</text>
   </g>
  </g>
  <defs>
