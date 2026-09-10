@@ -1,10 +1,16 @@
-# Real account and storage proofs in leanVM-b
+# State lookup for note-owner binding
 
-This experiment proves the Safe account's slot 0 value through three anchor paths. The program computes Ethereum Keccak-256, verifies canonical RLP and Merkle Patricia trie links, extracts the account's storage root, verifies the storage value, and binds the claim to its public anchor. The SSZ variant additionally computes the five SHA-256 branch hashes required by EIP-7807's proposed container.
+How much work does the choice of state or block root add when a proof reads an owner's account and stored verification key? This experiment isolates that state lookup, the state-dependent component of owner binding in a note-based privacy system.
 
-![Three public anchors and the shared account-and-storage inclusion relation](figures/figure-1-proof-paths.png)
+The motivating relation opens a note commitment `H = hash(owner_addr, secret)` and authenticates the account and stored key selected by that same `owner_addr`. We measure the account-and-storage lookup through three anchors. Commitment opening is shown as context, but is not in the measured program; owner hiding has not been demonstrated. Verifying a signature or nested STARK against the retrieved key is outside the selected scope.
 
-**Figure 1. One real claim through three anchor paths.** Anchor authentication converges on the same mainnet state root. The account proof supplies the storage root used for the storage proof. All depicted encoding and hashing checks run inside leanVM-b for the public fixed shape. [Full caption and PDF/SVG/PNG exports](figures/README.md#figure-1--one-real-claim-through-three-anchor-paths).
+![The note-owner relation and the state lookup measured through three anchors](figures/figure-1-proof-paths.png)
+
+**Figure 1. Where authenticated state enters owner binding.** The dashed box provides the note-commitment context; the solid state lookup is measured. All three anchors converge on the same account and storage proof. [Full caption and vector exports](figures/README.md#figure-1--state-lookup-for-owner-binding).
+
+The program computes Ethereum Keccak-256, verifies canonical RLP and Merkle Patricia trie links, extracts the account's storage root, verifies the storage word, and binds the claim to its public anchor. The SSZ variant additionally computes five SHA-256 branch hashes.
+
+## The real state claim
 
 The real claim at mainnet block **25,939,968** is:
 
@@ -16,23 +22,39 @@ The real claim at mainnet block **25,939,968** is:
 | State root | `0xae8de9c5c3a339068cafbaa4687bad7bc66f63dc5a04cd65c468677675831ce5` |
 | Historical RLP block hash | `0xa6f6dd4116ea6caf55549f1617943485fc9e56c164d68e21ebd32d2bdcb39863` |
 
-The value is the Safe singleton address. It is the same account-and-storage fixture used in the earlier calibration, not a verification key or a private transaction.
+The value is the Safe singleton address. This real 32-byte storage word stands in for a stored verification key hash; it is not itself an authorization key. The experiment uses the same account-and-storage fixture as the earlier calibration.
 
-## Measured results
+## Results for the state lookup
 
-![All measured proof runs with execution, commitment, proof size, and memory comparisons](figures/figure-2-measured-results.png)
+The block anchor adds about **13% more VM instructions**, while all three programs retain **182,455,228 committed witness cells**. The central result is this modest change in execution work with unchanged padded commitment size. Three variable timing samples per condition do not establish a reliable speed ranking.
 
-**Figure 2. Real proof measurements.** Individual fresh-process samples, medians, and observed ranges accompany deterministic instruction counts, commitment size, and proof size. Measurements used battery power. These ranges are not confidence intervals. [Full caption, source data, and vector exports](figures/README.md#figure-2--real-proof-measurements).
+![Added anchor instructions, unchanged padded commitments, and every proving-time sample](figures/figure-2-measured-results.png)
 
-All nine proof runs verified: three fresh processes per anchor, in orders direct/RLP/SSZ, SSZ/direct/RLP, and RLP/SSZ/direct. No run was discarded and no warmup was excluded. The measurements below are medians, with the full proving range shown.
+**Figure 2. Anchor work and observed proving cost.** Gray bars show the direct-state instruction baseline; colored extensions show net additional work. The commitment size remains identical. Every proving-time sample is visible, with medians and observed ranges. [Full caption and vector exports](figures/README.md#figure-2--anchor-work-and-proving-cost).
 
-| Anchor | VM cycles | Proving median (range), s | Verification median, ms | Proof bytes |
-| --- | ---: | ---: | ---: | ---: |
-| Direct state root | 7,401,439 | 19.414 (19.083–32.616) | 378.262 | 834,848 |
-| RLP block hash | 8,370,523 | 19.964 (15.312–25.673) | 533.596 | 833,632 |
-| Proposed SSZ root | 8,385,857 | 22.247 (21.180–25.608) | 590.278 | 835,136 |
+All nine proofs verified. Each anchor ran in three fresh processes, in orders direct/RLP/SSZ, SSZ/direct/RLP, and RLP/SSZ/direct. No run was discarded and no warmup was excluded.
 
-All three programs commit **182,455,228 witness cells** under the same padded table sizes. The RLP and SSZ variants execute additional real hash and encoding checks, but their proving cost also depends on table padding and the prover's other work. The measurements are too few and too variable to establish a reliable ordering between anchors.
+| Anchor | VM instructions | Added versus direct | Proving median (observed range), s |
+| --- | ---: | ---: | ---: |
+| Direct state root | 7,401,439 | Baseline | 19.414 (19.083 to 32.616) |
+| Historical RLP block hash | 8,370,523 | 969,084 (+13.09%) | 19.964 (15.312 to 25.673) |
+| Hypothetical SSZ summary root | 8,385,857 | 984,418 (+13.30%) | 22.247 (21.180 to 25.608) |
+
+### Why the conditions are close
+
+All three conditions verify the same ten account-trie nodes and two storage-trie nodes. Exposing the state root directly removes the block-header check but leaves this state lookup intact. [EIP-7807](https://eips.ethereum.org/EIPS/eip-7807) changes the execution-block representation and explicitly leaves the state trie unchanged.
+
+In this Boolean implementation, the 634-byte RLP header and the five SSZ pair hashes add similar net instruction counts. These are different hash algorithms and input lengths: the header requires five Keccak permutations, while the five 64-byte SHA-256 inputs require ten compression blocks including padding. Counting each as one uniform hash would miss this implementation cost.
+
+The extra instructions fit within the same padded prover tables, so the committed witness size does not grow. This limits one source of extra proving work, but identical commitment size does not imply identical proving time. No prover-stage profile was collected.
+
+### What the roughly 20 seconds means
+
+The median is an initial implementation measurement for this state lookup. Keccak and SHA-256 are lowered to individual Boolean operations in the VM, with separate field cells for intermediate bits. This produces 7.4 to 8.4 million instructions. The proving timer includes execution and witness generation as well as proof construction; Python generation, file loading, and assembly are excluded.
+
+This is not an optimized hash implementation or a lower bound for the cost of owner binding. The data also do not measure the note-commitment opening. Signature verification and recursive authorization are unnecessary for this anchor comparison and remain outside its scope.
+
+Verification time, proof size and process memory are retained in [Supplementary Figure S1](figures/README.md#supplementary-figure-s1--verification-size-and-memory). The serialized proofs are about 0.835 MB. These supporting metrics and all raw samples remain in the source data.
 
 The machine was an Apple M5 Max with 128 GiB RAM, macOS 26.5, Rust/Cargo 1.97.1, and eleven Rayon workers. It was on **battery power**, unlike the original AC-powered calibration. Power settings, load, thermal-status output, source hashes, and toolchain details are in [environment.json](results/environment.json), with an [end record](results/environment-end.json). Actual temperature and CPU frequency were not measured. Maximum macOS peak memory footprint across the runs was 38.85 GiB; this metric is distinct from maximum resident memory, which is also preserved in each log.
 

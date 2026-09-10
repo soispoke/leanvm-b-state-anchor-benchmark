@@ -1,28 +1,30 @@
 # leanVM-b state anchor benchmark
 
-Real Ethereum account-and-storage proofs through three anchor paths, with all Keccak hashing, RLP validation, trie traversal, and SSZ branch hashing enforced inside leanVM-b.
+How much does the choice of anchor add to the state proof needed for **note-owner binding**? We prove one real account-and-storage claim through a direct state root, an RLP block hash and a hypothetical SSZ summary root, with every required hash and encoding check enforced inside leanVM-b.
 
-The claim is the Safe account `0xb235f9b71000a39c25476f7ba40aaa3763287685`'s slot 0 value at mainnet block **25,939,968**. All nine proof runs verified, three per anchor. The three saved proofs also verified in separate processes without the witness files, and the VM rejected all 76 altered-witness cases.
+The motivating note commits `H = hash(owner_addr, secret)`. Its owner binding must use the same address to open the commitment and authenticate the account's stored key. This benchmark measures the **state lookup**. The commitment opening is context, and owner hiding has not been demonstrated. Signature or recursive authorization is outside the selected scope.
 
-![Real proof results: individual proving and verification measurements, instruction counts, committed cells, proof size, and peak memory footprint](real_state/figures/figure-2-measured-results.png)
+![State lookup for owner binding: context, measured scope, and three anchor paths](real_state/figures/figure-1-proof-paths.png)
 
-**Real proof results.** Every measured run is shown. The RLP and SSZ paths execute about 13% more instructions than the direct path, while commitment size is identical. Thin lines show observed ranges and black ticks show medians, not confidence intervals. [Figure gallery, full captions, and PDF/SVG/600 dpi PNG downloads](real_state/figures/README.md).
+**Figure 1. The measured component of owner binding.** All paths authenticate the same account and storage word. The real fixture is a Safe account's slot 0 at mainnet block **25,939,968**; its singleton address stands in for a verification key hash. [Full caption and exports](real_state/figures/README.md#figure-1--state-lookup-for-owner-binding).
 
-| Anchor | VM cycles | Median proving time | Proof bytes |
+## Results
+
+**The block anchors add about 13% more instructions, with identical padded commitment size.** Every proving-time observation appears below. Their variation does not establish a reliable timing ranking.
+
+![Additional anchor work, identical padded commitment sizes, and all nine proving measurements](real_state/figures/figure-2-measured-results.png)
+
+| Anchor | VM instructions | Added versus direct | Median proving time |
 | --- | ---: | ---: | ---: |
-| Direct state root | 7,401,439 | 19.414 s | 834,848 |
-| Historical RLP block hash | 8,370,523 | 19.964 s | 833,632 |
-| Proposed EIP-7807 SSZ root | 8,385,857 | 22.247 s | 835,136 |
+| Direct state root | 7,401,439 | Baseline | 19.414 s |
+| RLP block hash | 8,370,523 | 969,084 (+13.09%) | 19.964 s |
+| Hypothetical SSZ summary | 8,385,857 | 984,418 (+13.30%) | 22.247 s |
 
-These initial timings were collected on an Apple M5 Max with 128 GiB RAM, on battery power, using eleven Rayon workers. The ranges overlap substantially, so they do not establish a reliable ranking between anchors.
+All three programs commit **182,455,228 witness cells**. They share the account and storage trie work; only the anchor path changes. The roughly 20-second medians reflect this unoptimized Boolean hash implementation, not an intrinsic cost of owner binding. Runs used an Apple M5 Max, eleven Rayon workers and battery power, with three fresh processes per condition.
 
-The programs prove the complete inclusion claim for a **fixed public encoding shape**. They validate every encoding boundary and compute every required hash, but do not measure a general parser discovering arbitrary proof shapes at runtime. The SSZ case uses a hypothetical EIP-7807 summary containing the real state root. It is not a historical mainnet SSZ block. This is a state inclusion proof, with no private transaction or witness-hiding claim.
+All nine proofs verified. Three saved proofs also verified in separate processes without witness files, and all 76 altered-witness cases failed inside the VM. The relation uses a **fixed public encoding shape**. The SSZ summary contains the real state root, but is not a historical mainnet SSZ block.
 
-Read the [real proof report](real_state/README.md) for the exact statement, trust boundary, measured ranges, and reproduction commands. It includes [saved proofs](real_state/proofs/), [raw results](real_state/results/), [program hashes](real_state/programs.json), and the [guest relation](real_state/statement.py).
-
-![The three public anchors converge on the same real account-and-storage claim](real_state/figures/figure-1-proof-paths.png)
-
-**Proof paths.** Each anchor authenticates the same state root before the VM verifies the account and storage trie paths. The SSZ summary is hypothetical; its state root is from the mainnet fixture. [Full caption and vector exports](real_state/figures/README.md#figure-1--one-real-claim-through-three-anchor-paths).
+The [figure gallery](real_state/figures/README.md) includes full captions, editable SVGs, vector PDFs, 600 dpi PNGs and source data. [Supplementary Figure S1](real_state/figures/README.md#supplementary-figure-s1--verification-size-and-memory) retains verification time, proof size and memory. Read the [report](real_state/README.md) for the exact statement, timing ranges, implementation and reproduction details.
 
 ## Verify locally
 
@@ -49,25 +51,6 @@ The implementation uses [leanVM-b commit `8494c5d`](https://github.com/leanEther
 
 ## Earlier BLAKE3 calibration
 
-The original experiment models state anchor work using synthetic serial BLAKE3 chains. Its two batches establish that small differences in hash count can have almost no timing effect until they cross a committed witness padding boundary.
+The original synthetic calibration and independent repeat remain preserved as background. They measure serial BLAKE3 chains and do not supply the state-lookup timings above.
 
-| Observation | Original batch | Independent repeat |
-| --- | ---: | ---: |
-| Proving spread across 141, 146, and 161 hashes | 0.71% | 0.99% |
-| Proving increase from 508 to 513 hashes | 29.90% | 27.74% |
-| Median proving shift across all 24 workloads | Reference | +3.52% |
-
-The 508 → 513 jump appeared in all 12 process sessions across both batches. Each batch contains 1,440 samples: 24 workloads, six fresh processes, and ten measured passes per process after three warmups per workload. These calibration programs execute BLAKE3 chains; the real state proof implementation is the separate experiment above.
-
-![Independent repeat of the BLAKE3 calibration](reruns/2026-09-09-independent-repeat/figure-3-leanvm-timing.png)
-
-Both calibration batches used the same recorded machine, OS, toolchain, leanVM-b commit, dependency lock, source hashes, AC power, threads, warmups, repetitions, and workload order. The original run did not record temperature, CPU frequency, system load, or power mode. Its intervals describe variation **within each batch**. Exact environmental equivalence cannot be proven.
-
-The original evidence remains preserved:
-
-- [Calibration report](REPORT.md), [independent repeat report](reruns/2026-09-09-independent-repeat/README.md), and [comparison CSV](reruns/2026-09-09-independent-repeat/comparison.csv).
-- [Original timing CSV](timing-results.csv) and [raw transcript](timing-raw.txt).
-- [Repeat timing CSV](reruns/2026-09-09-independent-repeat/timing-results.csv) and [raw transcript](reruns/2026-09-09-independent-repeat/timing-raw.txt).
-- [Mainnet fixture](fixtures/mainnet-0x18bd000.json), [structural counts](usecase-results.csv), and [figure captions](figures/README.md).
-
-Run `python verify_evidence.py` to check the original hashes, 13 MPT tests, eight structural cases, 24 recorded chain runs, all 2,880 timing samples, summaries, and SVG figures. [REPRODUCING.md](REPRODUCING.md) covers the original calibration. [PROVENANCE.md](PROVENANCE.md) explains both experiments' evidence preservation.
+Read the [calibration report](REPORT.md), [independent repeat](reruns/2026-09-09-independent-repeat/README.md), [comparison CSV](reruns/2026-09-09-independent-repeat/comparison.csv) and [original figure gallery](figures/README.md). Run `python verify_evidence.py` to check all 2,880 calibration samples and preserved artifacts. [REPRODUCING.md](REPRODUCING.md) and [PROVENANCE.md](PROVENANCE.md) document reproduction and evidence preservation.
