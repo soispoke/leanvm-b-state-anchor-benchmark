@@ -1,0 +1,173 @@
+{
+  "schema": "leanvm-real-state-run-v1",
+  "command": "verify",
+  "started_at": "2026-09-10T08:40:13.381445+00:00",
+  "source_sha256": {
+    "real_state/run.py": "e46252627b6f6e69fe1e7931d6211f5b605244f024183ac5ae6aa7f03d8b38b4",
+    "real_state/real_state_bench.rs": "0a6cd55af3f1e80fcea32dbc1254c7225152bfcf45516f61d8cc4d99f4f05092",
+    "real_state/leanvm-witness-api.patch": "365a65f9554c2c326752df19752f7df3661a074ae5220b101f1a774e2b9682b1",
+    "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+    "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+    "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+    "real_state/profile.json": "31734989162baab8597643665318c63432af34a095c8434db824a78b4c6666dd",
+    "real_state/ssz-reference.json": "a3394fad336cc964c5cd07153c8394ded794dba83207241c236168abda4aad69",
+    "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463",
+    "fixtures/mainnet-0x18bd000.json": "c0ff761d18e011a3f83a053c765f7ca8057a6a8d4ff5764bb5dcd6476c7a7795"
+  },
+  "runner": {
+    "schema": "leanvm-real-state-runner-v1",
+    "upstream_commit": "8494c5d5df323f2b97ed89272942a4bee6247078",
+    "cargo_lock_sha256": "0c60e536366da5198d5536c3fdade9a7f20d48d070ee3093758f4b73712a2bf6",
+    "source_sha256": {
+      "real_state/run.py": "e46252627b6f6e69fe1e7931d6211f5b605244f024183ac5ae6aa7f03d8b38b4",
+      "real_state/real_state_bench.rs": "0a6cd55af3f1e80fcea32dbc1254c7225152bfcf45516f61d8cc4d99f4f05092",
+      "real_state/leanvm-witness-api.patch": "365a65f9554c2c326752df19752f7df3661a074ae5220b101f1a774e2b9682b1",
+      "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+      "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+      "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+      "real_state/profile.json": "31734989162baab8597643665318c63432af34a095c8434db824a78b4c6666dd",
+      "real_state/ssz-reference.json": "a3394fad336cc964c5cd07153c8394ded794dba83207241c236168abda4aad69",
+      "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463",
+      "fixtures/mainnet-0x18bd000.json": "c0ff761d18e011a3f83a053c765f7ca8057a6a8d4ff5764bb5dcd6476c7a7795"
+    },
+    "vm_cpu_sha256": "a4715841708068e119965a505ba5880efea1944b35df0559b1b4e4f18d0ee1c2",
+    "wrapper_sha256": "18a159f2fa52bb2b3d87a6ee18432f15a2a76a158db6d4195f43fad794ea886b",
+    "binary": "vendor/leanVM-b/target/release/deps/real_state_bench-fee7ac09d4cbbd58",
+    "binary_sha256": "1b2b4ea1d42ba6359fca534c23c124f3c9ab1927d15d49649301d73063c272cb",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (Homebrew)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: aarch64-apple-darwin\nrelease: 1.97.1\nLLVM version: 22.1.8",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30) (Homebrew)",
+    "built_at": "2026-09-10T08:39:21.201269+00:00"
+  },
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "python": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "rayon_num_threads": "11",
+  "measure_memory_requested": false,
+  "negative_scope": "interpreter execution rejection; not forged-proof verification",
+  "cases": {
+    "direct": {
+      "metadata": {
+        "mode": "direct",
+        "anchor": "0xae8de9c5c3a339068cafbaa4687bad7bc66f63dc5a04cd65c468677675831ce5",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0x6fad902a8c89a43de1f1201f90176e74af659e596079a864342f914246752560",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "memory_cells": 7395891,
+        "op_counts": {
+          "xor": 5874916,
+          "mul": 1526390,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "e108b10f678ea249a6495f54830d199b2afe9c537c7895edd1b8ab68faf779ec",
+        "public.bin": "05ae146067e58891fdcacbaea42414099cb531c36b7d9ca8f06200e65dfeee44",
+        "program.json": "a919c300bdcb5e88858c4e05062b78084b4f8c5c35bd6d59c73da64e3c33d32e"
+      }
+    }
+  },
+  "runs": [
+    {
+      "exit_code": 0,
+      "process_seconds": 1.2258338749998074,
+      "memory_measurement": null,
+      "log": "direct-01-verify.log",
+      "result": null,
+      "rejection": null,
+      "verifier_files": [
+        "program.bin",
+        "proof.bin",
+        "public.bin"
+      ],
+      "proof_sha256": "14503543d4674e52d87a0cc4f69486112b65af750b312b2c5e73b01aaed16657",
+      "mode": "direct",
+      "repeat": 1,
+      "mutation": null,
+      "passed": false
+    }
+  ],
+  "finished_at": "2026-09-10T08:40:14.669451+00:00"
+}

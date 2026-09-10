@@ -1,5 +1,7 @@
 # State Anchor Proof Paths with Real Mainnet Fixtures
 
+This report covers the September 9 BLAKE3 calibration. The [September 10 real account-and-storage experiment](real_state/README.md) implements the Keccak, RLP, MPT, and SSZ checks inside leanVM-b.
+
 ## TL;DR
 
 The corrected benchmark isolates state anchoring and uses six validated mainnet proofs. Authenticating one account and one fixed storage word takes 141 modeled leanVM-b BLAKE3 calls from a direct state root, 146 from an EIP-7807 block root, or 161 from the current RLP block hash. Other direct state root examples range from 125 calls for an account record to 616 for native ETH, WETH, and BAYC together. A direct application root is much cheaper, but only for a protocol that publishes the exact root it needs. The benchmark reports two batches of 1,440 leanVM-b timing samples for synthetic serial BLAKE3 programs. Both reveal the same padding costs, but they are not end to end private proof times.

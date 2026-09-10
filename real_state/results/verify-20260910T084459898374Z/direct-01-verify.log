@@ -1,0 +1,7 @@
+
+running 1 test
+test real_state_bench::real_state_benchmark ... RESULT {"action":"verify","cycles":7401439,"counts":[5874916, 1526390, 132, 0, 1, 0],"cells":7395894,"proof_bytes":834848,"assembly_ms":495.690,"verify_ms":613.705,"witness_loaded":false}
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 1.11s
+
