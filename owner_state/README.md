@@ -10,13 +10,13 @@ This experiment opens `H = Keccak256(owner_addr || secret)` and authenticates th
 
 The complete measurement table and figures are generated from the collection selected in [evidence.json](evidence.json). The original [state-lookup measurements](../real_state/README.md) remain preserved as an earlier, different relation.
 
-**Hash optimization removes 1.08–1.22% of instructions, but a proving-speed improvement is not established.** Every optimization interval includes no change. Positive timing changes below mean slower.
+**Both block anchors add about 10% proving time over a direct state root; the SSZ/RLP difference remains unresolved.** The table and figures use all 24 optimized-program measurements, eight per anchor. Baseline results are retained under [What was optimized](#what-was-optimized).
 
-| Anchor | Baseline median | Optimized median | Paired time change (95% interval) |
-| --- | ---: | ---: | ---: |
-| Direct state root | 6.54 s | 6.51 s | -0.7% [-3.1, +1.8] |
-| RLP block hash | 7.40 s | 7.31 s | -1.5% [-4.1, +1.1] |
-| SSZ summary* | 7.19 s | 7.19 s | -0.4% [-3.0, +2.3] |
+| Anchor | Median proving time | Paired change vs direct state (95% interval) |
+| --- | ---: | ---: |
+| Direct state root | 6.51 s | Reference |
+| RLP block hash | 7.31 s | +10.4% [+6.6, +14.4] |
+| SSZ summary* | 7.19 s | +10.3% [+7.0, +13.7] |
 
 The complete September 11 restart contains **48 measured proofs across eight randomized blocks**, plus six warmups, on an Apple M5 Max with eleven Rayon workers and AC power. All proofs verified. Observations span **6.32–8.29 s**, with residual drift during the batch; the intervals describe paired differences within this batch, not general machine variability.
 
@@ -47,9 +47,9 @@ Verification medians below are measured immediately after proving. Independent w
 
 All 54 proofs passed their public-input and serialized-proof tamper checks. The six saved proofs also verified in fresh processes containing no witness files. All 85 altered-witness checks and 49 native/compiler/measurement tests passed. [Raw evidence and source hashes](evidence.json) preserve these checks.
 
-![All 48 proof times and paired anchor comparisons](figures/figure-2-proving-results.png)
+![All 24 optimized-program proof times and paired anchor comparisons](figures/figure-2-proving-results.png)
 
-![Supporting figure: proof costs, compiler effects and observed timing drift](figures/figure-3-cost-breakdown.png)
+![Supporting figure: proof costs and observed timing drift](figures/figure-3-cost-breakdown.png)
 
 ## Exact statement
 
@@ -67,6 +67,14 @@ The account is Safe `0xb235f9b71000a39c25476f7ba40aaa3763287685`, slot `0`, at E
 All canonical RLP checks, secure trie key hashing, account and storage traversal, header hashing or SSZ branch verification, commitment opening and public-input hashing execute as constrained VM instructions. The relation retains the original **fixed public encoding shape**, including node lengths and RLP layouts. It is not a general variable-length Ethereum state verifier. The SSZ branch contains the real state root, but its summary is hypothetical; both state tries remain Keccak MPTs. See the [original profile and fixture derivation](../real_state/README.md).
 
 ## What was optimized
+
+**Hash optimization removes 1.08–1.22% of instructions, but a proving-speed improvement is not established.** Every optimization interval includes no change. Positive timing changes below mean slower.
+
+| Anchor | Baseline median | Optimized median | Paired time change (95% interval) |
+| --- | ---: | ---: | ---: |
+| Direct state root | 6.54 s | 6.51 s | -0.7% [-3.1, +1.8] |
+| RLP block hash | 7.40 s | 7.31 s | -1.5% [-4.1, +1.1] |
+| SSZ summary* | 7.19 s | 7.19 s | -0.4% [-3.0, +2.3] |
 
 The baseline and optimized conditions prove identical public statements. Common-subexpression elimination reuses identical operations within each hash. Dead-code elimination removes unused calculations, mainly unneeded outputs of Keccak's last permutation. Every write to an initialized cell remains a constraint root, preserving Booleanity, equality checks, conflicting-write rejection and public-input binding. Compilation decisions depend on public shape and wire identities, not witness values.
 
