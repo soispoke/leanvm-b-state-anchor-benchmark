@@ -99,7 +99,7 @@ python -m owner_state.verify_artifacts
 python -m unittest discover -s owner_state -p 'test_*.py' -v
 ```
 
-With the recorded Rust version installed, regenerate the programs and cryptographically verify the six saved proofs in fresh directories containing only the program, public input and proof:
+The recorded Rust installation must include `rustfmt` for the patch syntax check (with rustup: `rustup component add rustfmt --toolchain 1.97.1`). With that version installed, regenerate the programs and cryptographically verify the six saved proofs in fresh directories containing only the program, public input and proof:
 
 ```bash
 python -m owner_state.run setup

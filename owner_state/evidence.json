@@ -13,12 +13,12 @@
     "owner_state/results/collect-20260910T121326694990Z": "User paused after 20 completed measured proofs."
   },
   "sha256": {
-    ".github/workflows/verify.yml": "6951b3b29d3949cbb979e8bc1069ddedda55b72a699937d16a0d36d11fd456b5",
+    ".github/workflows/verify.yml": "eebd7c8650eb84d47eb69831c5487816af9fc3c7b2b2604ba74aaca03a12aa70",
     "PROVENANCE.md": "cf51a01b3300bf4143c0f90dac2e9f01fdf6a434582804c100730d480831e04a",
     "README.md": "e2ecb0fc6a78f4ef7e3a26a8c6e1bf002456993c0851db9d97106417b29fea4a",
     "owner_state/CONTRACT.md": "ce1cdfdbfc05e49f060cb8796bca9a10af54aad53fdd50ea00a8eb79a7ebb111",
     "owner_state/PRIVACY.md": "9a60780e6e0e53d3aa4ed686342a58f54d12c3332d3d4cce288bffee1b2ed06e",
-    "owner_state/README.md": "6b12fd426e3d845d0c366ddd401b5a970f73e98c24aeb879a34530f8f2f45f87",
+    "owner_state/README.md": "891904a2fccf4c1a0c2c78ff55e811bf95a920b6d196b6f96097fc68d150aa8a",
     "owner_state/__init__.py": "e7dedfb76c7cf8b45ecabe02e0148584c36c54f7d99b828be3b2b4838099d77f",
     "owner_state/analysis/comparisons.csv": "8b8c403dd27885ee598481f6d8700db330972db8ba0738c4b3decc221aeb1eaa",
     "owner_state/analysis/environment.csv": "920fc84efd92bf3577be680088787a2e5d203936da034b9108b56e56758a37ac",
