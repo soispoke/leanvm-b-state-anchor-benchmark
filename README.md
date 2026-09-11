@@ -14,13 +14,15 @@ The fixture is a Safe account's slot 0 at mainnet block **25,939,968**. Its sing
 
 | Anchor | Baseline median | Optimized median | Paired time change (95% interval) |
 | --- | ---: | ---: | ---: |
-| Direct state root | 8.28 s | 8.84 s | +1.9% [-0.9, +4.7] |
-| RLP block hash | 8.37 s | 8.55 s | +1.3% [-3.0, +5.8] |
-| SSZ summary* | 9.09 s | 9.15 s | +3.3% [-6.0, +13.6] |
+| Direct state root | 6.54 s | 6.51 s | -0.7% [-3.1, +1.8] |
+| RLP block hash | 7.40 s | 7.31 s | -1.5% [-4.1, +1.1] |
+| SSZ summary* | 7.19 s | 7.19 s | -0.4% [-3.0, +2.3] |
 
-The September 11 batch contains **48 measured proofs across eight randomized blocks**, plus six warmups, on an Apple M5 Max with eleven Rayon workers and AC power. All proofs verified. Observations span **7.54–18.92 s**, with a marked shift during the batch; the intervals describe paired differences within this batch, not general machine variability.
+The complete September 11 restart contains **48 measured proofs across eight randomized blocks**, plus six warmups, on an Apple M5 Max with eleven Rayon workers and AC power. All proofs verified. Observations span **6.32–8.29 s**, with residual drift during the batch; the intervals describe paired differences within this batch, not general machine variability.
 
-For optimized programs, mean VM execution is **0.45–0.83 s** and witness construction **0.66–0.79 s**. The remaining **85–89%** of complete proving time is proof work and cleanup. Keccak and SHA account for **98.6–98.8% of guest instructions**, but their proof-construction costs cannot be separated by subtracting standalone hash timings.
+All stages ran sequentially, after CPU-idle checks and with no concurrent local benchmark work. [Restart record](owner_state/repeats/20260911-full-restart/README.md).
+
+For optimized programs, mean VM execution is **0.44–0.79 s** and witness construction **0.64–0.78 s**. The remaining **79–84%** of complete proving time is proof work and cleanup. Keccak and SHA account for **98.6–98.8% of guest instructions**, but their proof-construction costs cannot be separated by subtracting standalone hash timings.
 
 *The SSZ summary is hypothetical and retains the same Keccak state tries. A secondary paired SSZ/RLP comparison also does not establish an SSZ timing advantage.
 

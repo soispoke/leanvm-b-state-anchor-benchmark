@@ -17,7 +17,7 @@ from owner_state.run import ROOT, MODES, digest, validate_evidence
 
 HERE = ROOT / 'owner_state'
 VARIANTS = ('baseline', 'cse_dce')
-DIAGNOSTICS = HERE / 'diagnostics/20260911-final'
+DIAGNOSTICS = HERE / 'diagnostics/20260911-full-restart'
 T_975_DF7 = 2.3646242510103
 PHASE_GROUPS = {
     'execution_s': ('execute_ms',),
@@ -43,11 +43,29 @@ def paired_ratio(numerator, denominator):
             'block_ratios': [math.exp(value) for value in logs]}
 
 
+def export_numbers(value):
+    """Stable derived-data precision across platform libm implementations.
+
+    Raw logs retain every recorded digit. Twelve significant digits greatly
+    exceed measurement precision and remove irrelevant last-bit differences
+    in logarithms, exponentials and derived floating-point arithmetic.
+    """
+    if isinstance(value, float):
+        if not math.isfinite(value):
+            raise ValueError('nonfinite derived measurement')
+        return float(format(value, '.12g'))
+    if isinstance(value, dict):
+        return {key: export_numbers(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [export_numbers(item) for item in value]
+    return value
+
+
 def csv_text(rows):
     out = io.StringIO(newline='')
     writer = csv.DictWriter(out, fieldnames=list(rows[0]), lineterminator='\n')
     writer.writeheader()
-    writer.writerows(rows)
+    writer.writerows(export_numbers(rows))
     return out.getvalue()
 
 
@@ -182,7 +200,7 @@ def products(directory, diagnostics=DIAGNOSTICS):
                                    'execute_min_ms': min(timing), 'execute_max_ms': max(timing),
                                    'instructions': group[0]['result']['cycles']})
     return {'source-data.csv': csv_text(samples), 'hash-instructions.csv': csv_text(costs),
-            'comparisons.csv': csv_text(comparisons), 'summary.json': json.dumps(summary, indent=2, allow_nan=False)+'\n',
+            'comparisons.csv': csv_text(comparisons), 'summary.json': json.dumps(export_numbers(summary), indent=2, allow_nan=False)+'\n',
             'environment.csv': csv_text(environment_rows),
             'hash-diagnostic-samples.csv': csv_text(diagnostic_samples),
             'hash-diagnostic-summary.csv': csv_text(diagnostic_summary)}

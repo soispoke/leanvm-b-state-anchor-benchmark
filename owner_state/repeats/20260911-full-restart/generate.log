@@ -1,0 +1,7 @@
+{"variant": "baseline", "mode": "direct", "generation_seconds": 5.900500249990728}
+{"variant": "baseline", "mode": "rlp", "generation_seconds": 6.620072917008656}
+{"variant": "baseline", "mode": "ssz", "generation_seconds": 6.612433957998292}
+{"variant": "cse_dce", "mode": "direct", "generation_seconds": 9.326841834001243}
+{"variant": "cse_dce", "mode": "rlp", "generation_seconds": 10.532429750004667}
+{"variant": "cse_dce", "mode": "ssz", "generation_seconds": 10.459778000004007}
+Report: /private/tmp/leanvm-b-state-anchor-benchmark-publish-20260910/owner_state/results/generate-20260911T073826032120Z/report.json

@@ -108,5 +108,24 @@ class AnalysisPipelineTests(unittest.TestCase):
             self.run_analysis(report)
 
 
+class ExportPrecisionTests(unittest.TestCase):
+    def test_last_bit_variation_does_not_change_derived_exports(self):
+        original = {'ratio': 1.018792345678123, 'phase': 0.454645123456789,
+                    'committed_cells': 207621052, 'kind': 'measured'}
+        adjacent = {key: math.nextafter(value, math.inf) if isinstance(value, float) else value
+                    for key, value in original.items()}
+        self.assertEqual(analyze.export_numbers(original), analyze.export_numbers(adjacent))
+        self.assertEqual(analyze.csv_text([original]), analyze.csv_text([adjacent]))
+        self.assertEqual(analyze.export_numbers(original)['committed_cells'], 207621052)
+        self.assertIsInstance(analyze.export_numbers(original)['committed_cells'], int)
+        self.assertNotEqual(analyze.csv_text([original]),
+                            analyze.csv_text([{**original, 'ratio': original['ratio'] + 1e-7}]))
+
+    def test_nonfinite_export_values_are_rejected(self):
+        for value in (math.nan, math.inf, -math.inf):
+            with self.assertRaisesRegex(ValueError, 'nonfinite'):
+                analyze.export_numbers({'nested': [value]})
+
+
 if __name__ == '__main__':
     unittest.main()

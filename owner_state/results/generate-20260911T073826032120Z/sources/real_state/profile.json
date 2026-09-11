@@ -1,0 +1,1099 @@
+{
+  "schema": "leanvm-account-storage-shape-v1",
+  "account": {
+    "nodes": [
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 28,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 70,
+            "bare": false
+          }
+        ]
+      }
+    ],
+    "odd_paths": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "storage": {
+    "nodes": [
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 0,
+            "bare": false
+          }
+        ]
+      },
+      {
+        "kind": "list",
+        "children": [
+          {
+            "kind": "bytes",
+            "length": 32,
+            "bare": false
+          },
+          {
+            "kind": "bytes",
+            "length": 21,
+            "bare": false
+          }
+        ]
+      }
+    ],
+    "odd_paths": [
+      false,
+      true
+    ]
+  },
+  "account_value": {
+    "kind": "list",
+    "children": [
+      {
+        "kind": "bytes",
+        "length": 1,
+        "bare": true
+      },
+      {
+        "kind": "bytes",
+        "length": 0,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      }
+    ]
+  },
+  "storage_value": {
+    "kind": "bytes",
+    "length": 20,
+    "bare": false
+  },
+  "header": {
+    "kind": "list",
+    "children": [
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 20,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 256,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 0,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 4,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 4,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 3,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 4,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 10,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 8,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 4,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 3,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 4,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      },
+      {
+        "kind": "bytes",
+        "length": 32,
+        "bare": false
+      }
+    ]
+  },
+  "ssz_gindex": 41,
+  "ssz_active_fields": 18
+}

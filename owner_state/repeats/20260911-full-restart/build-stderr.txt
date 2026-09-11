@@ -1,0 +1,2 @@
+   Compiling leanvm-b v0.1.0 (/private/tmp/leanvm-b-state-anchor-benchmark-publish-20260910/vendor/leanVM-b-profiled)
+    Finished `release` profile [optimized] target(s) in 5.41s

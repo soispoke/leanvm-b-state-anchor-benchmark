@@ -1,0 +1,11 @@
+# Complete restart requested September 11
+
+The user requested a new run of the entire owner-binding suite under consistent load after seeing the first completed batch. This restart selects its primary batch before observing its results. The earlier completed collection remains an independent earlier batch and is not pooled into the new estimates.
+
+All preparation and measurements run sequentially: validate/rebuild the pinned backend, regenerate six programs, rerun native/compiler/measurement and malformed-witness checks, collect standalone hash diagnostics, then collect six fresh-process warmups and all 48 measured proofs, and verify all six saved proofs without witness files. No figure generation, compilation, other diagnostics or local benchmark work runs during proof collection. The same executable, eleven Rayon workers, AC power, settings and randomized Williams schedule apply throughout the proof batch.
+
+Before each timing stage, record CPU idle/load and power while allowing the machine to settle. An idle preflight is a starting condition, not a guarantee about macOS background processes or thermal equilibrium. The collector retains power, settings, load and thermal-warning records at both endpoints of every proof. CPU temperature/frequency remain unmeasured. All measured observations are retained, and any remaining drift is shown explicitly.
+
+The restart completed successfully from 07:38 to 07:52 UTC. [Stage log](restart.json), [pre-diagnostic CPU snapshots](before-diagnostics.json), [pre-proof CPU snapshots](before-proofs.json) and [native test log](native-tests.log) preserve the sequence. All 49 native/compiler/analysis tests, 85 malformed-witness checks, 200 hash diagnostics, 54 proofs and six witness-free saved-proof verifications passed. Setup reproduced the same native binary SHA-256 as the earlier batch.
+
+The new measured observations span 6.32–8.29 seconds. Baseline/optimized medians are 6.54/6.51 seconds for direct state, 7.40/7.31 seconds for RLP and 7.19/7.19 seconds for SSZ. No paired optimization interval excludes zero change. Residual variation remains: block mean times range from 6.88 to 7.84 seconds. The preflight establishes quiet starting snapshots, not identical ambient conditions throughout the run.

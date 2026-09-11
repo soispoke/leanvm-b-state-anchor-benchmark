@@ -16,7 +16,7 @@ All figures are 183 mm wide, with 6–9 point typography, vector PDF with embedd
 
 ![All proof samples, paired changes, instructions and commitments](figure-2-proving-results.png)
 
-**a,** All eight measured fresh-process proving times per condition. Open markers show the baseline compiler; filled markers show common-subexpression elimination plus dead-code elimination. Thin lines connect observations from the same randomized block; black ticks are medians. The timer includes VM execution, witness construction, proof construction and return cleanup, excluding program loading/assembly, serialization and verification. **b,** Optimized/baseline time ratios, expressed as percentage changes. Each point is the geometric mean of eight blockwise ratios. Bars are 95% Student-t intervals on log ratios with seven degrees of freedom. They are within-batch, exploratory and unadjusted for multiple comparisons; they assume approximately independent, normally distributed block log ratios. An interval containing zero change does not establish equivalence. **c,** Exact executed instruction counts for each complete owner relation, including four wrapper instructions. **d,** Committed witness field cells reported by the backend, excluding virtual columns and before final aggregate polynomial padding. Each baseline/optimized pair has identical padded table sizes. Block-anchor programs cross a memory/bytecode domain boundary that the direct-state programs do not. This fixture-specific effect must not be generalized to arbitrary owner proofs.
+**a,** All eight measured fresh-process proving times per condition. Open markers show the baseline compiler; filled markers show common-subexpression elimination plus dead-code elimination. Thin lines connect observations from the same randomized block; black ticks are medians. The timer includes VM execution, witness construction, proof construction and return cleanup, excluding program loading/assembly, witness loading, serialization and verification. **b,** Optimized/baseline time ratios, expressed as percentage changes. Each point is the geometric mean of eight blockwise ratios. Bars are 95% Student-t intervals on log ratios with seven degrees of freedom. They are within-batch, exploratory and unadjusted for multiple comparisons; they assume approximately independent, normally distributed block log ratios. An interval containing zero change does not establish equivalence. **c,** Exact executed instruction counts for each complete owner relation, including four wrapper instructions. **d,** Committed witness field cells reported by the backend, excluding virtual columns and before final aggregate polynomial padding. Each baseline/optimized pair has identical padded table sizes. Block-anchor programs cross a memory/bytecode domain boundary that the direct-state programs do not. This fixture-specific effect must not be generalized to arbitrary owner proofs.
 
 [PDF](figure-2-proving-results.pdf) · [Editable SVG](figure-2-proving-results.svg) · [PNG](figure-2-proving-results.png)
 
@@ -30,7 +30,7 @@ All figures are 183 mm wide, with 6–9 point typography, vector PDF with embedd
 
 ## Source data and reproduction
 
-The collection uses one Apple M5 Max with 128 GiB RAM, macOS 26.5, eleven Rayon workers, AC power and the same pinned native-target executable. Each condition has one fresh-process warmup, then eight measured fresh processes in randomized Williams order. Two attempts interrupted by power changes and one stopped at the user's request were retained and excluded as entire batches before the September 11 restart. Temperature and CPU frequency were not measured. The intervals describe the selected batch, not reproducibility across machines or independent batches.
+The collection uses one Apple M5 Max with 128 GiB RAM, macOS 26.5, eleven Rayon workers, AC power and the same pinned native-target executable. Each condition has one fresh-process warmup, then eight measured fresh processes in randomized Williams order. Two attempts interrupted by power changes and one stopped at the user's request were retained and excluded as entire batches before the first completed September 11 batch. The user then requested the complete sequential restart selected here. Each timing stage began after three CPU-idle snapshots above 90% on AC power; no local build, diagnostic or figure work ran during proof collection. The earlier complete batch remains separate. Temperature and CPU frequency were not measured. The intervals describe the selected batch, not reproducibility across machines or independent batches.
 
 - [All proof samples and phases, including labeled warmups](../analysis/source-data.csv)
 - [Paired comparisons](../analysis/comparisons.csv)
@@ -44,8 +44,8 @@ The collection uses one Apple M5 Max with 128 GiB RAM, macOS 26.5, eleven Rayon 
 
 ```bash
 python -m pip install -r real_state/figure-requirements.txt
-python -m owner_state.plot_figures --run owner_state/results/collect-20260911T071527362410Z
-python -m owner_state.plot_figures --run owner_state/results/collect-20260911T071527362410Z --check
+python -m owner_state.plot_figures --run owner_state/results/collect-20260911T074413358669Z
+python -m owner_state.plot_figures --run owner_state/results/collect-20260911T074413358669Z --check
 ```
 
 Use the collection path from `evidence.json`. Verification recomputes SVGs deterministically from raw measurements; PDF and PNG encoders can vary between library/platform builds. See the [full report](../README.md) for the statement, validation and limits.

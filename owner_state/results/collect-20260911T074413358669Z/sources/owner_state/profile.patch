@@ -1,0 +1,150 @@
+--- a/src/cpu/mod.rs
++++ b/src/cpu/mod.rs
+@@ -367,10 +367,19 @@
+ /// (scalar stream + PCS commitment / opening hints). Returns the proof and the
+ /// run [`Stats`].
+ pub fn prove(program: &Program, public_input: [F128; 2]) -> (Proof, Stats) {
++    // Benchmark-only clocks; no proof data or transcript depends on them.
++    let phase_prof = std::env::var_os("LEANVM_PHASE_PROFILE").is_some();
++    let phase_clock = || phase_prof.then(std::time::Instant::now);
++    let phase_elapsed = |start: Option<std::time::Instant>| {
++        start.map_or(0.0, |s| s.elapsed().as_secs_f64() * 1e3)
++    };
++    let phase_total_start = phase_clock();
+     let prof = std::env::var("LEANVM_PROFILE").is_ok();
+     let ms = |t: std::time::Instant| t.elapsed().as_secs_f64() * 1e3;
+     let t = std::time::Instant::now();
++    let phase_start = phase_clock();
+     let exec = program.execute(public_input);
++    let phase_execute_ms = phase_elapsed(phase_start);
+     if prof {
+         eprintln!("[prove] execute     : {:>7.2} ms", ms(t));
+     }
+@@ -386,7 +395,10 @@
+     let n_b3_warm = exec.trace.blake3.len().max(1);
+     std::thread::spawn(move || crate::blake3_flock::warm_setup(n_b3_warm));
+     let cycles = exec.cycles;
++    let phase_start = phase_clock();
+     let w = program.build(&exec);
++    let phase_build_ms = phase_elapsed(phase_start);
++    let phase_start = phase_clock();
+     let counts = w.row_counts;
+     // Real committed data, before zero-pad to 2^m. Virtual columns (the BLAKE3
+     // value columns) carry data for the bus but are NOT committed, so exclude them.
+@@ -403,8 +415,11 @@
+ 
+     // Announce the prover's sizes, then commit, before sampling any challenge.
+     announce_public(&mut ps, w.log_mem, w.row_counts);
++    let phase_transcript_setup_ms = phase_elapsed(phase_start);
+     let t = std::time::Instant::now();
++    let phase_start = phase_clock();
+     let committed = pcs::commit(&mut ps, &w.q);
++    let phase_commit_ms = phase_elapsed(phase_start);
+     if prof {
+         eprintln!("[prove] commit      : {:>7.2} ms", ms(t));
+     }
+@@ -417,12 +432,15 @@
+     // memory bus (virtual value columns route to q_pkd); the constant pins reuse a
+     // bus point, so no dedicated binding challenge is drawn. Mirrored in `verify`.
+     let t = std::time::Instant::now();
++    let phase_start = phase_clock();
+     let l = &w.layout;
+     let bus_claims = leaf::prove_balance(&l.push, &l.pull, &l.count, &w.cols, &mut ps);
++    let phase_bus_ms = phase_elapsed(phase_start);
+     if prof {
+         eprintln!("[prove] bus(grand-p): {:>7.2} ms", ms(t));
+     }
+     let t = std::time::Instant::now();
++    let phase_start = phase_clock();
+     let sch = schema();
+     let mut table_claims = Vec::new();
+     for (ti, table) in tables::tables().iter().enumerate() {
+@@ -435,10 +453,12 @@
+             &mut ps,
+         ));
+     }
++    let phase_constraints_ms = phase_elapsed(phase_start);
+     if prof {
+         eprintln!("[prove] constraints : {:>7.2} ms", ms(t));
+     }
+ 
++    let phase_start = phase_clock();
+     let mut claims = bus_claims;
+     claims.extend(constraint_claims(&table_claims));
+     claims.push(bind_pi_claim(ps.sample(), &w.layout.placements, &w.layout.pi));
+@@ -449,6 +469,7 @@
+     let pin_point = blake3_pin_point(&claims);
+     claims.extend(blake3_pin_claims(&pin_point, exec.trace.blake3.len()));
+     let slots = slot_claims(&w.layout, &claims);
++    let phase_claim_prep_ms = phase_elapsed(phase_start);
+ 
+     // Run flock's reduction (zerocheck + lincheck) over the executed compressions
+     // (or a single padding instance when none ran); it returns the `(ab, c)`
+@@ -456,6 +477,7 @@
+     // SAME Ligerito as every leanVM point claim (the point claims become the
+     // opener's `stack_pd`).
+     let t = std::time::Instant::now();
++    let phase_start = phase_clock();
+     use flock_prover::r1cs_hashes::blake3::Compression;
+     let blocks: Vec<Compression> = if exec.trace.blake3.is_empty() {
+         vec![crate::blake3_flock::padding_compression()]
+@@ -469,21 +491,25 @@
+     let (_z_packed, zc, lc, reduced) = crate::blake3_flock::prove_reduction(&blocks, &committed.commitment, &mut ps);
+     let offset = w.layout.placements[QPKD].offset;
+     let ring = crate::blake3_flock::ring_switch_open(blocks.len(), offset, &reduced);
++    let phase_reduction_ms = phase_elapsed(phase_start);
+     if prof {
+         eprintln!("[open]  reduction   : {:>7.2} ms", ms(t));
+     }
+     let t_pcs = std::time::Instant::now();
++    let phase_start = phase_clock();
+     let mixed_open = pcs::open(&mut ps, &committed, &w.q, &slots, &ring);
++    let phase_pcs_open_ms = phase_elapsed(phase_start);
+     if prof {
+         eprintln!("[open]  pcs::open   : {:>7.2} ms", ms(t_pcs));
+     }
+     // Carry flock's sub-proof on the shared channels: its scalar reduction on the
+     // `stream` (raw transport), its Ligerito on the `openings` hint channel.
++    let phase_start = phase_clock();
+     crate::blake3_flock::write_stack_proof(&mut ps, zc, lc, mixed_open);
+     if prof {
+         eprintln!("[prove] open        : {:>7.2} ms", ms(t));
+     }
+-    (
++    let result = (
+         ps.into_proof(),
+         Stats {
+             cycles,
+@@ -492,7 +518,31 @@
+             log_mem: w.log_mem,
+             mem_used: exec.mem_used,
+         },
+-    )
++    );
++    let phase_finalize_ms = phase_elapsed(phase_start);
++    let phase_internal_total_ms = phase_elapsed(phase_total_start);
++    if phase_prof {
++        let phase_accounted_ms = phase_execute_ms + phase_build_ms + phase_transcript_setup_ms + phase_commit_ms + phase_bus_ms + phase_constraints_ms + phase_claim_prep_ms + phase_reduction_ms + phase_pcs_open_ms + phase_finalize_ms;
++        // Gaps include timer overhead and background-setup thread launch.
++        // The spawned setup's CPU time is not added to overlapping wall time.
++        let phase_internal_residual_ms = phase_internal_total_ms - phase_accounted_ms;
++        eprintln!(
++            "PHASES {{\"profile_schema\":1,\"scope\":\"cpu_prove_before_logging_and_local_drops\",\"execute_ms\":{:.9},\"build_ms\":{:.9},\"transcript_setup_ms\":{:.9},\"commit_ms\":{:.9},\"bus_ms\":{:.9},\"constraints_ms\":{:.9},\"claim_prep_ms\":{:.9},\"reduction_ms\":{:.9},\"pcs_open_ms\":{:.9},\"finalize_ms\":{:.9},\"internal_total_ms\":{:.9},\"internal_residual_ms\":{:.9}}}",
++            phase_execute_ms,
++            phase_build_ms,
++            phase_transcript_setup_ms,
++            phase_commit_ms,
++            phase_bus_ms,
++            phase_constraints_ms,
++            phase_claim_prep_ms,
++            phase_reduction_ms,
++            phase_pcs_open_ms,
++            phase_finalize_ms,
++            phase_internal_total_ms,
++            phase_internal_residual_ms,
++        );
++    }
++    result
+ }
+ 
+ /// The public-input binding claim (§8): `MEM(r, 0,…,0) = interp(m[0], m[1], r)`.
