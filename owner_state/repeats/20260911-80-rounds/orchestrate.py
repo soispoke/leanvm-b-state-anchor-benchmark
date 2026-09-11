@@ -1,6 +1,6 @@
 """Run the predeclared 80-round optimized-anchor collection, then verify proofs."""
 from pathlib import Path
-import datetime
+import argparse
 import hashlib
 import json
 import os
@@ -9,8 +9,9 @@ import subprocess
 import sys
 import time
 
-FOLDER = Path(__file__).resolve().parent
-ROOT = FOLDER.parents[2]
+BASE_FOLDER = Path(__file__).resolve().parent
+FOLDER = BASE_FOLDER
+ROOT = BASE_FOLDER.parents[2]
 PYTHON = Path(sys.executable)
 sys.path.insert(0, str(ROOT))
 from owner_state import run
@@ -75,8 +76,15 @@ def preflight():
 
 
 def main():
-    if (FOLDER/'experiment.json').exists():
-        raise RuntimeError('This experiment directory already has a record; preserve it and use a new directory')
+    global FOLDER
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, help='new attempt directory; defaults to a timestamped subdirectory')
+    args = parser.parse_args()
+    FOLDER = (args.output or BASE_FOLDER/('attempt-'+run.stamp())).resolve()
+    FOLDER.mkdir(parents=True, exist_ok=False)
+    script = Path(__file__).read_bytes()
+    (FOLDER/'orchestrate.py').write_bytes(script)
+    STATE['orchestrator_sha256'] = hashlib.sha256(script).hexdigest()
     keep_awake = subprocess.Popen(['/usr/bin/caffeinate', '-i', '-w', str(os.getpid())])
     try:
         binary, runner = run.load_runner()

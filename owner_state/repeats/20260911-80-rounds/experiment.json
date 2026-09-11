@@ -1,0 +1,466 @@
+{
+  "status": "failed",
+  "started_at": "2026-09-11T08:46:00.241731+00:00",
+  "stages": [],
+  "runner": {
+    "schema": "leanvm-owner-runner-v1",
+    "upstream_commit": "8494c5d5df323f2b97ed89272942a4bee6247078",
+    "cargo_lock_sha256": "0c60e536366da5198d5536c3fdade9a7f20d48d070ee3093758f4b73712a2bf6",
+    "vm_cpu_sha256": "e6264ca07d7ddb16c2b4a618dfd80dc65870dbebbb0f2c359c3f7b06bdaaff82",
+    "witness_patch_sha256": "365a65f9554c2c326752df19752f7df3661a074ae5220b101f1a774e2b9682b1",
+    "profile_patch_sha256": "38a63917808288f5e720f79f1b1bad723710fe50a7db03f2098489e89626ac89",
+    "wrapper_sha256": "18a159f2fa52bb2b3d87a6ee18432f15a2a76a158db6d4195f43fad794ea886b",
+    "rust_runner_sha256": "0a6cd55af3f1e80fcea32dbc1254c7225152bfcf45516f61d8cc4d99f4f05092",
+    "binary": "vendor/leanVM-b-profiled/target/release/deps/owner_state_bench-99b937fd4338f7e8",
+    "binary_sha256": "3d776efa8485482340b24bf72a9f9de7daabbec2fec3e55d318b2296a141db2a",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (Homebrew)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: aarch64-apple-darwin\nrelease: 1.97.1\nLLVM version: 22.1.8",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30) (Homebrew)",
+    "build_logs": "local-runs/owner-state/build-20260911T073749555146Z",
+    "built_at": "2026-09-11T07:37:55.006710+00:00"
+  },
+  "cases": {
+    "cse_dce/direct": {
+      "program.bin": "17e5e6823735027a5b1f6c1cef60113810fff44897404aa0a700b891086366e0",
+      "public.bin": "4cebc325587e15494912abf76533caeefa450cfbb271db82e0abd8969aba1ec2",
+      "witness.bin": "515332a9855aabed06181ddc7a49967ba1c258b6d69ce52b6cb42b7ba222a8f3",
+      "program.json": "22ecc2613783b9f8da5ec427a18e7b15bfdb30f08c211b0597ab08c178aceaf5"
+    },
+    "cse_dce/rlp": {
+      "program.bin": "785563a2dca66b0d18d2bf3690799c2385a24b6cfb8fae6d0b1a7434e66b2a83",
+      "public.bin": "9488b2daaed6abcaa7d01b7298bb274a228bd512b39724d00bb3b362363bda58",
+      "witness.bin": "1753fead09b7cf6f2d2a91b08f349ed10670f70decced10e94674d61fd223d96",
+      "program.json": "26fa6889f641b83787f7d3eb98d3b3f286b405219a1f72cbc34f7e4fe06541f9"
+    },
+    "cse_dce/ssz": {
+      "program.bin": "ca71eb97d034cb5897d537fe82cce4aeceaf7efb9137e569b032104e196e2ced",
+      "public.bin": "d7aad9dff85810615eca2e346d72611a49d765085935d008f08153029d853a7d",
+      "witness.bin": "2f771fa414eac70a73a5eac0c55ceaa242632c735427b304375222de806fa111",
+      "program.json": "60a84253fad9864f4e362e13f7441a639b43ca68c9fce5d892a94e99529b5573"
+    }
+  },
+  "seed": 20260911,
+  "blocks": 80,
+  "expected_measured_proofs": 240,
+  "expected_warmup_proofs": 3,
+  "warmup_orders": [
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ]
+  ],
+  "measured_orders": [
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/direct",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "cse_dce/ssz"
+    ]
+  ],
+  "plan_source_sha256": {
+    "owner_state/CONTRACT.md": "61aed334f581d40e7e678f43488c132b15c34dc3d2e265030a00254fd0c4427e",
+    "owner_state/analyze.py": "a1fab0fffe5b3bacf6d78bb23f74f31e4ae86efd5d8e52755f1c26d8997a22b5",
+    "owner_state/run.py": "e48314367a11559c3884cc773c4146fada891422c805862738e2cea887f73f67",
+    "owner_state/test_run.py": "d331c58b86f1f9f2d149f902981956da0bac28e538e3fa033237379abf966426",
+    "owner_state/test_analyze.py": "14b6db53effb1b6d2fdb3618591c43bf506608d9bd5b483af96f10c1152bb14e"
+  },
+  "git_commit": "66b2ed69e463edc5df2fff5b08532dc5786b9381",
+  "error": "KeyboardInterrupt()",
+  "finished_at": "2026-09-11T08:48:15.405386+00:00",
+  "halt_reason": "Coordinator stopped preflight before any proof: CPU idle stayed below 90%; a separate Python process used about 80 GB, leaving about 3 GB free while proof processes previously peaked near 42 GiB.",
+  "measured_proofs_started": 0
+}
