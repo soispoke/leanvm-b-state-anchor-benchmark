@@ -13,6 +13,7 @@ from eth_utils import keccak
 from owner_state.circuit import Circuit
 from owner_state import hashes
 from real_state.run import parse_output
+from owner_state.run import environment, check_environment, digest, process_environment
 
 ROOT=Path(__file__).resolve().parent.parent
 
@@ -38,8 +39,14 @@ def main():
     binary=a.binary.resolve()
     out=a.output or ROOT/'owner_state/diagnostics'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     out.mkdir(parents=True,exist_ok=False)
-    data={'scope':'standalone hash circuit including Boolean inputs/public output; execute only',
-          'binary_sha256':hashlib.sha256(binary.read_bytes()).hexdigest(),'repeats':a.repeats,'cases':{},'runs':[]}
+    before=environment()
+    check_environment(before)
+    source_names=('owner_state/microbench.py','owner_state/circuit.py','owner_state/hashes.py',
+                  'real_state/circuit.py','real_state/hashes.py','real_state/real_state_bench.rs')
+    data={'scope':'standalone hash circuit including Boolean inputs/public output; execute only; exploratory',
+          'binary_sha256':digest(binary),'repeats':a.repeats,'cases':{},'runs':[],
+          'environment_before':before,'source_sha256':{name:digest(ROOT/name) for name in source_names},
+          'environment_scope':'batch endpoints only, not before/after each diagnostic'}
     # Exact lengths used by any of the three owner-state programs.
     lengths=Counter()
     for mode in ('direct','rlp','ssz'):
@@ -51,22 +58,24 @@ def main():
             key=f'{kind}-{length}-{variant}'
             directory=ROOT/'local-runs/owner-hash-diagnostics'/key
             data['cases'][key]=generate(directory,kind,length,variant)
-    env=dict(os.environ,RAYON_NUM_THREADS='11')
-    for key in list(env):
-        if key=='LEANVM_PROFILE' or key=='LEANVM_PHASE_PROFILE' or (key.startswith('FLOCK_') and key.endswith('_TIMING')):
-            env.pop(key)
     # Alternate case order for diagnostics; separate from main proving dataset.
     for repetition in range(a.repeats):
         keys=sorted(data['cases'],reverse=bool(repetition%2))
         for key in keys:
             directory=ROOT/'local-runs/owner-hash-diagnostics'/key
-            env.update(REAL_STATE_ACTION='execute',REAL_STATE_DIR=str(directory))
+            env=process_environment(directory,'execute')
+            env.pop('LEANVM_PHASE_PROFILE')
             started=time.perf_counter()
             proc=subprocess.run([str(binary),'real_state_benchmark','--nocapture','--test-threads=1'],env=env,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
             name=f'{key}-{repetition+1:02}.txt';(out/name).write_text(proc.stdout)
             result,_=parse_output(proc.stdout)
             if proc.returncode or result is None or result['action']!='execute':raise RuntimeError(f'failed {name}')
-            data['runs'].append({'case':key,'repetition':repetition+1,'log':name,'result':result,'process_s':time.perf_counter()-started})
+            data['runs'].append({'case':key,'repetition':repetition+1,'log':name,'log_sha256':digest(out/name),
+                                 'exit_code':proc.returncode,'result':result,'process_s':time.perf_counter()-started})
+    data['environment_after']=environment()
+    check_environment(data['environment_after'],before)
+    if digest(binary)!=data['binary_sha256'] or {name:digest(ROOT/name) for name in source_names}!=data['source_sha256']:
+        raise ValueError('diagnostic executable or source changed')
     (out/'report.json').write_text(json.dumps(data,indent=2)+'\n')
     print(json.dumps({'output':str(out),'cases':len(data['cases']),'runs':len(data['runs'])}))
 

@@ -1,0 +1,25 @@
+
+running 1 test
+test real_state_bench::real_state_benchmark ... RESULT {"action":"verify","cycles":8482697,"counts":[6592617, 1889947, 132, 0, 1, 0],"cells":8476896,"proof_bytes":836384,"assembly_ms":1025.392,"verify_ms":897.806,"witness_loaded":false}
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 1.92s
+
+        1.96 real         1.86 user         0.87 sys
+          5079547904  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              310349  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                2884  involuntary context switches
+         39557662160  instructions retired
+         11637031954  cycles elapsed
+          5080289216  peak memory footprint

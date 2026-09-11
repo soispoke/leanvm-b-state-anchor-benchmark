@@ -1,0 +1,2884 @@
+{
+  "schema": "leanvm-owner-run-v1",
+  "command": "collect",
+  "status": "failed",
+  "started_at": "2026-09-10T11:13:35.723438+00:00",
+  "source_sha256": {
+    "owner_state/run.py": "7530f16cadaa47d5422ea12794ed5607b39afc40b94e8261655d50c0297f2e1f",
+    "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+    "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+    "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+    "owner_state/instrumentation.py": "584c3a2fbcb673a51a64b444026a1228f50874219946d05be1a418147f3a0701",
+    "owner_state/profile.patch": "38a63917808288f5e720f79f1b1bad723710fe50a7db03f2098489e89626ac89",
+    "real_state/real_state_bench.rs": "0a6cd55af3f1e80fcea32dbc1254c7225152bfcf45516f61d8cc4d99f4f05092",
+    "real_state/leanvm-witness-api.patch": "365a65f9554c2c326752df19752f7df3661a074ae5220b101f1a774e2b9682b1",
+    "real_state/run.py": "00bfaf6365a788456afba4c6e109bef82b030396f7a5c265cedb5652c527ce22",
+    "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+    "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+    "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+    "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+    "real_state/profile.json": "31734989162baab8597643665318c63432af34a095c8434db824a78b4c6666dd",
+    "real_state/ssz-reference.json": "a3394fad336cc964c5cd07153c8394ded794dba83207241c236168abda4aad69",
+    "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463",
+    "fixtures/mainnet-0x18bd000.json": "c0ff761d18e011a3f83a053c765f7ca8057a6a8d4ff5764bb5dcd6476c7a7795"
+  },
+  "runner": {
+    "schema": "leanvm-owner-runner-v1",
+    "upstream_commit": "8494c5d5df323f2b97ed89272942a4bee6247078",
+    "cargo_lock_sha256": "0c60e536366da5198d5536c3fdade9a7f20d48d070ee3093758f4b73712a2bf6",
+    "vm_cpu_sha256": "e6264ca07d7ddb16c2b4a618dfd80dc65870dbebbb0f2c359c3f7b06bdaaff82",
+    "witness_patch_sha256": "365a65f9554c2c326752df19752f7df3661a074ae5220b101f1a774e2b9682b1",
+    "profile_patch_sha256": "38a63917808288f5e720f79f1b1bad723710fe50a7db03f2098489e89626ac89",
+    "wrapper_sha256": "18a159f2fa52bb2b3d87a6ee18432f15a2a76a158db6d4195f43fad794ea886b",
+    "rust_runner_sha256": "0a6cd55af3f1e80fcea32dbc1254c7225152bfcf45516f61d8cc4d99f4f05092",
+    "binary": "vendor/leanVM-b-profiled/target/release/deps/owner_state_bench-99b937fd4338f7e8",
+    "binary_sha256": "3d776efa8485482340b24bf72a9f9de7daabbec2fec3e55d318b2296a141db2a",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (Homebrew)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: aarch64-apple-darwin\nrelease: 1.97.1\nLLVM version: 22.1.8",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30) (Homebrew)",
+    "build_logs": "local-runs/owner-state/build-20260910T110912859202Z",
+    "built_at": "2026-09-10T11:09:34.352052+00:00"
+  },
+  "variants": [
+    "baseline",
+    "cse_dce"
+  ],
+  "rayon_num_threads": 11,
+  "cases": {
+    "baseline/direct": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "baseline",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "direct",
+        "anchor": "0xae8de9c5c3a339068cafbaa4687bad7bc66f63dc5a04cd65c468677675831ce5",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0xf2c5dc41f882b8ca478a8142389dffefa81c69ff413079e42de5fc048a2ea48d",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": false,
+          "dce": false,
+          "before_dce": {
+            "instructions": 7591103,
+            "memory_cells": 7585559
+          },
+          "after_dce": {
+            "instructions": 7591103,
+            "memory_cells": 7585559
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 67766,
+                "xor": 35076
+              },
+              "after": {
+                "set": 129,
+                "mul": 67766,
+                "xor": 35076
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 150207,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 150207,
+                "mul": 38080
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 150939,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 150939,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616634,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616634,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151818,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151818,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151818,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151818,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 152138,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 152138,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 461156,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 461156,
+                "mul": 115200
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 151386,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151386,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 151322,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151322,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 152094,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 152094,
+                "mul": 38400
+              }
+            }
+          ]
+        },
+        "memory_cells": 7585559,
+        "op_counts": {
+          "xor": 6025928,
+          "mul": 1565046,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "secret",
+            "base": 7204450,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "6af5e87113f0b8d57b08376c702fcd3c69231988b698c353d2e1e7b9bb6c2bb7",
+        "public.bin": "4cebc325587e15494912abf76533caeefa450cfbb271db82e0abd8969aba1ec2",
+        "witness.bin": "d4411b0ac13b6a022eb985fabe643732ca3ff9eee36afc8f5ff5f1b127625d01",
+        "program.json": "99df3a92274a0c546ae108bdef3f60f3b097e2e13d0e984b1c11603415e223a2"
+      },
+      "generated_directory": "local-runs/owner-state/baseline/direct"
+    },
+    "baseline/rlp": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "baseline",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "rlp",
+        "anchor": "0xa6f6dd4116ea6caf55549f1617943485fc9e56c164d68e21ebd32d2bdcb39863",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0x8c631f6b0a86cba3c8548bdbd0521b6f28add4537f017796298710bd628c9e3d",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": false,
+          "dce": false,
+          "before_dce": {
+            "instructions": 8560187,
+            "memory_cells": 8554172
+          },
+          "after_dce": {
+            "instructions": 8560187,
+            "memory_cells": 8554172
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 72887,
+                "xor": 35645
+              },
+              "after": {
+                "set": 129,
+                "mul": 72887,
+                "xor": 35645
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 634,
+              "before": {
+                "xor": 771392,
+                "mul": 192000
+              },
+              "after": {
+                "xor": 771392,
+                "mul": 192000
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 150207,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 150207,
+                "mul": 38080
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 150939,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 150939,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616634,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616634,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151818,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151818,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151818,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151818,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 152138,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 152138,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 461156,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 461156,
+                "mul": 115200
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 151386,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151386,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 151322,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151322,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 152096,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 152096,
+                "mul": 38400
+              }
+            }
+          ]
+        },
+        "memory_cells": 8554172,
+        "op_counts": {
+          "xor": 6797891,
+          "mul": 1762167,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "header",
+            "base": 35276,
+            "length": 5072
+          },
+          {
+            "name": "secret",
+            "base": 8173061,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "08e1c7c184e392ca79935886aa87c9814c50f6e92db78cdceeeb1eb6ad8b1de4",
+        "public.bin": "9488b2daaed6abcaa7d01b7298bb274a228bd512b39724d00bb3b362363bda58",
+        "witness.bin": "befd9ca70571b053248bade016283fb545bf480b0938ba683c365372f169920e",
+        "program.json": "f67a3917d233f407b72177830d69155746745d8df28d613b97070505b210d7d5"
+      },
+      "generated_directory": "local-runs/owner-state/baseline/rlp"
+    },
+    "baseline/ssz": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "baseline",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "ssz",
+        "anchor": "0x80072a7509b62a55de86841190368b6fdb868dc017e9d56a1df0e516ff8a4a88",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0x79b5dd12500ea72bb10fe4abe8ba425e9ba4519d9853e721a32a989bab6e70cd",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": false,
+          "dce": false,
+          "before_dce": {
+            "instructions": 8575521,
+            "memory_cells": 8569721
+          },
+          "after_dce": {
+            "instructions": 8575521,
+            "memory_cells": 8569721
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 69046,
+                "xor": 35332
+              },
+              "after": {
+                "set": 129,
+                "mul": 69046,
+                "xor": 35332
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127551,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127551,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127551,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127551,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127551,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127551,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127551,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127551,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127551,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127551,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 150207,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 150207,
+                "mul": 38080
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 150939,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 150939,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616890,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616890,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616634,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 616634,
+                "mul": 153600
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151818,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151818,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151818,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151818,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 152138,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 152138,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 461156,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 461156,
+                "mul": 115200
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 151386,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151386,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 151322,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 151322,
+                "mul": 38400
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 152096,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 152096,
+                "mul": 38400
+              }
+            }
+          ]
+        },
+        "memory_cells": 8569721,
+        "op_counts": {
+          "xor": 6663941,
+          "mul": 1911451,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "ssz_sibling_0",
+            "base": 35276,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_1",
+            "base": 232108,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_2",
+            "base": 428940,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_3",
+            "base": 625772,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_4",
+            "base": 822604,
+            "length": 256
+          },
+          {
+            "name": "secret",
+            "base": 8188610,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "a61c4bb7734f3eb06855e7a900c8817d83f6374f53515f61747a3d7722c81cea",
+        "public.bin": "d7aad9dff85810615eca2e346d72611a49d765085935d008f08153029d853a7d",
+        "witness.bin": "99a95ce45c31e2081f4063d24bf365c6b849abcaf3d79e9343508e7d934a378f",
+        "program.json": "261b717eb3528e06ec8d83245699f72b3ee39a4d6e778ecdc1ca7494d4d278fa"
+      },
+      "generated_directory": "local-runs/owner-state/baseline/ssz"
+    },
+    "cse_dce/direct": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "cse_dce",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "direct",
+        "anchor": "0xae8de9c5c3a339068cafbaa4687bad7bc66f63dc5a04cd65c468677675831ce5",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0xf2c5dc41f882b8ca478a8142389dffefa81c69ff413079e42de5fc048a2ea48d",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": true,
+          "dce": true,
+          "before_dce": {
+            "instructions": 7583504,
+            "memory_cells": 7577960
+          },
+          "after_dce": {
+            "instructions": 7498506,
+            "memory_cells": 7492962
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 67766,
+                "xor": 35076
+              },
+              "after": {
+                "set": 129,
+                "mul": 67766,
+                "xor": 35076
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 149115,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 145141,
+                "mul": 36736
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 149910,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 145942,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616442,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612474,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 151680,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147712,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 460964,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 456996,
+                "mul": 113856
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 150552,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146584,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 150456,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146488,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 151546,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147578,
+                "mul": 37056
+              }
+            }
+          ]
+        },
+        "memory_cells": 7492962,
+        "op_counts": {
+          "xor": 5954835,
+          "mul": 1543542,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "secret",
+            "base": 7123891,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "17e5e6823735027a5b1f6c1cef60113810fff44897404aa0a700b891086366e0",
+        "public.bin": "4cebc325587e15494912abf76533caeefa450cfbb271db82e0abd8969aba1ec2",
+        "witness.bin": "515332a9855aabed06181ddc7a49967ba1c258b6d69ce52b6cb42b7ba222a8f3",
+        "program.json": "22ecc2613783b9f8da5ec427a18e7b15bfdb30f08c211b0597ab08c178aceaf5"
+      },
+      "generated_directory": "local-runs/owner-state/cse_dce/direct"
+    },
+    "cse_dce/rlp": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "cse_dce",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "rlp",
+        "anchor": "0xa6f6dd4116ea6caf55549f1617943485fc9e56c164d68e21ebd32d2bdcb39863",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0x8c631f6b0a86cba3c8548bdbd0521b6f28add4537f017796298710bd628c9e3d",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": true,
+          "dce": true,
+          "before_dce": {
+            "instructions": 8552395,
+            "memory_cells": 8546380
+          },
+          "after_dce": {
+            "instructions": 8462085,
+            "memory_cells": 8456070
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 72887,
+                "xor": 35645
+              },
+              "after": {
+                "set": 129,
+                "mul": 72887,
+                "xor": 35645
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 634,
+              "before": {
+                "xor": 771200,
+                "mul": 192000
+              },
+              "after": {
+                "xor": 767232,
+                "mul": 190656
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 149115,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 145141,
+                "mul": 36736
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 149910,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 145942,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616442,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612474,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 151680,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147712,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 460964,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 456996,
+                "mul": 113856
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 150552,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146584,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 150456,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146488,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 151547,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147579,
+                "mul": 37056
+              }
+            }
+          ]
+        },
+        "memory_cells": 8456070,
+        "op_counts": {
+          "xor": 6722637,
+          "mul": 1739319,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "header",
+            "base": 35276,
+            "length": 5072
+          },
+          {
+            "name": "secret",
+            "base": 8086998,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "785563a2dca66b0d18d2bf3690799c2385a24b6cfb8fae6d0b1a7434e66b2a83",
+        "public.bin": "9488b2daaed6abcaa7d01b7298bb274a228bd512b39724d00bb3b362363bda58",
+        "witness.bin": "1753fead09b7cf6f2d2a91b08f349ed10670f70decced10e94674d61fd223d96",
+        "program.json": "26fa6889f641b83787f7d3eb98d3b3f286b405219a1f72cbc34f7e4fe06541f9"
+      },
+      "generated_directory": "local-runs/owner-state/cse_dce/rlp"
+    },
+    "cse_dce/ssz": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "cse_dce",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "ssz",
+        "anchor": "0x80072a7509b62a55de86841190368b6fdb868dc017e9d56a1df0e516ff8a4a88",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0x79b5dd12500ea72bb10fe4abe8ba425e9ba4519d9853e721a32a989bab6e70cd",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": true,
+          "dce": true,
+          "before_dce": {
+            "instructions": 8567801,
+            "memory_cells": 8562001
+          },
+          "after_dce": {
+            "instructions": 8482693,
+            "memory_cells": 8476893
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 69046,
+                "xor": 35332
+              },
+              "after": {
+                "set": 129,
+                "mul": 69046,
+                "xor": 35332
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 149115,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 145141,
+                "mul": 36736
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 149910,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 145942,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616442,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612474,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 151680,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147712,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 460964,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 456996,
+                "mul": 113856
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 150552,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146584,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 150456,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146488,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 151547,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147579,
+                "mul": 37056
+              }
+            }
+          ]
+        },
+        "memory_cells": 8476893,
+        "op_counts": {
+          "xor": 6592617,
+          "mul": 1889947,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "ssz_sibling_0",
+            "base": 35276,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_1",
+            "base": 232062,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_2",
+            "base": 428848,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_3",
+            "base": 625634,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_4",
+            "base": 822420,
+            "length": 256
+          },
+          {
+            "name": "secret",
+            "base": 8107821,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "ca71eb97d034cb5897d537fe82cce4aeceaf7efb9137e569b032104e196e2ced",
+        "public.bin": "d7aad9dff85810615eca2e346d72611a49d765085935d008f08153029d853a7d",
+        "witness.bin": "2f771fa414eac70a73a5eac0c55ceaa242632c735427b304375222de806fa111",
+        "program.json": "60a84253fad9864f4e362e13f7441a639b43ca68c9fce5d892a94e99529b5573"
+      },
+      "generated_directory": "local-runs/owner-state/cse_dce/ssz"
+    }
+  },
+  "runs": [
+    {
+      "condition": "baseline/ssz",
+      "variant": "baseline",
+      "mode": "ssz",
+      "kind": "warmup",
+      "block": 1,
+      "position": 1,
+      "started_at": "2026-09-10T11:13:35.992419+00:00",
+      "passed": true,
+      "environment_before": "001-warmup-01-baseline-ssz-before.json",
+      "environment_before_sha256": "973039ef69ea595856059880c3acb055052928edba044bfbb56a215e8245a90d",
+      "exit_code": 0,
+      "process_seconds": 28.31014008299826,
+      "log": "001-warmup-01-baseline-ssz.log",
+      "log_sha256": "ebd56581d64bf78f5d1ced3b2a0d0a0d0c67a3625038684272c8c896f08c7104",
+      "memory_measurement": "macos-time-l",
+      "memory": {
+        "max_rss_bytes": 12967985152,
+        "peak_footprint_bytes": 36498549136
+      },
+      "result": {
+        "action": "prove",
+        "cycles": 8575525,
+        "counts": [
+          6663941,
+          1911451,
+          132,
+          0,
+          1,
+          0
+        ],
+        "cells": 8569724,
+        "mem_used": 8569724,
+        "log_mem": 24,
+        "committed": 207621052,
+        "proof_bytes": 834016,
+        "assembly_ms": 1050.264,
+        "prove_including_execute_ms": 25400.81,
+        "verify_ms": 864.141,
+        "negative_checks_ms": 198.944,
+        "wrong_public_rejected": true,
+        "mutated_proof_rejected": true
+      },
+      "rejection": null,
+      "phases": {
+        "profile_schema": 1,
+        "scope": "cpu_prove_before_logging_and_local_drops",
+        "execute_ms": 1016.779167,
+        "build_ms": 2928.73475,
+        "transcript_setup_ms": 0.055917,
+        "commit_ms": 4951.50675,
+        "bus_ms": 9708.47725,
+        "constraints_ms": 441.772833,
+        "claim_prep_ms": 0.202208,
+        "reduction_ms": 24.681375,
+        "pcs_open_ms": 6093.835125,
+        "finalize_ms": 0.072625,
+        "internal_total_ms": 25166.158958,
+        "internal_residual_ms": 0.040958,
+        "outer_prove_residual_ms": 234.65104200000133,
+        "outer_timer_resolution_ms": 0.001
+      },
+      "environment_after": "001-warmup-01-baseline-ssz-after.json",
+      "environment_after_sha256": "0d60f18571c36af445afb159a16eb826ef94d6c38be67a7cacfc30da43f93d2a",
+      "finished_at": "2026-09-10T11:14:04.711017+00:00",
+      "environment_valid": true,
+      "proof_sha256": "f1a6a22b6953df9619f3f45499b2ccb08a2bece43c521413b806016c17c9d96c"
+    },
+    {
+      "condition": "cse_dce/ssz",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "kind": "warmup",
+      "block": 1,
+      "position": 2,
+      "started_at": "2026-09-10T11:14:04.714693+00:00",
+      "passed": true,
+      "environment_before": "002-warmup-01-cse_dce-ssz-before.json",
+      "environment_before_sha256": "2eff4c60a4bc0bf8d36e9aa00eb401c4983bddccc1c78de87374f0f8a0ff8be5",
+      "exit_code": 0,
+      "process_seconds": 24.845265499996458,
+      "log": "002-warmup-01-cse_dce-ssz.log",
+      "log_sha256": "3b8603222e775fc382c983e455acf930c4672dc08cec6759c8f74db2b9f68526",
+      "memory_measurement": "macos-time-l",
+      "memory": {
+        "max_rss_bytes": 16301948928,
+        "peak_footprint_bytes": 37175946168
+      },
+      "result": {
+        "action": "prove",
+        "cycles": 8482697,
+        "counts": [
+          6592617,
+          1889947,
+          132,
+          0,
+          1,
+          0
+        ],
+        "cells": 8476896,
+        "mem_used": 8476896,
+        "log_mem": 24,
+        "committed": 207621052,
+        "proof_bytes": 836384,
+        "assembly_ms": 1105.951,
+        "prove_including_execute_ms": 21682.959,
+        "verify_ms": 776.534,
+        "negative_checks_ms": 230.563,
+        "wrong_public_rejected": true,
+        "mutated_proof_rejected": true
+      },
+      "rejection": null,
+      "phases": {
+        "profile_schema": 1,
+        "scope": "cpu_prove_before_logging_and_local_drops",
+        "execute_ms": 816.197417,
+        "build_ms": 1790.989459,
+        "transcript_setup_ms": 0.004,
+        "commit_ms": 4568.79025,
+        "bus_ms": 8035.736208,
+        "constraints_ms": 528.725875,
+        "claim_prep_ms": 0.055333,
+        "reduction_ms": 15.401458,
+        "pcs_open_ms": 5700.096791,
+        "finalize_ms": 0.028125,
+        "internal_total_ms": 21456.048334,
+        "internal_residual_ms": 0.023418,
+        "outer_prove_residual_ms": 226.91066599999976,
+        "outer_timer_resolution_ms": 0.001
+      },
+      "environment_after": "002-warmup-01-cse_dce-ssz-after.json",
+      "environment_after_sha256": "34149b9475bcbbabd2a7b81f5b4121cc3cfd657905a6a50e0c8145ebc41bb69c",
+      "finished_at": "2026-09-10T11:14:29.792896+00:00",
+      "environment_valid": true,
+      "proof_sha256": "ee031e0b2151be87c68a54dfcb0c9cb418bcb12aad8820d5fd8682e728d1d5cf"
+    },
+    {
+      "condition": "baseline/rlp",
+      "variant": "baseline",
+      "mode": "rlp",
+      "kind": "warmup",
+      "block": 1,
+      "position": 3,
+      "started_at": "2026-09-10T11:14:29.796748+00:00",
+      "passed": true,
+      "environment_before": "003-warmup-01-baseline-rlp-before.json",
+      "environment_before_sha256": "358aaf474a7ed820c94c3bc2fbce09602c86ba1c8bfc86745fcfbc71d349a59d",
+      "exit_code": 0,
+      "process_seconds": 24.451367833000404,
+      "log": "003-warmup-01-baseline-rlp.log",
+      "log_sha256": "99afb8796e52089a9fff12ecbc26c407b14f5d9100d23fc6463dab9f18ced3c9",
+      "memory_measurement": "macos-time-l",
+      "memory": {
+        "max_rss_bytes": 23725129728,
+        "peak_footprint_bytes": 38400651104
+      },
+      "result": {
+        "action": "prove",
+        "cycles": 8560191,
+        "counts": [
+          6797891,
+          1762167,
+          132,
+          0,
+          1,
+          0
+        ],
+        "cells": 8554175,
+        "mem_used": 8554175,
+        "log_mem": 24,
+        "committed": 207621052,
+        "proof_bytes": 834080,
+        "assembly_ms": 1039.237,
+        "prove_including_execute_ms": 21405.505,
+        "verify_ms": 1041.583,
+        "negative_checks_ms": 222.257,
+        "wrong_public_rejected": true,
+        "mutated_proof_rejected": true
+      },
+      "rejection": null,
+      "phases": {
+        "profile_schema": 1,
+        "scope": "cpu_prove_before_logging_and_local_drops",
+        "execute_ms": 876.260875,
+        "build_ms": 847.448834,
+        "transcript_setup_ms": 0.009583,
+        "commit_ms": 3765.468459,
+        "bus_ms": 8399.728958,
+        "constraints_ms": 628.019667,
+        "claim_prep_ms": 1.21825,
+        "reduction_ms": 30.574958,
+        "pcs_open_ms": 6626.722833,
+        "finalize_ms": 0.248666,
+        "internal_total_ms": 21175.723458,
+        "internal_residual_ms": 0.022375,
+        "outer_prove_residual_ms": 229.78154200000063,
+        "outer_timer_resolution_ms": 0.001
+      },
+      "environment_after": "003-warmup-01-baseline-rlp-after.json",
+      "environment_after_sha256": "459f5d21769845f6bbde0e846a589e448bb020062ca645ca59a8e180246923b6",
+      "finished_at": "2026-09-10T11:14:54.520786+00:00",
+      "environment_valid": true,
+      "proof_sha256": "a4b1f409fdb663101740a097ad323a415b9a262a28e0db26acc57622c6589534"
+    },
+    {
+      "condition": "cse_dce/direct",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "kind": "warmup",
+      "block": 1,
+      "position": 4,
+      "started_at": "2026-09-10T11:14:54.524835+00:00",
+      "passed": true,
+      "environment_before": "004-warmup-01-cse_dce-direct-before.json",
+      "environment_before_sha256": "e6a47fdd302bade3a56dbac7fd3057559fe32463868ba73603acb346ce77836a",
+      "exit_code": 0,
+      "process_seconds": 20.022010291999322,
+      "log": "004-warmup-01-cse_dce-direct.log",
+      "log_sha256": "30c97f7d2469762556678068a194ff8c5c437a57a855c5fa4e9a2dae7ae81592",
+      "memory_measurement": "macos-time-l",
+      "memory": {
+        "max_rss_bytes": 23459414016,
+        "peak_footprint_bytes": 34210865800
+      },
+      "result": {
+        "action": "prove",
+        "cycles": 7498510,
+        "counts": [
+          5954835,
+          1543542,
+          132,
+          0,
+          1,
+          0
+        ],
+        "cells": 7492965,
+        "mem_used": 7492965,
+        "log_mem": 23,
+        "committed": 182455228,
+        "proof_bytes": 834752,
+        "assembly_ms": 585.627,
+        "prove_including_execute_ms": 18103.082,
+        "verify_ms": 492.047,
+        "negative_checks_ms": 122.981,
+        "wrong_public_rejected": true,
+        "mutated_proof_rejected": true
+      },
+      "rejection": null,
+      "phases": {
+        "profile_schema": 1,
+        "scope": "cpu_prove_before_logging_and_local_drops",
+        "execute_ms": 515.141584,
+        "build_ms": 723.209583,
+        "transcript_setup_ms": 0.005,
+        "commit_ms": 3042.684709,
+        "bus_ms": 8076.223667,
+        "constraints_ms": 435.991333,
+        "claim_prep_ms": 0.057166,
+        "reduction_ms": 15.916292,
+        "pcs_open_ms": 5060.304542,
+        "finalize_ms": 0.037666,
+        "internal_total_ms": 17869.601708,
+        "internal_residual_ms": 0.030166,
+        "outer_prove_residual_ms": 233.4802920000002,
+        "outer_timer_resolution_ms": 0.001
+      },
+      "environment_after": "004-warmup-01-cse_dce-direct-after.json",
+      "environment_after_sha256": "340535cc5dc57c4cc956149ec6adcfec7da25c67243faebfc1dd4655ba0fd5e8",
+      "finished_at": "2026-09-10T11:15:14.801470+00:00",
+      "environment_valid": true,
+      "proof_sha256": "89039081f67644b4d19b34604c712948f18d60a9e964c2a6c865e645268bb9e6"
+    },
+    {
+      "condition": "baseline/direct",
+      "variant": "baseline",
+      "mode": "direct",
+      "kind": "warmup",
+      "block": 1,
+      "position": 5,
+      "started_at": "2026-09-10T11:15:14.805650+00:00",
+      "passed": true,
+      "environment_before": "005-warmup-01-baseline-direct-before.json",
+      "environment_before_sha256": "1ffb9b707d5943e29a451f85f68f4a87e7d1c1e2ada264eb82f8e1f2c8ea79a2",
+      "exit_code": 0,
+      "process_seconds": 18.12384700000257,
+      "log": "005-warmup-01-baseline-direct.log",
+      "log_sha256": "98e625ebcacfe2793bd9f9d36f3e588ab8b02be711e8068a7a06c1cc2fc6232c",
+      "memory_measurement": "macos-time-l",
+      "memory": {
+        "max_rss_bytes": 24050712576,
+        "peak_footprint_bytes": 37204781864
+      },
+      "result": {
+        "action": "prove",
+        "cycles": 7591107,
+        "counts": [
+          6025928,
+          1565046,
+          132,
+          0,
+          1,
+          0
+        ],
+        "cells": 7585562,
+        "mem_used": 7585562,
+        "log_mem": 23,
+        "committed": 182455228,
+        "proof_bytes": 831168,
+        "assembly_ms": 537.643,
+        "prove_including_execute_ms": 16260.803,
+        "verify_ms": 462.579,
+        "negative_checks_ms": 123.428,
+        "wrong_public_rejected": true,
+        "mutated_proof_rejected": true
+      },
+      "rejection": null,
+      "phases": {
+        "profile_schema": 1,
+        "scope": "cpu_prove_before_logging_and_local_drops",
+        "execute_ms": 552.881458,
+        "build_ms": 773.410916,
+        "transcript_setup_ms": 0.004583,
+        "commit_ms": 2981.57,
+        "bus_ms": 7416.313167,
+        "constraints_ms": 449.157667,
+        "claim_prep_ms": 0.068792,
+        "reduction_ms": 15.950416,
+        "pcs_open_ms": 3815.659,
+        "finalize_ms": 0.008708,
+        "internal_total_ms": 16005.056167,
+        "internal_residual_ms": 0.03146,
+        "outer_prove_residual_ms": 255.74683299999924,
+        "outer_timer_resolution_ms": 0.001
+      },
+      "environment_after": "005-warmup-01-baseline-direct-after.json",
+      "environment_after_sha256": "1587ad5f31166d2bc934ffb3f476816ba8d6ad7b0de144ea6837d80648b094a7",
+      "finished_at": "2026-09-10T11:15:33.171224+00:00",
+      "environment_valid": true,
+      "proof_sha256": "3a45b8e4a150e3aa108b4cc7ce6a67df9c8a198da3e178aa8792fc58cefce9d3"
+    },
+    {
+      "condition": "cse_dce/rlp",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "kind": "warmup",
+      "block": 1,
+      "position": 6,
+      "started_at": "2026-09-10T11:15:33.175631+00:00",
+      "passed": true,
+      "environment_before": "006-warmup-01-cse_dce-rlp-before.json",
+      "environment_before_sha256": "822f85bccd4503168faf5aec845f14d089fa5ba672d8c5fffac12b839b01d4a4",
+      "exit_code": 0,
+      "process_seconds": 21.3469042910001,
+      "log": "006-warmup-01-cse_dce-rlp.log",
+      "log_sha256": "5809b68aa10b2af6bed85cdf4b84a39f18ddd2bf4f99050f73288da0e22eb702",
+      "memory_measurement": "macos-time-l",
+      "memory": {
+        "max_rss_bytes": 27420000256,
+        "peak_footprint_bytes": 40359458024
+      },
+      "result": {
+        "action": "prove",
+        "cycles": 8462089,
+        "counts": [
+          6722637,
+          1739319,
+          132,
+          0,
+          1,
+          0
+        ],
+        "cells": 8456073,
+        "mem_used": 8456073,
+        "log_mem": 24,
+        "committed": 207621052,
+        "proof_bytes": 835712,
+        "assembly_ms": 1036.049,
+        "prove_including_execute_ms": 18699.608,
+        "verify_ms": 764.775,
+        "negative_checks_ms": 225.813,
+        "wrong_public_rejected": true,
+        "mutated_proof_rejected": true
+      },
+      "rejection": null,
+      "phases": {
+        "profile_schema": 1,
+        "scope": "cpu_prove_before_logging_and_local_drops",
+        "execute_ms": 1117.407,
+        "build_ms": 912.562333,
+        "transcript_setup_ms": 0.0045,
+        "commit_ms": 2949.782542,
+        "bus_ms": 7237.015791,
+        "constraints_ms": 1172.72075,
+        "claim_prep_ms": 0.036292,
+        "reduction_ms": 8.729041,
+        "pcs_open_ms": 5058.499625,
+        "finalize_ms": 0.013542,
+        "internal_total_ms": 18456.801709,
+        "internal_residual_ms": 0.030293,
+        "outer_prove_residual_ms": 242.80629100000078,
+        "outer_timer_resolution_ms": 0.001
+      },
+      "environment_after": "006-warmup-01-cse_dce-rlp-after.json",
+      "environment_after_sha256": "527c51a36ba01292ddbdbd0ae38e15e52af4c786a3a9dcc95b8af120ea9380df",
+      "finished_at": "2026-09-10T11:15:54.763972+00:00",
+      "environment_valid": true,
+      "proof_sha256": "a56271e974b646b624179348406ce22905c367ca6748aae634aacd8cb9e7e0e3"
+    },
+    {
+      "condition": "baseline/rlp",
+      "variant": "baseline",
+      "mode": "rlp",
+      "kind": "measured",
+      "block": 1,
+      "position": 1,
+      "started_at": "2026-09-10T11:15:54.767790+00:00",
+      "passed": true,
+      "environment_before": "007-measured-01-baseline-rlp-before.json",
+      "environment_before_sha256": "ac94eb0acb79a66c76818bacf1a0a075c2113eaee72a9771dee567f8711b917b",
+      "exit_code": 0,
+      "process_seconds": 29.170889416000136,
+      "log": "007-measured-01-baseline-rlp.log",
+      "log_sha256": "c4b53ae55858963efb42ee6319e01e7b0b8b4453e2a44be364540ee743a78310",
+      "memory_measurement": "macos-time-l",
+      "memory": {
+        "max_rss_bytes": 23859691520,
+        "peak_footprint_bytes": 36604045760
+      },
+      "result": {
+        "action": "prove",
+        "cycles": 8560191,
+        "counts": [
+          6797891,
+          1762167,
+          132,
+          0,
+          1,
+          0
+        ],
+        "cells": 8554175,
+        "mem_used": 8554175,
+        "log_mem": 24,
+        "committed": 207621052,
+        "proof_bytes": 834080,
+        "assembly_ms": 1068.424,
+        "prove_including_execute_ms": 26182.802,
+        "verify_ms": 1386.956,
+        "negative_checks_ms": 180.615,
+        "wrong_public_rejected": true,
+        "mutated_proof_rejected": true
+      },
+      "rejection": null,
+      "phases": {
+        "profile_schema": 1,
+        "scope": "cpu_prove_before_logging_and_local_drops",
+        "execute_ms": 975.919125,
+        "build_ms": 847.595125,
+        "transcript_setup_ms": 0.004417,
+        "commit_ms": 3520.449416,
+        "bus_ms": 13271.955625,
+        "constraints_ms": 1650.170292,
+        "claim_prep_ms": 0.043166,
+        "reduction_ms": 15.053041,
+        "pcs_open_ms": 5753.11625,
+        "finalize_ms": 0.021583,
+        "internal_total_ms": 26034.355667,
+        "internal_residual_ms": 0.027627,
+        "outer_prove_residual_ms": 148.44633299999987,
+        "outer_timer_resolution_ms": 0.001
+      },
+      "environment_after": "007-measured-01-baseline-rlp-after.json",
+      "environment_after_sha256": "546301dd95234af329712f4fb4c52791094a1ce461b8a9e7e791a684b310d9f3",
+      "finished_at": "2026-09-10T11:16:24.161035+00:00"
+    }
+  ],
+  "timing_scope": "outer prove call includes execution, witness build and return cleanup",
+  "temperature_frequency_measured": false,
+  "environment_checks_passed": false,
+  "seed": 20260910,
+  "blocks": 8,
+  "warmups_per_condition": 1,
+  "warmup_orders": [
+    [
+      "baseline/ssz",
+      "cse_dce/ssz",
+      "baseline/rlp",
+      "cse_dce/direct",
+      "baseline/direct",
+      "cse_dce/rlp"
+    ]
+  ],
+  "measured_orders": [
+    [
+      "baseline/rlp",
+      "cse_dce/direct",
+      "cse_dce/rlp",
+      "cse_dce/ssz",
+      "baseline/direct",
+      "baseline/ssz"
+    ],
+    [
+      "cse_dce/ssz",
+      "baseline/ssz",
+      "cse_dce/direct",
+      "baseline/direct",
+      "baseline/rlp",
+      "cse_dce/rlp"
+    ],
+    [
+      "cse_dce/rlp",
+      "baseline/rlp",
+      "baseline/direct",
+      "cse_dce/direct",
+      "baseline/ssz",
+      "cse_dce/ssz"
+    ],
+    [
+      "baseline/ssz",
+      "baseline/direct",
+      "cse_dce/ssz",
+      "cse_dce/rlp",
+      "cse_dce/direct",
+      "baseline/rlp"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "baseline/rlp",
+      "baseline/ssz",
+      "cse_dce/rlp",
+      "baseline/direct"
+    ],
+    [
+      "baseline/direct",
+      "cse_dce/rlp",
+      "baseline/ssz",
+      "baseline/rlp",
+      "cse_dce/ssz",
+      "cse_dce/direct"
+    ],
+    [
+      "cse_dce/rlp",
+      "baseline/rlp",
+      "baseline/direct",
+      "cse_dce/direct",
+      "baseline/ssz",
+      "cse_dce/ssz"
+    ],
+    [
+      "cse_dce/direct",
+      "cse_dce/ssz",
+      "baseline/rlp",
+      "baseline/ssz",
+      "cse_dce/rlp",
+      "baseline/direct"
+    ]
+  ],
+  "order_method": "randomized Williams rows, complete cycles balance positions and preceding conditions",
+  "sample_policy": "all measured samples retained; warmups explicitly labeled and excluded from estimates",
+  "finished_at": "2026-09-10T11:16:24.163787+00:00",
+  "error": "AC power is not confirmed; batch stopped and timing comparisons are inconclusive"
+}

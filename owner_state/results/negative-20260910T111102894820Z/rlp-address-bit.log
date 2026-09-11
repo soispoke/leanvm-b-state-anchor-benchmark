@@ -1,0 +1,11 @@
+
+running 1 test
+test real_state_bench::real_state_benchmark ... 
+thread 'real_state_bench::real_state_benchmark' (452722) panicked at src/cpu/execute.rs:98:17:
+write-once conflict at cell 2
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+REJECTED mutation_cell=4 execute_ms=758.633 reason=write-once conflict at cell 2
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 1.82s
+

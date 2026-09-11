@@ -1,0 +1,2949 @@
+{
+  "schema": "leanvm-owner-run-v1",
+  "command": "negative",
+  "status": "complete",
+  "started_at": "2026-09-10T11:11:02.895456+00:00",
+  "source_sha256": {
+    "owner_state/run.py": "7530f16cadaa47d5422ea12794ed5607b39afc40b94e8261655d50c0297f2e1f",
+    "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+    "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+    "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+    "owner_state/instrumentation.py": "584c3a2fbcb673a51a64b444026a1228f50874219946d05be1a418147f3a0701",
+    "owner_state/profile.patch": "38a63917808288f5e720f79f1b1bad723710fe50a7db03f2098489e89626ac89",
+    "real_state/real_state_bench.rs": "0a6cd55af3f1e80fcea32dbc1254c7225152bfcf45516f61d8cc4d99f4f05092",
+    "real_state/leanvm-witness-api.patch": "365a65f9554c2c326752df19752f7df3661a074ae5220b101f1a774e2b9682b1",
+    "real_state/run.py": "00bfaf6365a788456afba4c6e109bef82b030396f7a5c265cedb5652c527ce22",
+    "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+    "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+    "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+    "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+    "real_state/profile.json": "31734989162baab8597643665318c63432af34a095c8434db824a78b4c6666dd",
+    "real_state/ssz-reference.json": "a3394fad336cc964c5cd07153c8394ded794dba83207241c236168abda4aad69",
+    "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463",
+    "fixtures/mainnet-0x18bd000.json": "c0ff761d18e011a3f83a053c765f7ca8057a6a8d4ff5764bb5dcd6476c7a7795"
+  },
+  "runner": {
+    "schema": "leanvm-owner-runner-v1",
+    "upstream_commit": "8494c5d5df323f2b97ed89272942a4bee6247078",
+    "cargo_lock_sha256": "0c60e536366da5198d5536c3fdade9a7f20d48d070ee3093758f4b73712a2bf6",
+    "vm_cpu_sha256": "e6264ca07d7ddb16c2b4a618dfd80dc65870dbebbb0f2c359c3f7b06bdaaff82",
+    "witness_patch_sha256": "365a65f9554c2c326752df19752f7df3661a074ae5220b101f1a774e2b9682b1",
+    "profile_patch_sha256": "38a63917808288f5e720f79f1b1bad723710fe50a7db03f2098489e89626ac89",
+    "wrapper_sha256": "18a159f2fa52bb2b3d87a6ee18432f15a2a76a158db6d4195f43fad794ea886b",
+    "rust_runner_sha256": "0a6cd55af3f1e80fcea32dbc1254c7225152bfcf45516f61d8cc4d99f4f05092",
+    "binary": "vendor/leanVM-b-profiled/target/release/deps/owner_state_bench-99b937fd4338f7e8",
+    "binary_sha256": "3d776efa8485482340b24bf72a9f9de7daabbec2fec3e55d318b2296a141db2a",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (Homebrew)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: aarch64-apple-darwin\nrelease: 1.97.1\nLLVM version: 22.1.8",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30) (Homebrew)",
+    "build_logs": "local-runs/owner-state/build-20260910T110912859202Z",
+    "built_at": "2026-09-10T11:09:34.352052+00:00"
+  },
+  "variants": [
+    "cse_dce"
+  ],
+  "rayon_num_threads": 11,
+  "cases": {
+    "cse_dce/direct": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "cse_dce",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "direct",
+        "anchor": "0xae8de9c5c3a339068cafbaa4687bad7bc66f63dc5a04cd65c468677675831ce5",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0xf2c5dc41f882b8ca478a8142389dffefa81c69ff413079e42de5fc048a2ea48d",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": true,
+          "dce": true,
+          "before_dce": {
+            "instructions": 7583504,
+            "memory_cells": 7577960
+          },
+          "after_dce": {
+            "instructions": 7498506,
+            "memory_cells": 7492962
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 67766,
+                "xor": 35076
+              },
+              "after": {
+                "set": 129,
+                "mul": 67766,
+                "xor": 35076
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 149115,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 145141,
+                "mul": 36736
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 149910,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 145942,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616442,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612474,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 151680,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147712,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 460964,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 456996,
+                "mul": 113856
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 150552,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146584,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 150456,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146488,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 151546,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147578,
+                "mul": 37056
+              }
+            }
+          ]
+        },
+        "memory_cells": 7492962,
+        "op_counts": {
+          "xor": 5954835,
+          "mul": 1543542,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "secret",
+            "base": 7123891,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "17e5e6823735027a5b1f6c1cef60113810fff44897404aa0a700b891086366e0",
+        "public.bin": "4cebc325587e15494912abf76533caeefa450cfbb271db82e0abd8969aba1ec2",
+        "witness.bin": "515332a9855aabed06181ddc7a49967ba1c258b6d69ce52b6cb42b7ba222a8f3",
+        "program.json": "22ecc2613783b9f8da5ec427a18e7b15bfdb30f08c211b0597ab08c178aceaf5"
+      },
+      "generated_directory": "local-runs/owner-state/cse_dce/direct"
+    },
+    "cse_dce/rlp": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "cse_dce",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "rlp",
+        "anchor": "0xa6f6dd4116ea6caf55549f1617943485fc9e56c164d68e21ebd32d2bdcb39863",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0x8c631f6b0a86cba3c8548bdbd0521b6f28add4537f017796298710bd628c9e3d",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": true,
+          "dce": true,
+          "before_dce": {
+            "instructions": 8552395,
+            "memory_cells": 8546380
+          },
+          "after_dce": {
+            "instructions": 8462085,
+            "memory_cells": 8456070
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 72887,
+                "xor": 35645
+              },
+              "after": {
+                "set": 129,
+                "mul": 72887,
+                "xor": 35645
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 634,
+              "before": {
+                "xor": 771200,
+                "mul": 192000
+              },
+              "after": {
+                "xor": 767232,
+                "mul": 190656
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 149115,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 145141,
+                "mul": 36736
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 149910,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 145942,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616442,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612474,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 151680,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147712,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 460964,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 456996,
+                "mul": 113856
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 150552,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146584,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 150456,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146488,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 151547,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147579,
+                "mul": 37056
+              }
+            }
+          ]
+        },
+        "memory_cells": 8456070,
+        "op_counts": {
+          "xor": 6722637,
+          "mul": 1739319,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "header",
+            "base": 35276,
+            "length": 5072
+          },
+          {
+            "name": "secret",
+            "base": 8086998,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "785563a2dca66b0d18d2bf3690799c2385a24b6cfb8fae6d0b1a7434e66b2a83",
+        "public.bin": "9488b2daaed6abcaa7d01b7298bb274a228bd512b39724d00bb3b362363bda58",
+        "witness.bin": "1753fead09b7cf6f2d2a91b08f349ed10670f70decced10e94674d61fd223d96",
+        "program.json": "26fa6889f641b83787f7d3eb98d3b3f286b405219a1f72cbc34f7e4fe06541f9"
+      },
+      "generated_directory": "local-runs/owner-state/cse_dce/rlp"
+    },
+    "cse_dce/ssz": {
+      "metadata": {
+        "relation": "owner-v1",
+        "variant": "cse_dce",
+        "note_commitment": "0x644730db4e62e76585160679508e0fec9df6a75a4e1fe9ce9c9d014b03310fe5",
+        "secret_fixture": "0x000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "mode": "ssz",
+        "anchor": "0x80072a7509b62a55de86841190368b6fdb868dc017e9d56a1df0e516ff8a4a88",
+        "account": "0xb235f9b71000a39c25476f7ba40aaa3763287685",
+        "slot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "value": "0x00000000000000000000000029fcb43b46531bca003ddc8fcb67ffe91900c762",
+        "public_digest": "0x79b5dd12500ea72bb10fe4abe8ba425e9ba4519d9853e721a32a989bab6e70cd",
+        "profile_sha256": "76d6882d171d4a99a7d9e1fe2d2ebded134ba12b89839e91b0cdf0821f272c2f",
+        "generation_source_sha256": {
+          "owner_state/relation.py": "484feb131780cfd61a34d07d23317edbad5e87700219ab72514c7a0aa380f30d",
+          "owner_state/circuit.py": "f292eae2950ccb9ff90cbdf1950864e02239f259ce106b4a78a76e8ba229519d",
+          "owner_state/hashes.py": "12386688490f0628a05f1c27aa709afdb89c3d9abd3ae9bffd546144c0cc48e0",
+          "real_state/circuit.py": "6643a81e64b83db3edf87b1e050a6b5e731a2fafaf82f1dabf66b245e4a7c48b",
+          "real_state/hashes.py": "5dd56fae77faae1025e6add29326c80adcae95dbedc2b106c9ab2a93df4e0e94",
+          "real_state/statement.py": "311ec972020ef948421e86319718d023500979f709b3c6e1ffe269a9cfb42f02",
+          "real_state/ssz_reference.py": "4863cabd43fe10dfb1c46541a42cfb253bf8f283bd71d77ace2128fe0163a773",
+          "analyze_fixtures.py": "6c677ac66de1c5755fb886ca871e007f0b7ca388771d566421a00edf6dd22463"
+        },
+        "optimization": {
+          "cse": true,
+          "dce": true,
+          "before_dce": {
+            "instructions": 8567801,
+            "memory_cells": 8562001
+          },
+          "after_dce": {
+            "instructions": 8482693,
+            "memory_cells": 8476893
+          },
+          "sections": [
+            {
+              "kind": "relation",
+              "length_bytes": null,
+              "before": {
+                "set": 129,
+                "mul": 69046,
+                "xor": 35332
+              },
+              "after": {
+                "set": 129,
+                "mul": 69046,
+                "xor": 35332
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "sha256",
+              "length_bytes": 64,
+              "before": {
+                "xor": 127527,
+                "mul": 69025
+              },
+              "after": {
+                "xor": 127505,
+                "mul": 69025
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 20,
+              "before": {
+                "xor": 149115,
+                "mul": 38080
+              },
+              "after": {
+                "xor": 145141,
+                "mul": 36736
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 32,
+              "before": {
+                "xor": 149910,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 145942,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 532,
+              "before": {
+                "xor": 616698,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612730,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 500,
+              "before": {
+                "xor": 616442,
+                "mul": 153600
+              },
+              "after": {
+                "xor": 612474,
+                "mul": 152256
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 83,
+              "before": {
+                "xor": 151200,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147232,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 103,
+              "before": {
+                "xor": 151680,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147712,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 276,
+              "before": {
+                "xor": 460964,
+                "mul": 115200
+              },
+              "after": {
+                "xor": 456996,
+                "mul": 113856
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 56,
+              "before": {
+                "xor": 150552,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146584,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 52,
+              "before": {
+                "xor": 150456,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 146488,
+                "mul": 37056
+              }
+            },
+            {
+              "kind": "keccak256",
+              "length_bytes": 106,
+              "before": {
+                "xor": 151547,
+                "mul": 38400
+              },
+              "after": {
+                "xor": 147579,
+                "mul": 37056
+              }
+            }
+          ]
+        },
+        "memory_cells": 8476893,
+        "op_counts": {
+          "xor": 6592617,
+          "mul": 1889947,
+          "set": 129
+        },
+        "witness_ranges": [
+          {
+            "name": "address",
+            "base": 4,
+            "length": 160
+          },
+          {
+            "name": "slot",
+            "base": 164,
+            "length": 256
+          },
+          {
+            "name": "value",
+            "base": 420,
+            "length": 256
+          },
+          {
+            "name": "state_root",
+            "base": 676,
+            "length": 256
+          },
+          {
+            "name": "account_node_00",
+            "base": 932,
+            "length": 4256
+          },
+          {
+            "name": "account_node_01",
+            "base": 5188,
+            "length": 4256
+          },
+          {
+            "name": "account_node_02",
+            "base": 9444,
+            "length": 4256
+          },
+          {
+            "name": "account_node_03",
+            "base": 13700,
+            "length": 4256
+          },
+          {
+            "name": "account_node_04",
+            "base": 17956,
+            "length": 4256
+          },
+          {
+            "name": "account_node_05",
+            "base": 22212,
+            "length": 4256
+          },
+          {
+            "name": "account_node_06",
+            "base": 26468,
+            "length": 4000
+          },
+          {
+            "name": "account_node_07",
+            "base": 30468,
+            "length": 664
+          },
+          {
+            "name": "account_node_08",
+            "base": 31132,
+            "length": 664
+          },
+          {
+            "name": "account_node_09",
+            "base": 31796,
+            "length": 824
+          },
+          {
+            "name": "storage_node_00",
+            "base": 32620,
+            "length": 2208
+          },
+          {
+            "name": "storage_node_01",
+            "base": 34828,
+            "length": 448
+          },
+          {
+            "name": "ssz_sibling_0",
+            "base": 35276,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_1",
+            "base": 232062,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_2",
+            "base": 428848,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_3",
+            "base": 625634,
+            "length": 256
+          },
+          {
+            "name": "ssz_sibling_4",
+            "base": 822420,
+            "length": 256
+          },
+          {
+            "name": "secret",
+            "base": 8107821,
+            "length": 256
+          }
+        ]
+      },
+      "sha256": {
+        "program.bin": "ca71eb97d034cb5897d537fe82cce4aeceaf7efb9137e569b032104e196e2ced",
+        "public.bin": "d7aad9dff85810615eca2e346d72611a49d765085935d008f08153029d853a7d",
+        "witness.bin": "2f771fa414eac70a73a5eac0c55ceaa242632c735427b304375222de806fa111",
+        "program.json": "60a84253fad9864f4e362e13f7441a639b43ca68c9fce5d892a94e99529b5573"
+      },
+      "generated_directory": "local-runs/owner-state/cse_dce/ssz"
+    }
+  },
+  "runs": [
+    {
+      "exit_code": 0,
+      "process_seconds": 1.4751688329997705,
+      "log": "direct-nonboolean-input.log",
+      "log_sha256": "cecee720d2b3636a3a01e9c71fe632fdddb2e036bde3a52515ff050bc9304aac",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=4 execute_ms=498.552 reason=write-once conflict at cell 4",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "nonboolean-input",
+        "range": "address",
+        "cell": 4,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": 2
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.1815036250009143,
+      "log": "direct-address-bit.log",
+      "log_sha256": "e432b0cd659092879fa3bb6b3b6bebe130305354a31bd65c60fedca3648dab4b",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=4 execute_ms=566.280 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "address-bit",
+        "range": "address",
+        "cell": 4,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.110510875001637,
+      "log": "direct-slot-bit.log",
+      "log_sha256": "873bb1f4f43a06a8d670ac6ae3b63da2a6296ba292927b247b067a982f4e69d8",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=164 execute_ms=515.890 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "slot-bit",
+        "range": "slot",
+        "cell": 164,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.1487886249997246,
+      "log": "direct-value-bit.log",
+      "log_sha256": "5ac509fbfdb38c03484aa8f43ec30c61682fe0739d93a274e8b8ba051bdb7f2e",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=420 execute_ms=543.103 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "value-bit",
+        "range": "value",
+        "cell": 420,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.1611474999990605,
+      "log": "direct-state_root-bit.log",
+      "log_sha256": "d60f36d31203faef8915c9a783b465e3c10d0a00ee4cb2ef63d34e778c2aadd5",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=676 execute_ms=537.811 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "state_root-bit",
+        "range": "state_root",
+        "cell": 676,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9328537920009694,
+      "log": "direct-account-node-00-rlp-prefix.log",
+      "log_sha256": "6b4056559b9ed697951971aaddad66de0827f57fa461a56fdfeece315a6c1f00",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=932 execute_ms=366.897 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-00-rlp-prefix",
+        "range": "account_node_00",
+        "cell": 932,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9196692080004141,
+      "log": "direct-account-node-01-rlp-prefix.log",
+      "log_sha256": "59a3e822fa16ac5304deac69aa798dc8eee55c952e7eca4ea5b971551530b66c",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=5188 execute_ms=357.004 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-01-rlp-prefix",
+        "range": "account_node_01",
+        "cell": 5188,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9605005840021477,
+      "log": "direct-account-node-02-rlp-prefix.log",
+      "log_sha256": "f3228fef4616151f5890436b9e773022a27d058d8cc1eaf7c400b5d396163456",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=9444 execute_ms=377.186 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-02-rlp-prefix",
+        "range": "account_node_02",
+        "cell": 9444,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9847141669997654,
+      "log": "direct-account-node-03-rlp-prefix.log",
+      "log_sha256": "d8a3caf7e87ff001d496410fc175b87ae6ed139774fb4f389224c278310b94e7",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=13700 execute_ms=386.613 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-03-rlp-prefix",
+        "range": "account_node_03",
+        "cell": 13700,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9620044169969333,
+      "log": "direct-account-node-04-rlp-prefix.log",
+      "log_sha256": "0ce6d8e1c4924ae2e003e59adb360a048ec5df823d488f8fcb3158fc4902537f",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=17956 execute_ms=390.977 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-04-rlp-prefix",
+        "range": "account_node_04",
+        "cell": 17956,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9706623749989376,
+      "log": "direct-account-node-05-rlp-prefix.log",
+      "log_sha256": "7073533bea1270d53ae52bff128b942499a0ed29a10325f2e9f67b3dffe04a4f",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=22212 execute_ms=385.702 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-05-rlp-prefix",
+        "range": "account_node_05",
+        "cell": 22212,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9780383329998585,
+      "log": "direct-account-node-06-rlp-prefix.log",
+      "log_sha256": "111c6537bbb398d6485dcaea134c864c9f07f7770f1217a69c8e08faaa46fb95",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=26468 execute_ms=407.728 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-06-rlp-prefix",
+        "range": "account_node_06",
+        "cell": 26468,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9286503749972326,
+      "log": "direct-account-node-07-rlp-prefix.log",
+      "log_sha256": "7bf6dec9e40732e04d1ac4d894b4114259795152ebd9c6fa5d89b7e747f199ff",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=30468 execute_ms=343.488 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-07-rlp-prefix",
+        "range": "account_node_07",
+        "cell": 30468,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.044006249998347,
+      "log": "direct-account-node-08-rlp-prefix.log",
+      "log_sha256": "0b17c0527b6bedb800d30e73ec4d7d6f252ad728468043f11dc60f8172afecdf",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31132 execute_ms=410.154 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-08-rlp-prefix",
+        "range": "account_node_08",
+        "cell": 31132,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9444850410000072,
+      "log": "direct-account-node-09-rlp-prefix.log",
+      "log_sha256": "3d53e35fc182bbc931326b7f778cd6d9c0d3d8e69cae3479039c7a5c5b268b9e",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31796 execute_ms=324.245 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-node-09-rlp-prefix",
+        "range": "account_node_09",
+        "cell": 31796,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.035528542000975,
+      "log": "direct-account-compact-flags.log",
+      "log_sha256": "0e66c0cdeb4c269900c5a73cabeb4ad616fc323412897e9fecfe46ce88f09496",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31824 execute_ms=465.304 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-compact-flags",
+        "range": "account_node_09",
+        "cell": 31824,
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.0136435410022386,
+      "log": "direct-account-compact-suffix.log",
+      "log_sha256": "267c47aa76a36813a0a6ba68874ffb56f5390a65ed30cb854c2a9024129e528c",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32036 execute_ms=460.296 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-compact-suffix",
+        "range": "account_node_09",
+        "cell": 32036,
+        "byte_offset": 30,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9661427920000278,
+      "log": "direct-storage-node-00-rlp-prefix.log",
+      "log_sha256": "12eb794da2bf1c36dd25405cd20034b6e0dda716b5589b72f50f7318d6adad79",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32620 execute_ms=406.532 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "storage-node-00-rlp-prefix",
+        "range": "storage_node_00",
+        "cell": 32620,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9698947079996287,
+      "log": "direct-storage-node-01-rlp-prefix.log",
+      "log_sha256": "e305bd716cb8f7e205e89e4f2571f0faf8ec9224d1ec798e7ff52ef5a264166e",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=34828 execute_ms=426.716 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "storage-node-01-rlp-prefix",
+        "range": "storage_node_01",
+        "cell": 34828,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.0106978749972768,
+      "log": "direct-storage-compact-flags.log",
+      "log_sha256": "eb98f55d4096a211db8bbc5464254e45c7bb90f5e2ef7c8726b825e0f4425f32",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=34848 execute_ms=453.071 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "storage-compact-flags",
+        "range": "storage_node_01",
+        "cell": 34848,
+        "byte_offset": 2,
+        "bit_offset": 4,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9980695830017794,
+      "log": "direct-storage-compact-suffix.log",
+      "log_sha256": "e6b7c910ee190512ce9134fc4f10712b401aafa91527c00154fc91a2f5989dc1",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35092 execute_ms=438.596 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "storage-compact-suffix",
+        "range": "storage_node_01",
+        "cell": 35092,
+        "byte_offset": 33,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 0.9689276250028342,
+      "log": "direct-account-storage-root.log",
+      "log_sha256": "893dfc62465809c6487f5144ab3f639a06291a709221e77c3eca260d0149f059",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32100 execute_ms=421.059 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "account-storage-root",
+        "range": "account_node_09",
+        "cell": 32100,
+        "byte_offset": 38,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.0085762079979759,
+      "log": "direct-storage-leaf-last-byte.log",
+      "log_sha256": "71e4b996f7898e719fabfc3b43e24a198b22e7741921d9c9edc9c06388b43132",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35268 execute_ms=456.927 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "storage-leaf-last-byte",
+        "range": "storage_node_01",
+        "cell": 35268,
+        "byte_offset": 55,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.0512014579981042,
+      "log": "direct-secret-first-bit.log",
+      "log_sha256": "1a8d549861714f1ec373ee3032e9bf9e21fbe01f8cde4827206b7c8eb7362b08",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=7123891 execute_ms=489.840 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "secret-first-bit",
+        "cell": 7123891,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.0007448340002156,
+      "log": "direct-secret-nonboolean.log",
+      "log_sha256": "ce2954521e0ab2ef4ce9281358d94430110132202a323d0c71d168733b5d164d",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=7123891 execute_ms=448.538 reason=write-once conflict at cell 7123891",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "secret-nonboolean",
+        "cell": 7123891,
+        "replacement": 2
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.0517841250002675,
+      "log": "direct-secret-last-bit.log",
+      "log_sha256": "519a017f59ed1c7f19db9ef047ba6eb2b5a8b48f50b9c2c861684738c16c35fa",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=7124146 execute_ms=491.862 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "direct",
+      "mutation": {
+        "tag": "secret-last-bit",
+        "cell": 7124146,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.7941753750019416,
+      "log": "rlp-nonboolean-input.log",
+      "log_sha256": "5899b38c34ff56e633acebacda9b5d437219df944fbe7e661dda10764e9497cd",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=4 execute_ms=659.433 reason=write-once conflict at cell 4",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "nonboolean-input",
+        "range": "address",
+        "cell": 4,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": 2
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.8572344160020293,
+      "log": "rlp-address-bit.log",
+      "log_sha256": "93b4ef810e25f25fab34e51b634a6a65c036c9981f949c4b2806eb6155dfd897",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=4 execute_ms=758.633 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "address-bit",
+        "range": "address",
+        "cell": 4,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.817965792000905,
+      "log": "rlp-slot-bit.log",
+      "log_sha256": "fe003b6e3b7b7901f6d9a1cf908f44bc2076b02114b5410fe56ed22138ba68cb",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=164 execute_ms=763.647 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "slot-bit",
+        "range": "slot",
+        "cell": 164,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.8606007500020496,
+      "log": "rlp-value-bit.log",
+      "log_sha256": "08072a113a4917bdf43ff18a826144432399c7c2a08728808187b6d36f8d46e4",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=420 execute_ms=778.851 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "value-bit",
+        "range": "value",
+        "cell": 420,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.7110472499989555,
+      "log": "rlp-state_root-bit.log",
+      "log_sha256": "d48db4f2c557c7f577c7502a15298ece49fb800f18bbc28636f3ce99ab8e75c9",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=676 execute_ms=614.639 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "state_root-bit",
+        "range": "state_root",
+        "cell": 676,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.7288947500019276,
+      "log": "rlp-account-node-00-rlp-prefix.log",
+      "log_sha256": "d3f43ea50949ca1c1fadc3ff77755f5738feb632b8753dd71c3aa7150ed75788",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=932 execute_ms=650.909 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-00-rlp-prefix",
+        "range": "account_node_00",
+        "cell": 932,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.7022949999991397,
+      "log": "rlp-account-node-01-rlp-prefix.log",
+      "log_sha256": "bca49e673a972ee562c7dbec87a27e0907c54408680f1fbf259b8594df793c5c",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=5188 execute_ms=625.245 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-01-rlp-prefix",
+        "range": "account_node_01",
+        "cell": 5188,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.7243483749989537,
+      "log": "rlp-account-node-02-rlp-prefix.log",
+      "log_sha256": "684aef864e94b97da337f3fb45cce7cc142c9f704d3cd5dcd316e8122154dde2",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=9444 execute_ms=663.062 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-02-rlp-prefix",
+        "range": "account_node_02",
+        "cell": 9444,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.7032283750013448,
+      "log": "rlp-account-node-03-rlp-prefix.log",
+      "log_sha256": "c4658e7b1f25cda0486dbf1f64c0bce4f5d998ee7d977503ed2067a67af32eba",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=13700 execute_ms=644.250 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-03-rlp-prefix",
+        "range": "account_node_03",
+        "cell": 13700,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.2168998749984894,
+      "log": "rlp-account-node-04-rlp-prefix.log",
+      "log_sha256": "81a6b299ff890359cc26b02975d261422469c8100dfdd2b515e9024212a3f9c6",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=17956 execute_ms=1117.975 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-04-rlp-prefix",
+        "range": "account_node_04",
+        "cell": 17956,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9533625830008532,
+      "log": "rlp-account-node-05-rlp-prefix.log",
+      "log_sha256": "9558d2951a09c7ec7f2ff412c17085c217e53cf69dab71d31d35429d29ce77bc",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=22212 execute_ms=810.707 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-05-rlp-prefix",
+        "range": "account_node_05",
+        "cell": 22212,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.8509059160023753,
+      "log": "rlp-account-node-06-rlp-prefix.log",
+      "log_sha256": "06dd54c35b0740678c461f641e92742c6d172656dede24aa3e86d824212ae2ab",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=26468 execute_ms=733.367 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-06-rlp-prefix",
+        "range": "account_node_06",
+        "cell": 26468,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9315049159995397,
+      "log": "rlp-account-node-07-rlp-prefix.log",
+      "log_sha256": "2ef10abada6dfaf33bb240417f230cdf729fe2c129dce398b28197bdfc5c1790",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=30468 execute_ms=807.778 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-07-rlp-prefix",
+        "range": "account_node_07",
+        "cell": 30468,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9303162910000538,
+      "log": "rlp-account-node-08-rlp-prefix.log",
+      "log_sha256": "eac274f1918f9e4e73a1f2d9083c0d118fae2545a0cab2b7962cf4309643a86e",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31132 execute_ms=811.476 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-08-rlp-prefix",
+        "range": "account_node_08",
+        "cell": 31132,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0661249160002626,
+      "log": "rlp-account-node-09-rlp-prefix.log",
+      "log_sha256": "91a0ec8555c84e894dd8ebfed4840467d20cd09fb103113b1a5f6f26c9ff88f4",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31796 execute_ms=878.475 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-node-09-rlp-prefix",
+        "range": "account_node_09",
+        "cell": 31796,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0967669159981597,
+      "log": "rlp-account-compact-flags.log",
+      "log_sha256": "ada5575401d0cb7778b99e7e6cfdd91c2e266bc5175d11ee44d10f5e449e7d0f",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31824 execute_ms=922.408 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-compact-flags",
+        "range": "account_node_09",
+        "cell": 31824,
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.031569208000292,
+      "log": "rlp-account-compact-suffix.log",
+      "log_sha256": "4f93c44ba0c5494f85bd0ff0762bd1f2ceb31d27ca95f0f8634ee4da11f994c6",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32036 execute_ms=890.117 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-compact-suffix",
+        "range": "account_node_09",
+        "cell": 32036,
+        "byte_offset": 30,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0679684589995304,
+      "log": "rlp-storage-node-00-rlp-prefix.log",
+      "log_sha256": "5ccf91f9fbb070bc8f21cc17024b65e5942ebb07e92ee2e8fc396f4c0bdeb587",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32620 execute_ms=928.331 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "storage-node-00-rlp-prefix",
+        "range": "storage_node_00",
+        "cell": 32620,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0438254590008,
+      "log": "rlp-storage-node-01-rlp-prefix.log",
+      "log_sha256": "02bbcbd32d5208f1e64af7e2040bc91eff0f753afb60a47d6f60ddd65db60f3c",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=34828 execute_ms=922.840 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "storage-node-01-rlp-prefix",
+        "range": "storage_node_01",
+        "cell": 34828,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0605189999987488,
+      "log": "rlp-storage-compact-flags.log",
+      "log_sha256": "b940ad1d54687851c65d8f392628dc938e9a1faa0a6b13eb1377acf36b2efd17",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=34848 execute_ms=929.273 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "storage-compact-flags",
+        "range": "storage_node_01",
+        "cell": 34848,
+        "byte_offset": 2,
+        "bit_offset": 4,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0414964590017917,
+      "log": "rlp-storage-compact-suffix.log",
+      "log_sha256": "c8d36f102f25a200b4f7cbfa60b888bc9fdb14782af734cc7afb44ffb83ae4e5",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35092 execute_ms=907.038 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "storage-compact-suffix",
+        "range": "storage_node_01",
+        "cell": 35092,
+        "byte_offset": 33,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.1044522910015075,
+      "log": "rlp-account-storage-root.log",
+      "log_sha256": "cacae8b819d890b2d0fbd2213dd735d5727b73dc6682a425fd749a39f698e071",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32100 execute_ms=988.370 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "account-storage-root",
+        "range": "account_node_09",
+        "cell": 32100,
+        "byte_offset": 38,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0598844590022054,
+      "log": "rlp-storage-leaf-last-byte.log",
+      "log_sha256": "cf4518daf560ef1d83ab4de4929189f2c3f60dd9a35ba77ed7b2bf1fc6bd2eea",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35268 execute_ms=959.663 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "storage-leaf-last-byte",
+        "range": "storage_node_01",
+        "cell": 35268,
+        "byte_offset": 55,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.8663230830024986,
+      "log": "rlp-header-rlp-prefix.log",
+      "log_sha256": "b1156df313a3769855ac716a915b67e1d3d9ca94af509b0d077ccb900031b575",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35276 execute_ms=757.665 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "header-rlp-prefix",
+        "range": "header",
+        "cell": 35276,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.8987527919998684,
+      "log": "rlp-header-state-root.log",
+      "log_sha256": "870484acc5615daec3ff455bd54537e00d09cda4369ab004a4633be78823bdde",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=36004 execute_ms=758.146 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "header-state-root",
+        "range": "header",
+        "cell": 36004,
+        "byte_offset": 91,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.1881045420013834,
+      "log": "rlp-secret-first-bit.log",
+      "log_sha256": "c3dbf9256c40ebb00c72cf09da79d10d23065a1744a2d2a2b2df134386851a8d",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=8086998 execute_ms=1078.988 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "secret-first-bit",
+        "cell": 8086998,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.99429891699765,
+      "log": "rlp-secret-nonboolean.log",
+      "log_sha256": "1f299e2448e8ac354d78ce974e27043f87e3ce4207c3645f75b38e3e9c3f65c4",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=8086998 execute_ms=852.639 reason=write-once conflict at cell 8086998",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "secret-nonboolean",
+        "cell": 8086998,
+        "replacement": 2
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.6039902079974127,
+      "log": "rlp-secret-last-bit.log",
+      "log_sha256": "57a0fceb3739ec506e82b5ae9d100df4bc6e2c3ccc89111b80c8e7b30e5c8647",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=8087253 execute_ms=1455.680 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "rlp",
+      "mutation": {
+        "tag": "secret-last-bit",
+        "cell": 8087253,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9014596669985622,
+      "log": "ssz-nonboolean-input.log",
+      "log_sha256": "7792803ce6589cee528bfc72e109ca0d6c4d1368866fc9c0f046ef2e88fbbd0a",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=4 execute_ms=770.433 reason=write-once conflict at cell 4",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "nonboolean-input",
+        "range": "address",
+        "cell": 4,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": 2
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.020729791998747,
+      "log": "ssz-address-bit.log",
+      "log_sha256": "33d82c13d3d0eb1292456b7c1ba1d443946bf28468219ed06fea1acccd3cdaf1",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=4 execute_ms=904.918 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "address-bit",
+        "range": "address",
+        "cell": 4,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.072288874998776,
+      "log": "ssz-slot-bit.log",
+      "log_sha256": "d906bcfb95498f8313f3c8635a94ceffddd3220432e81828e6bc865d0159d2bb",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=164 execute_ms=952.207 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "slot-bit",
+        "range": "slot",
+        "cell": 164,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.015013291998912,
+      "log": "ssz-value-bit.log",
+      "log_sha256": "90f9f26871ce83c0bd5b11bcfffca98aa11cacc60e46d9e0e4f1be3a081c350c",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=420 execute_ms=886.027 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "value-bit",
+        "range": "value",
+        "cell": 420,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.1140988339975593,
+      "log": "ssz-state_root-bit.log",
+      "log_sha256": "a99137e7ec9bd6796b1a7925790a90379a9ec33222e3001d14ae0105350a38f2",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=676 execute_ms=956.882 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "state_root-bit",
+        "range": "state_root",
+        "cell": 676,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9594366659985099,
+      "log": "ssz-account-node-00-rlp-prefix.log",
+      "log_sha256": "17a00e4bddc46b343d621bbd0012187385e3cf1ee386299489c6d3662dae6731",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=932 execute_ms=809.115 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-00-rlp-prefix",
+        "range": "account_node_00",
+        "cell": 932,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9326722500009055,
+      "log": "ssz-account-node-01-rlp-prefix.log",
+      "log_sha256": "609f2821dbaae7fd1424c21157dbe1774aac7b66b61c304b023a46bac5f16ae5",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=5188 execute_ms=800.538 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-01-rlp-prefix",
+        "range": "account_node_01",
+        "cell": 5188,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.7487958339988836,
+      "log": "ssz-account-node-02-rlp-prefix.log",
+      "log_sha256": "b0159da5306b66697b8968c7e0b0385cfd328959eb53434274a10066e231b4d7",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=9444 execute_ms=641.814 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-02-rlp-prefix",
+        "range": "account_node_02",
+        "cell": 9444,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.8129126249987166,
+      "log": "ssz-account-node-03-rlp-prefix.log",
+      "log_sha256": "8cd14dd9f663035b60a2d3640177b09f9e891f4d3fe027f4ff79e521abdbd632",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=13700 execute_ms=721.459 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-03-rlp-prefix",
+        "range": "account_node_03",
+        "cell": 13700,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.834675916001288,
+      "log": "ssz-account-node-04-rlp-prefix.log",
+      "log_sha256": "771cdafc11f46dd69e017bf32d582a8b397456c8f249ad0b4410b7c474e8a390",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=17956 execute_ms=703.147 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-04-rlp-prefix",
+        "range": "account_node_04",
+        "cell": 17956,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.2575199589991826,
+      "log": "ssz-account-node-05-rlp-prefix.log",
+      "log_sha256": "d7d3a5ad9356fead073eadf63f46843dc14298c46e1e819dfdf7d5ad38093a11",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=22212 execute_ms=1089.886 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-05-rlp-prefix",
+        "range": "account_node_05",
+        "cell": 22212,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9886812080003438,
+      "log": "ssz-account-node-06-rlp-prefix.log",
+      "log_sha256": "53737b4cd33ac5f69a6fb53e1d6962509b657eb17c238b85a1da64de6ad96833",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=26468 execute_ms=847.607 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-06-rlp-prefix",
+        "range": "account_node_06",
+        "cell": 26468,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.9540020409986028,
+      "log": "ssz-account-node-07-rlp-prefix.log",
+      "log_sha256": "c48136438c4a926a1c9cd87017079591fc485a9d9316f83f4e6b2e587fd68a17",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=30468 execute_ms=836.923 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-07-rlp-prefix",
+        "range": "account_node_07",
+        "cell": 30468,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.877870415999496,
+      "log": "ssz-account-node-08-rlp-prefix.log",
+      "log_sha256": "c8bfc8950310fc06a9af4e1d14252762d21447c2339729fea0bbf2ba597f207a",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31132 execute_ms=760.442 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-08-rlp-prefix",
+        "range": "account_node_08",
+        "cell": 31132,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0147310830034257,
+      "log": "ssz-account-node-09-rlp-prefix.log",
+      "log_sha256": "a6ab22cb473ce358af688fee2704b1a05136a6574cbee509aa63092e31579899",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31796 execute_ms=908.428 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-node-09-rlp-prefix",
+        "range": "account_node_09",
+        "cell": 31796,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0164049999984854,
+      "log": "ssz-account-compact-flags.log",
+      "log_sha256": "2e80904d873aaad28e819732c6acf2b438d06ec8f0a80448f5bc3210517465ab",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=31824 execute_ms=886.161 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-compact-flags",
+        "range": "account_node_09",
+        "cell": 31824,
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0734384579991456,
+      "log": "ssz-account-compact-suffix.log",
+      "log_sha256": "f05a260c9e285e4b7229eab9821aaf82209540eb7a369a8aa07ea8847cfdf568",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32036 execute_ms=957.338 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-compact-suffix",
+        "range": "account_node_09",
+        "cell": 32036,
+        "byte_offset": 30,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0833912500020233,
+      "log": "ssz-storage-node-00-rlp-prefix.log",
+      "log_sha256": "457eb3a63313f16bd210b8ea6e88139944ec7e507f22e6397e10f5f632df26e7",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32620 execute_ms=952.307 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "storage-node-00-rlp-prefix",
+        "range": "storage_node_00",
+        "cell": 32620,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.180745958998159,
+      "log": "ssz-storage-node-01-rlp-prefix.log",
+      "log_sha256": "a53744c10a37267f350772cd12a5f66d1ced4538fcf80009fada6efa7364e454",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=34828 execute_ms=1021.151 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "storage-node-01-rlp-prefix",
+        "range": "storage_node_01",
+        "cell": 34828,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.216545874998701,
+      "log": "ssz-storage-compact-flags.log",
+      "log_sha256": "bd1a7167f9bfd812c6bf5cabe02f9dd1ea61025f8acd1168464a26e47cc9bfee",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=34848 execute_ms=1053.769 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "storage-compact-flags",
+        "range": "storage_node_01",
+        "cell": 34848,
+        "byte_offset": 2,
+        "bit_offset": 4,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.200194917000772,
+      "log": "ssz-storage-compact-suffix.log",
+      "log_sha256": "017bb0d68b629a82e166643cc01a1511ca2473bf475036425d2e1ff47ff4eb37",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35092 execute_ms=982.205 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "storage-compact-suffix",
+        "range": "storage_node_01",
+        "cell": 35092,
+        "byte_offset": 33,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0751714580001135,
+      "log": "ssz-account-storage-root.log",
+      "log_sha256": "0734498fbe063f3c24d2cbd68757143fddde7ffb1244d48c0ef015b950af9a22",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=32100 execute_ms=942.579 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "account-storage-root",
+        "range": "account_node_09",
+        "cell": 32100,
+        "byte_offset": 38,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.105911250000645,
+      "log": "ssz-storage-leaf-last-byte.log",
+      "log_sha256": "1f616a3bf81d13c44f4a659ed565917ba49e48e1c54e73421c0371690a3cfc6b",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35268 execute_ms=969.080 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "storage-leaf-last-byte",
+        "range": "storage_node_01",
+        "cell": 35268,
+        "byte_offset": 55,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0739653339987854,
+      "log": "ssz-ssz-sibling-0-bit.log",
+      "log_sha256": "3ac4165d18b6722f4ddd2eeecc7c6826f3baaa1dac0c86f89b166adee840a063",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=35276 execute_ms=962.799 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "ssz-sibling-0-bit",
+        "range": "ssz_sibling_0",
+        "cell": 35276,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.055593625002075,
+      "log": "ssz-ssz-sibling-1-bit.log",
+      "log_sha256": "35e63aa26653d006b8c968e9805d21ca3b500f1b2a2137a64768f23595bad4a6",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=232062 execute_ms=941.390 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "ssz-sibling-1-bit",
+        "range": "ssz_sibling_1",
+        "cell": 232062,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0752854169986676,
+      "log": "ssz-ssz-sibling-2-bit.log",
+      "log_sha256": "296b0eac544049eb3fa61eee5cf1819e056c81f0bc677fb0f51860b7b94025de",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=428848 execute_ms=961.131 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "ssz-sibling-2-bit",
+        "range": "ssz_sibling_2",
+        "cell": 428848,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.0676604160034913,
+      "log": "ssz-ssz-sibling-3-bit.log",
+      "log_sha256": "cb1bfe79c57b9fb5e59bc1b2d56cafbd5b3dfe49ac2cae3dbab5ac8883f84d82",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=625634 execute_ms=946.016 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "ssz-sibling-3-bit",
+        "range": "ssz_sibling_3",
+        "cell": 625634,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.964250417000585,
+      "log": "ssz-ssz-sibling-4-bit.log",
+      "log_sha256": "85c6a7528d0e8c5d11b841ccd0e5947e5d10e2f3d7f6b84e5e9dfa3e54a0f9ad",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=822420 execute_ms=837.831 reason=write-once conflict at cell 2",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "ssz-sibling-4-bit",
+        "range": "ssz_sibling_4",
+        "cell": 822420,
+        "byte_offset": 0,
+        "bit_offset": 0,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 1.989746125000238,
+      "log": "ssz-secret-first-bit.log",
+      "log_sha256": "55221f5f9de3a78fc801167bdfa9cf858e44fb61d1003888d55da6efdb077736",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=8107821 execute_ms=840.480 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "secret-first-bit",
+        "cell": 8107821,
+        "replacement": null
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.1391114159996505,
+      "log": "ssz-secret-nonboolean.log",
+      "log_sha256": "0cd1cd0b7afdcb3438b21a3d30abbe69857152a7a08d4bfafc9d79333abb6a78",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=8107821 execute_ms=971.956 reason=write-once conflict at cell 8107821",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "secret-nonboolean",
+        "cell": 8107821,
+        "replacement": 2
+      },
+      "passed": true
+    },
+    {
+      "exit_code": 0,
+      "process_seconds": 2.268056084001728,
+      "log": "ssz-secret-last-bit.log",
+      "log_sha256": "bf16ab75dd9467da03e40392d40c7d7f0dc3becfafc9ca2497f0e9dc49297d87",
+      "memory_measurement": null,
+      "memory": {},
+      "result": null,
+      "rejection": "REJECTED mutation_cell=8108076 execute_ms=1079.212 reason=write-once conflict at cell 0",
+      "variant": "cse_dce",
+      "mode": "ssz",
+      "mutation": {
+        "tag": "secret-last-bit",
+        "cell": 8108076,
+        "replacement": null
+      },
+      "passed": true
+    }
+  ],
+  "timing_scope": "outer prove call includes execution, witness build and return cleanup",
+  "temperature_frequency_measured": false,
+  "environment_checks_passed": false,
+  "negative_scope": "interpreter witness rejection after compilation; not forged-proof verification",
+  "finished_at": "2026-09-10T11:13:28.010767+00:00"
+}

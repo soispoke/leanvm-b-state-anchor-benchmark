@@ -1,0 +1,28 @@
+diff --git a/src/cpu/mod.rs b/src/cpu/mod.rs
+index 9fc02f19..70227c1f 100644
+--- a/src/cpu/mod.rs
++++ b/src/cpu/mod.rs
+@@ -198,6 +198,23 @@ impl Program {
+     pub fn set_witness(&mut self, name: impl Into<String>, entries: Vec<Vec<F128>>) {
+         self.witness.insert(name.into(), entries);
+     }
++
++    /// Fill a fixed range in the initial frame from a named witness stream.
++    /// This exposes the existing `WitnessStack` execution hint to direct
++    /// bytecode callers. It changes neither bytecode nor proof constraints;
++    /// the caller must constrain every supplied value with ordinary opcodes.
++    pub fn add_witness_range(&mut self, name: impl Into<String>, base: u32, len: u32) {
++        assert!(base >= 2, "witness range must exclude the public input cells");
++        assert!(
++            base.checked_add(len).is_some_and(|end| end <= self.main_frame),
++            "witness range must lie within the initial frame"
++        );
++        self.hints.entry(self.pc0).or_default().push(crate::compiler::RHint::WitnessStack {
++            name: name.into(),
++            base,
++            len,
++        });
++    }
+ }
+ 
+ impl Program {

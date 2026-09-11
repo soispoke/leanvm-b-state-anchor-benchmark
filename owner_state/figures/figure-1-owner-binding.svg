@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.740157pt" height="425.19685pt" viewBox="0 0 518.740157 425.19685" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:description>Measured note-owner binding and three state anchor paths</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.8, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 425.19685
+L 518.740157 425.19685
+L 518.740157 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 21.259843 109.133858
+L 160.15748 109.133858
+L 160.15748 43.937008
+L 21.259843 43.937008
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #f3f5f6; stroke: #202124; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 188.503937 79.370079
+L 406.771654 79.370079
+L 406.771654 39.685039
+L 188.503937 39.685039
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #202124; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 162.154051 59.527559
+Q 174.330259 59.527559 185.723843 59.527559
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+    <path d="M 183.323843 58.327559
+L 185.723843 59.527559
+L 183.323843 60.727559
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #202124; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 188.503937 138.897638
+L 406.771654 138.897638
+L 406.771654 99.212598
+L 188.503937 99.212598
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #202124; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 161.641932 94.879314
+Q 174.330229 106.298781 186.436806 117.1947
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+    <path d="M 185.455658 114.697232
+L 186.436806 117.1947
+L 183.850143 116.481138
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #202124; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 18.425197 266.456693
+L 162.992126 266.456693
+L 162.992126 198.425197
+L 18.425197 198.425197
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #009e73; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 187.086614 266.456693
+L 331.653543 266.456693
+L 331.653543 198.425197
+L 187.086614 198.425197
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #0072b2; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 355.748031 266.456693
+L 500.314961 266.456693
+L 500.314961 198.425197
+L 355.748031 198.425197
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #d55e00; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 90.708661 285.461829
+Q 90.708661 291.968504 90.708661 297.692556
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+    <path d="M 91.908661 295.292556
+L 90.708661 297.692556
+L 89.508661 295.292556
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #202124; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 18.425197 362.834646
+L 162.992126 362.834646
+L 162.992126 300.472441
+L 18.425197 300.472441
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #202124; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 187.086614 362.834646
+L 331.653543 362.834646
+L 331.653543 300.472441
+L 187.086614 300.472441
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #202124; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 355.748031 362.834646
+L 500.314961 362.834646
+L 500.314961 300.472441
+L 355.748031 300.472441
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #ffffff; stroke: #202124; stroke-width: 0.65; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 164.989216 331.653543
+Q 175.038515 331.653543 184.30519 331.653543
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+    <path d="M 181.90519 330.453543
+L 184.30519 331.653543
+L 181.90519 332.853543
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #202124; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 333.650633 331.653543
+Q 343.699932 331.653543 352.966607 331.653543
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+    <path d="M 350.566607 330.453543
+L 352.966607 331.653543
+L 350.566607 332.853543
+z
+" clip-path="url(#pdc3a52aba1)" style="fill: #202124; stroke: #202124; stroke-width: 0.7; stroke-linecap: round"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 90.708661 266.456693
+L 90.708661 283.464567
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #009e73; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 259.370079 266.456693
+L 259.370079 283.464567
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #0072b2; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 428.031496 266.456693
+L 428.031496 283.464567
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #d55e00; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 90.708661 283.464567
+L 428.031496 283.464567
+" clip-path="url(#pdc3a52aba1)" style="fill: none; stroke: #202124; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(65.025771 68.76691)">Witness inputs</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(45.980849 78.466996)">owner address (20 bytes)</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(60.869521 88.167082)">secret (32 bytes)</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(233.623342 56.527047)">Keccak-256(owner address || secret)</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(223.645061 66.421821)">Must equal the public note commitment H</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(232.50553 116.136638)">Account lookup at the chosen anchor</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(229.71592 125.836724)">Uses Keccak-256 of that same address</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #009e73" x="428.031496" y="61.459122" transform="rotate(-0 428.031496 61.459122)">Measured</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #009e73" x="428.031496" y="120.986681" transform="rotate(-0 428.031496 120.986681)">Measured</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="21.259843" y="153.070866" transform="rotate(-0 21.259843 153.070866)">Public statement: anchor type, anchor root/hash, H and storage slot; bound through one Keccak digest.</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(64.166825 229.730927)">Direct state root</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(64.908232 238.73815)">No header work</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(234.847813 225.227316)">RLP block hash</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(215.746446 234.234539)">634-byte canonical header</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(210.292032 243.241761)">Keccak-256; extract stateRoot</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(396.138332 225.227316)">SSZ summary root*</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(391.04091 234.234539)">5 SHA-256 pair hashes</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(389.07466 243.241761)">Check stateRoot branch</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(49.780536 323.88502)">Account MPT; 10 nodes</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(48.471318 333.585106)">Canonical RLP + Keccak</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(54.389599 343.285192)">Outputs storageRoot</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(237.294922 323.88502)">Storage MPT</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(233.532422 333.585106)">2 nodes; slot 0</text>
+    <text style="font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(217.132735 343.285192)">Canonical RLP + Keccak</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(396.040832 324.439914)">Authenticated word</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(382.884426 333.447137)">Available inside the relation</text>
+    <text style="font-size: 6.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; fill: #202124" transform="translate(390.495012 342.45436)">No authorization check</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 6px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle; fill: #60676d" x="272.125984" y="293.385827" transform="rotate(-0 272.125984 293.385827)">Same stateRoot</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 7px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="21.259843" y="382.677165" transform="rotate(-0 21.259843 382.677165)">Binding is tested. Owner privacy is not established by this proof backend.</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 6.3px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #60676d" x="21.259843" y="405.354331" transform="rotate(-0 21.259843 405.354331)">*Hypothetical SSZ summary containing the real state root. Both state tries remain Keccak MPTs.</text>
+   </g>
+  </g>
+  <g id="text_16">
+   <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="17.007874" y="22.325957" transform="rotate(-0 17.007874 22.325957)">a</text>
+  </g>
+  <g id="text_17">
+   <text style="font-weight: 700; font-size: 7.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="31.181102" y="21.912051" transform="rotate(-0 31.181102 21.912051)">The same address opens the note and selects the account</text>
+  </g>
+  <g id="text_18">
+   <text style="font-weight: 700; font-size: 9px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="17.007874" y="183.90076" transform="rotate(-0 17.007874 183.90076)">b</text>
+  </g>
+  <g id="text_19">
+   <text style="font-weight: 700; font-size: 7.5px; font-family: 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start; fill: #202124" x="31.181102" y="183.457557" transform="rotate(-0 31.181102 183.457557)">Only the route from the anchor to stateRoot changes</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pdc3a52aba1">
+   <rect x="0" y="0" width="518.740157" height="425.19685"/>
+  </clipPath>
+ </defs>
+</svg>
