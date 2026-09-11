@@ -1,11 +1,11 @@
-"""Publication figures for the complete owner-binding relation.
+"""Publication figures for the measured owner-binding relation.
 
 python -m owner_state.plot_figures --run owner_state/results/collect-<id>
 """
 from __future__ import annotations
 
 import argparse
-import json
+import math
 from pathlib import Path
 import statistics as st
 import tempfile
@@ -19,228 +19,277 @@ from matplotlib.patches import FancyArrowPatch, Patch, Rectangle
 from owner_state.analyze import HERE, MODES, VARIANTS, analyze
 from real_state.plot_figures import export as export_base
 
-MM = 1/25.4
-INK, MUTED, GRID = '#202124', '#60676D', '#E2E5E8'
-COLORS = ('#009E73', '#0072B2', '#D55E00')
-LABELS = ('Direct state', 'RLP block hash', 'SSZ summary*')
-PHASES = ('execution_s', 'witness_build_s', 'commitment_s', 'bus_s', 'constraints_s', 'opening_s', 'other_s')
-PHASE_LABELS = ('Execution', 'Witness build', 'Commitment', 'Bus proof', 'Constraints', 'Opening', 'Other / cleanup')
-PHASE_COLORS = ('#009E73', '#9AD5C4', '#0072B2', '#6DAED5', '#CC79A7', '#D55E00', '#B7BDC2')
+MM = 1 / 25.4
+WIDTH = 180
+INK, MUTED, RULE = '#202124', '#50575D', '#C9CED2'
+COLORS = ('#007C66', '#0067A5', '#C45A00')
+NAMES = ('Direct state root', 'RLP block hash', 'SSZ summary*')
 STEMS = ('figure-1-owner-binding', 'figure-2-proving-results', 'figure-3-cost-breakdown')
 plt.rcParams.update({
     'font.family': ['DejaVu Sans', 'sans-serif'], 'font.size': 7,
-    'axes.labelsize': 7, 'xtick.labelsize': 6.5, 'ytick.labelsize': 6.5,
-    'text.color': INK, 'axes.labelcolor': INK, 'xtick.color': INK, 'ytick.color': INK,
-    'axes.linewidth': .55, 'xtick.major.width': .5, 'ytick.major.width': .5,
+    'axes.labelsize': 7, 'xtick.labelsize': 7, 'ytick.labelsize': 7,
+    'text.color': INK, 'axes.labelcolor': INK,
+    'xtick.color': INK, 'ytick.color': INK,
+    'axes.linewidth': .6, 'xtick.major.width': .6, 'ytick.major.width': .6,
     'xtick.major.size': 2.5, 'ytick.major.size': 2.5,
-    'svg.fonttype': 'none', 'svg.hashsalt': 'owner-binding-measured-v1',
+    'svg.fonttype': 'none', 'svg.hashsalt': 'owner-binding-figures-v2',
     'pdf.fonttype': 42, 'ps.fonttype': 42,
     'savefig.facecolor': 'white', 'figure.facecolor': 'white',
 })
 
 
-def export(fig, path, description):
-    # Auto locators may create labels beyond fixed axis limits. Matplotlib
-    # does not draw them, but the shared bounds check inspects every label.
-    for ax in fig.axes:
-        if not ax.axison:
-            continue
-        low, high=sorted(ax.get_xlim())
-        ax.set_xticks([value for value in ax.get_xticks() if low<=value<=high])
-        low, high=sorted(ax.get_ylim())
-        ax.set_yticks([value for value in ax.get_yticks() if low<=value<=high])
-    export_base(fig,path,description)
+def figure(height):
+    return plt.figure(figsize=(WIDTH * MM, height * MM))
 
 
-def axes(fig, rect, *, grid='y'):
-    width, height = fig.get_size_inches()/MM
+def text(fig, x, y, value, *, bold=False, size=7, color=INK, **kwargs):
+    height = fig.get_size_inches()[1] / MM
+    return fig.text(x / WIDTH, y / height, value, fontsize=size,
+                    fontweight='bold' if bold else 'normal', color=color, **kwargs)
+
+
+def title(fig, letter, value, y):
+    text(fig, 5, y, letter, size=8, bold=True, va='center')
+    text(fig, 11, y, value, bold=True, va='center')
+
+
+def axes(fig, rect):
     x, y, w, h = rect
-    ax = fig.add_axes([x/width, y/height, w/width, h/height])
+    height = fig.get_size_inches()[1] / MM
+    ax = fig.add_axes([x / WIDTH, y / height, w / WIDTH, h / height])
     ax.spines[['top', 'right']].set_visible(False)
-    if grid:
-        ax.grid(axis=grid, color=GRID, linewidth=.5)
-        ax.set_axisbelow(True)
     return ax
 
 
-def title(fig, letter, text, x, y):
-    w, h = fig.get_size_inches()/MM
-    fig.text(x/w, y/h, letter, fontsize=9, fontweight='bold', va='center')
-    fig.text((x+5)/w, y/h, text, fontsize=7.5, fontweight='bold', va='center')
+def export(fig, path, description):
+    # Ignore locator ticks beyond the visible limits in the shared bounds check.
+    for ax in fig.axes:
+        if ax.axison:
+            lo, hi = sorted(ax.get_xlim())
+            ax.set_xticks([v for v in ax.get_xticks() if lo <= v <= hi])
+            lo, hi = sorted(ax.get_ylim())
+            ax.set_yticks([v for v in ax.get_yticks() if lo <= v <= hi])
+    export_base(fig, path, description)
 
 
-def footer(fig, text):
-    fig.text(.035, .027, text, fontsize=6.3, color=MUTED, va='bottom')
+def measured_rows(samples, mode, variant):
+    return sorted((row for row in samples if row['kind'] == 'measured'
+                   and row['mode'] == mode and row['variant'] == variant),
+                  key=lambda row: row['block'])
+
+
+def compiler_key(fig, x, y, *, color=INK):
+    """Full compiler names, with shape as well as fill distinguishing variants."""
+    height = fig.get_size_inches()[1] / MM
+    fig.legend(handles=[
+        Line2D([], [], marker='o', linestyle='none', mfc='white', mec=color,
+               mew=.8, ms=4, label='Original compiler'),
+        Line2D([], [], marker='s', linestyle='none', mfc=color, mec=color,
+               ms=3.7, label='Optimized compiler'),
+    ], loc='center left', bbox_to_anchor=(x / WIDTH, y / height), ncol=2,
+        frameon=False, fontsize=7, handlelength=1, handletextpad=.5,
+        columnspacing=1.5, borderaxespad=0)
 
 
 def schematic(destination):
-    fig = plt.figure(figsize=(183*MM, 150*MM))
-    ax = fig.add_axes([0, 0, 1, 1], xlim=(0, 183), ylim=(0, 150))
+    fig = figure(139)
+    ax = fig.add_axes([0, 0, 1, 1], xlim=(0, WIDTH), ylim=(0, 139))
     ax.set_axis_off()
-    def box(x, y, w, h, text, *, color=INK, fill='white', size=7):
-        ax.add_patch(Rectangle((x-w/2, y-h/2), w, h, facecolor=fill, edgecolor=color, lw=.65))
-        ax.text(x, y, text, ha='center', va='center', fontsize=size, linespacing=1.55)
-    def arrow(a, b, color=INK):
-        ax.add_patch(FancyArrowPatch(a, b, arrowstyle='-|>', mutation_scale=6, color=color, lw=.7))
-    title(fig, 'a', 'The same address opens the note and selects the account', 6, 143)
-    box(32, 123, 49, 23, 'Witness inputs\nowner address (20 bytes)\nsecret (32 bytes)', fill='#F3F5F6')
-    box(105, 129, 77, 14, 'Keccak-256(owner address || secret)\nMust equal the public note commitment H')
-    arrow((56.5, 129), (66.5, 129))
-    box(105, 108, 77, 14, 'Account lookup at the chosen anchor\nUses Keccak-256 of that same address')
-    arrow((56.5, 117), (66.5, 108))
-    ax.text(151, 129, 'Measured', va='center', fontsize=7, color=COLORS[0], fontweight='bold')
-    ax.text(151, 108, 'Measured', va='center', fontsize=7, color=COLORS[0], fontweight='bold')
-    ax.text(7.5, 96, 'Public statement: anchor type, anchor root/hash, H and storage slot; bound through one Keccak digest.', fontsize=6.5)
-    title(fig, 'b', 'Only the route from the anchor to stateRoot changes', 6, 86)
-    centers = (32, 91.5, 151)
-    details = ('Direct state root\nNo header work', 'RLP block hash\n634-byte canonical header\nKeccak-256; extract stateRoot',
-               'SSZ summary root*\n5 SHA-256 pair hashes\nCheck stateRoot branch')
-    for x, text, color in zip(centers, details, COLORS):
-        box(x, 68, 51, 24, text, color=color, size=6.5)
-        ax.plot([x, x], [56, 50], color=color, lw=.8)
-    ax.plot([32, 151], [50, 50], color=INK, lw=.7)
-    arrow((32, 50), (32, 44))
-    box(32, 33, 51, 22, 'Account MPT; 10 nodes\nCanonical RLP + Keccak\nOutputs storageRoot')
-    box(91.5, 33, 51, 22, 'Storage MPT\n2 nodes; slot 0\nCanonical RLP + Keccak')
-    box(151, 33, 51, 22, 'Authenticated word\nAvailable inside the relation\nNo authorization check', size=6.5)
-    arrow((57.5, 33), (66, 33))
-    arrow((117, 33), (125.5, 33))
-    ax.text(96, 46.5, 'Same stateRoot', ha='center', fontsize=6, color=MUTED)
-    ax.text(7.5, 15, 'Binding is tested. Owner privacy is not established by this proof backend.', fontsize=7, fontweight='bold')
-    ax.text(7.5, 7, '*Hypothetical SSZ summary containing the real state root. Both state tries remain Keccak MPTs.', fontsize=6.3, color=MUTED)
-    export(fig, destination/STEMS[0], 'Measured note-owner binding and three state anchor paths')
+
+    def box(x, y, w, h, lines, *, edge=RULE, emphasis=False):
+        ax.add_patch(Rectangle((x-w/2, y-h/2), w, h, facecolor='white',
+                               edgecolor=edge, lw=.7))
+        ax.text(x, y, lines, ha='center', va='center', fontsize=7,
+                fontweight='bold' if emphasis else 'normal', linespacing=1.55)
+
+    def arrow(start, end):
+        ax.add_patch(FancyArrowPatch(start, end, arrowstyle='-|>',
+                                    mutation_scale=7, color=INK, linewidth=.7))
+
+    title(fig, 'a', 'One address links the note to the authenticated account', 132)
+    box(30, 109, 48, 24, 'Witness inputs\nOwner address + secret')
+    box(119, 119, 110, 18,
+        'Open the public note commitment\nH = Keccak-256(owner address || secret)')
+    box(119, 96, 110, 18,
+        'Authenticate that same address\nAccount and storage lookup under the selected root')
+    arrow((54, 115), (64, 119))
+    arrow((54, 103), (64, 96))
+    text(fig, 6, 80, 'Public inputs: anchor type, anchor root/hash, note commitment H and storage slot.', color=MUTED)
+
+    title(fig, 'b', 'Change the anchor; keep the same account and storage proofs', 69)
+    centers = (32, 90, 148)
+    details = ('No header check', 'Parse the RLP header\nHash with Keccak-256',
+               'Check the state-root branch\n5 SHA-256 pair hashes')
+    for x, name, detail, color in zip(centers, NAMES, details, COLORS):
+        ax.add_patch(Rectangle((x-26, 39), 52, 24, facecolor='white', edgecolor=color, lw=.8))
+        ax.plot([x-26, x+26], [56, 56], color=color, linewidth=.6)
+        ax.text(x, 59.5, name, ha='center', va='center', fontsize=7, fontweight='bold')
+        ax.text(x, 47.5, detail, ha='center', va='center', fontsize=7, linespacing=1.55)
+        ax.plot([x, x], [39, 34], color=INK, lw=.7)
+    ax.plot([32, 148], [34, 34], color=INK, lw=.7)
+    arrow((90, 34), (90, 27))
+    ax.text(94, 30.5, 'Same state root', fontsize=7, va='center')
+    box(90, 19, 168, 16,
+        'Same Keccak account and storage proofs\nState root → account → storage → authenticated word')
+    text(fig, 6, 6.3, 'Binding is tested. Owner privacy and transaction authorization are not implemented.', size=6.5)
+    text(fig, 6, 2.2, '*Hypothetical SSZ summary. Both state tries remain Keccak.', size=6.5, color=MUTED)
+    export(fig, destination/STEMS[0], 'One note-owner relation, three state anchors; only header authentication changes')
 
 
 def proving(destination, samples, summary):
-    measured = [row for row in samples if row['kind'] == 'measured']
-    fig = plt.figure(figsize=(183*MM, 158*MM))
-    title(fig, 'a', 'Every measured proof, paired by block', 6, 151)
-    a = axes(fig, (19, 88, 72, 53))
-    for i, (mode, color) in enumerate(zip(MODES, COLORS)):
-        x0, x1 = i*3, i*3+1
-        for block in range(1, 9):
-            pair = [next(row for row in measured if row['mode']==mode and row['variant']==variant and row['block']==block)['prove_s']
-                    for variant in VARIANTS]
-            offset = (block-4.5)*.026
-            a.plot([x0+offset, x1+offset], pair, lw=.45, color=color, alpha=.35)
-            a.scatter(x0+offset, pair[0], s=12, facecolor='white', edgecolor=color, linewidth=.7, zorder=3)
-            a.scatter(x1+offset, pair[1], s=12, facecolor=color, edgecolor='white', linewidth=.3, zorder=3)
-        for x, variant in zip((x0, x1), VARIANTS):
-            median = summary['conditions'][f'{variant}/{mode}']['prove_median_s']
-            a.plot([x-.22, x+.22], [median, median], color=INK, lw=1.2, zorder=4)
-    a.set(xticks=[.5, 3.5, 6.5], xticklabels=['Direct', 'RLP', 'SSZ*'], ylabel='Complete prove time (s)', ylim=(0, None))
-    a.legend(handles=[Line2D([], [], marker='o', linestyle='none', mfc='white', mec=INK, ms=3.5, label='Baseline'),
-                      Line2D([], [], marker='o', linestyle='none', color=INK, ms=3.5, label='Optimized')],
-             loc='lower left', ncol=2, fontsize=6, frameon=False, bbox_to_anchor=(-.09, 1.01))
-    title(fig, 'b', 'Does optimization reduce proving time?', 100, 151)
-    b = axes(fig, (123, 94, 52, 46), grid='x')
-    b.axvline(0, color=INK, lw=.65, zorder=1)
-    for i, (mode, color) in enumerate(zip(MODES, COLORS)):
-        comparison = next(item for item in summary['comparisons'] if item['comparison']=='optimization' and item['numerator']==f'cse_dce/{mode}')
-        center, low, high = [100*(comparison[key]-1) for key in ('ratio', 'ci95_low', 'ci95_high')]
-        b.errorbar(center, 2-i, xerr=[[center-low], [high-center]], fmt='o', ms=4, color=color, lw=1, capsize=2)
-        b.text(.98, (2-i+.2)/3.0, f'{center:+.1f}% [{low:+.1f}, {high:+.1f}]',
-               transform=b.transAxes, ha='right', va='top', fontsize=6, color=MUTED)
-    b.set(yticks=[2, 1, 0], yticklabels=['Direct', 'RLP', 'SSZ*'], ylim=(-.65, 2.6), xlabel='Optimized / baseline time − 1 (%)')
-    b.margins(x=.22)
-    fig.text(101/183, 76/158, 'Point: geometric mean of 8 paired ratios\nBar: 95% within-batch interval', fontsize=6.2, color=MUTED, linespacing=1.5)
-    title(fig, 'c', 'Instruction savings leave padding unchanged', 6, 73)
-    c = axes(fig, (23, 22, 68, 41), grid='x')
-    y, labels = [], []
-    for i, (mode, color) in enumerate(zip(MODES, COLORS)):
-        for j, variant in enumerate(VARIANTS):
-            position = 5-i*2-j
-            count = summary['conditions'][f'{variant}/{mode}']['instructions']/1e6
-            c.barh(position, count, height=.65, color=color if j else 'white', edgecolor=color, linewidth=.8)
-            c.text(9.65, position, f'{count:.3f}', ha='right', va='center', fontsize=6)
-            y.append(position); labels.append(('B' if j==0 else 'O') + '  ' + ('Direct', 'RLP', 'SSZ*')[i])
-    c.set(yticks=y, yticklabels=labels, xlabel='VM instructions (million)', xlim=(0, 10))
-    boundary=(2**23-1)/1e6  # The bytecode also contains one unexecuted sentinel.
-    c.axvline(boundary,color=INK,lw=.65,linestyle=(0,(2,2)))
-    c.text(boundary,6.15,'2²³ bytecode boundary',ha='center',va='bottom',fontsize=5.7,color=MUTED)
-    title(fig, 'd', 'Committed witness size', 100, 73)
-    d = axes(fig, (121, 22, 54, 41), grid='x')
-    for i, (mode, color) in enumerate(zip(MODES, COLORS)):
-        for j, variant in enumerate(VARIANTS):
-            count = summary['conditions'][f'{variant}/{mode}']['committed_cells']/1e6
-            d.barh(5-i*2-j, count, height=.65, color=color if j else 'white', edgecolor=color, linewidth=.8)
-            d.text(count+1, 5-i*2-j, f'{count:.2f}', va='center', fontsize=6)
-    maximum = max(value['committed_cells']/1e6 for value in summary['conditions'].values())
-    d.set(yticks=y, yticklabels=labels, xlabel='Committed field cells (million)', xlim=(0, maximum*1.26))
-    footer(fig, '48 proofs; 8 blocks × 6 conditions. B, baseline; O, optimized. *Hypothetical SSZ summary. All samples retained.')
-    export(fig, destination/STEMS[1], 'Owner-binding proof times, paired optimization effects, instruction counts and commitments')
+    fig = figure(157)
+    title(fig, 'a', 'Proving time for the same note-owner claim', 150)
+    text(fig, 11, 143.5, '48 measured proofs across 8 rounds. Lines join compiler variants in the same round.', color=MUTED)
+    text(fig, 6, 134, 'Anchor', bold=True)
+    text(fig, 44, 134, 'Compiler', bold=True)
+    text(fig, 165, 134, 'Median (s)', bold=True, ha='center')
+    a = axes(fig, (68, 83, 78, 44))
+    a.spines['left'].set_visible(False)
+    a.tick_params(axis='y', left=False, labelleft=False)
+    times = [row['prove_s'] for row in samples if row['kind']=='measured']
+    time_lo = math.floor((min(times)-.15)*2)/2
+    time_hi = math.ceil((max(times)+.15)*2)/2
+    a.set(xlim=(time_lo, time_hi+.1), ylim=(-.5, 7.5),
+          xticks=[time_lo+j*.5 for j in range(round((time_hi-time_lo)*2)+1)],
+          xlabel='Complete proving time (s)')
+    for i, (mode, color, name) in enumerate(zip(MODES, COLORS, NAMES)):
+        y0, y1 = 7 - i*3, 6 - i*3
+        group0 = measured_rows(samples, mode, 'baseline')
+        group1 = measured_rows(samples, mode, 'cse_dce')
+        for j, (original, optimized) in enumerate(zip(group0, group1)):
+            offset = (j-3.5)*.055
+            a.plot([original['prove_s'], optimized['prove_s']], [y0+offset, y1+offset],
+                   color=color, lw=.5, alpha=.35, zorder=1)
+            a.scatter(original['prove_s'], y0+offset, s=18, marker='o', facecolor='white',
+                      edgecolor=color, linewidth=.8, zorder=3)
+            a.scatter(optimized['prove_s'], y1+offset, s=16, marker='s', facecolor=color,
+                      edgecolor='white', linewidth=.35, zorder=3)
+        center_mm = 83 + ((y0+y1)/2+.5)/8*44
+        text(fig, 6, center_mm, name.replace(' state root', '\nstate root').replace(' block hash', '\nblock hash'),
+             bold=True, va='center', linespacing=1.35)
+        for y, variant, compiler in ((y0, 'baseline', 'Original'), (y1, 'cse_dce', 'Optimized')):
+            value = summary['conditions'][f'{variant}/{mode}']['prove_median_s']
+            a.plot([value, value], [y-.32, y+.32], color=INK, lw=1, zorder=5)
+            ym = 83 + (y+.5)/8*44
+            text(fig, 44, ym, compiler, va='center')
+            text(fig, 165, ym, f'{value:.2f}', bold=True, va='center', ha='center')
+    text(fig, 11, 71.5, 'Each marker is one proof; black ticks mark medians.', size=6.5, color=MUTED)
+
+    title(fig, 'b', 'Both block anchors add about 10%; SSZ has no resolved advantage', 63)
+    text(fig, 11, 56.5, 'Optimized compiler. Points: paired change. Bars: 95% within-batch intervals (8 pairs).', size=6.5, color=MUTED)
+    b = axes(fig, (68, 22, 78, 29))
+    b.spines['left'].set_visible(False)
+    b.tick_params(axis='y', length=0, pad=8)
+    b.axvline(0, color=INK, lw=.65, linestyle=(0, (3, 3)))
+    comparisons = [('cse_dce/rlp', 'cse_dce/direct', 'RLP vs direct state', COLORS[1]),
+                   ('cse_dce/ssz', 'cse_dce/direct', 'SSZ vs direct state', COLORS[2]),
+                   ('cse_dce/ssz', 'cse_dce/rlp', 'SSZ vs RLP', INK)]
+    for i, (num, den, label, color) in enumerate(comparisons):
+        result = next(row for row in summary['comparisons'] if row['numerator']==num and row['denominator']==den)
+        center, lo, hi = [100*(result[key]-1) for key in ('ratio', 'ci95_low', 'ci95_high')]
+        y=2-i
+        b.errorbar(center, y, xerr=[[center-lo], [hi-center]], fmt='o', color=color,
+                   markersize=4.5, elinewidth=1, capsize=2.5, capthick=.8)
+        ym=22+(y+.5)/3*29
+        text(fig, 165, ym+1.5, f'{center:+.1f}%', ha='center', va='center', bold=True)
+        text(fig, 165, ym-2.2, f'[{lo:+.1f}, {hi:+.1f}]', ha='center', va='center', size=6.5, color=MUTED)
+    b.set(xlim=(-5, 17), ylim=(-.5, 2.5), xticks=[-5, 0, 5, 10, 15],
+          yticks=[2, 1, 0], yticklabels=[row[2] for row in comparisons], xlabel='Change in proving time (%)')
+    text(fig, 6, 6.3, 'Apple M5 Max · 11 workers · AC power. One mainnet fixture with a fixed proof shape.', size=6.5)
+    text(fig, 6, 2.2, '*Hypothetical SSZ summary; both state tries remain Keccak.', size=6.5, color=MUTED)
+    export(fig, destination/STEMS[1], 'All 48 proof measurements and paired anchor comparisons, including uncertainty')
 
 
 def costs(destination, samples, summary):
-    measured = [row for row in samples if row['kind']=='measured']
-    fig = plt.figure(figsize=(183*MM, 167*MM))
-    title(fig, 'a', 'Where complete proving time is spent', 6, 160)
-    a = axes(fig, (23, 100, 151, 47), grid='x')
-    labels=[]
+    fig = figure(167)
+    title(fig, 'a', 'Most time is spent constructing the proof', 161)
+    text(fig, 11, 154.5, 'Optimized compiler; arithmetic means of 8 runs. Phase times do not overlap.', color=MUTED)
+    phase_colors=('#5DAB97', '#BDC7CE', '#3D6F95')
+    fig.legend(handles=[Patch(facecolor=color, label=name) for color, name in zip(phase_colors,
+               ('VM execution', 'Witness tables', 'Proof work + cleanup'))],
+               loc='center left', bbox_to_anchor=(31/WIDTH, 147.5/167), ncol=3, frameon=False,
+               fontsize=7, borderaxespad=0, handlelength=1.2, handletextpad=.5, columnspacing=1.6)
+    a=axes(fig, (36, 119, 111, 22))
+    a.spines['left'].set_visible(False)
+    a.tick_params(axis='y', length=0, pad=6)
     for i, mode in enumerate(MODES):
-        for j, variant in enumerate(VARIANTS):
-            bottom=0
-            condition=summary['conditions'][f'{variant}/{mode}']
-            for key, color in zip(PHASES, PHASE_COLORS):
-                value=condition['phases_mean_s'][key]
-                a.barh(5-i*2-j, value, left=bottom, color=color, height=.7, edgecolor='white', linewidth=.25)
-                bottom+=value
-            a.text(bottom+.18, 5-i*2-j, f'{bottom:.2f} s', va='center', fontsize=6.3)
-            labels.append(('B' if j==0 else 'O')+'  '+('Direct','RLP','SSZ*')[i])
-    maximum=max(value['prove_mean_s'] for value in summary['conditions'].values())
-    a.set(yticks=list(range(5,-1,-1)), yticklabels=labels, xlabel='Arithmetic mean wall time (s)', xlim=(0, maximum*1.14))
-    fig.legend(handles=[Patch(facecolor=color,label=label) for color,label in zip(PHASE_COLORS,PHASE_LABELS)],
-               loc='upper left', bbox_to_anchor=(.11,.927), ncol=4, frameon=False, fontsize=6, handlelength=1.2,
-               handletextpad=.4, columnspacing=1.2, labelspacing=.4)
-    title(fig, 'b', 'Hashing dominates guest instructions', 6, 84)
-    b=axes(fig,(21,35,68,39),grid='x')
-    component_colors=('#455C6E','#CC79A7','#BBC3C8')
-    for i, mode in enumerate(MODES):
-        values=summary['conditions'][f'cse_dce/{mode}']['instruction_sections']
-        total=sum(values.values()); left=0
-        for key,color in zip(('keccak256','sha256','relation'),component_colors):
-            share=values[key]/total*100
-            b.barh(2-i,share,left=left,height=.55,color=color,edgecolor='white',linewidth=.25)
-            left+=share
-        share=(values['keccak256']+values['sha256'])/total*100
-        b.text(50,2-i,f'{share:.1f}% hashes',ha='center',va='center',color='white',fontsize=6.3)
-    b.set(yticks=[2,1,0],yticklabels=['Direct','RLP','SSZ*'],xlabel='Optimized instructions (%)',xlim=(0,100))
-    b.legend(handles=[Patch(facecolor=color,label=label) for color,label in zip(component_colors,('Keccak','SHA-256','Other'))],
-             loc='upper left',bbox_to_anchor=(-.12,-.27),ncol=3,frameon=False,fontsize=6,handlelength=1)
-    title(fig, 'c', 'Observe variation across the batch', 99, 84)
-    c=axes(fig,(114,35,60,39),grid='y')
-    for mode,color in zip(MODES,COLORS):
+        item=summary['conditions'][f'cse_dce/{mode}']
+        execution=item['phases_mean_s']['execution_s']
+        build=item['phases_mean_s']['witness_build_s']
+        remaining=item['prove_mean_s']-execution-build
+        left=0
+        for value, color in zip((execution, build, remaining), phase_colors):
+            a.barh(2-i, value, left=left, height=.55, color=color, edgecolor='white', linewidth=.4)
+            left+=value
+        ym=119+(2-i+.5)/3*22
+        text(fig, 152, ym+1.3, f'{item["prove_mean_s"]:.2f} s total', va='center', bold=True)
+        text(fig, 152, ym-2.2, f'{100*remaining/item["prove_mean_s"]:.0f}% proof work', size=6.5, va='center', color=MUTED)
+    max_mean=max(summary['conditions'][f'cse_dce/{mode}']['prove_mean_s'] for mode in MODES)
+    a.set(yticks=[2, 1, 0], yticklabels=NAMES, ylim=(-.5, 2.5),
+          xlim=(0, math.ceil(max_mean/2)*2), xlabel='Mean complete proving time (s)')
+
+    title(fig, 'b', 'The compiler optimization has no resolved timing benefit', 106)
+    text(fig, 11, 99.5, 'Optimized relative to original compiler; 95% within-batch intervals (8 paired ratios).', size=6.5, color=MUTED)
+    b=axes(fig, (36, 72, 111, 21))
+    b.spines['left'].set_visible(False)
+    b.tick_params(axis='y', length=0, pad=6)
+    b.axvline(0, color=INK, lw=.65, linestyle=(0, (3, 3)))
+    for i, (mode, color) in enumerate(zip(MODES, COLORS)):
+        entry=next(row for row in summary['comparisons'] if row['comparison']=='optimization' and row['numerator']==f'cse_dce/{mode}')
+        center, lo, hi=[100*(entry[key]-1) for key in ('ratio', 'ci95_low', 'ci95_high')]
+        b.errorbar(center, 2-i, xerr=[[center-lo], [hi-center]], fmt='o', color=color,
+                   markersize=4.5, elinewidth=1, capsize=2.5, capthick=.8)
+        ym=72+(2-i+.5)/3*21
+        text(fig, 165, ym+1.4, f'{center:+.1f}%', ha='center', va='center', bold=True)
+        text(fig, 165, ym-2.2, f'[{lo:+.1f}, {hi:+.1f}]', ha='center', va='center', size=6.5, color=MUTED)
+    b.set(yticks=[2, 1, 0], yticklabels=NAMES, ylim=(-.5, 2.5), xlim=(-5, 4),
+          xticks=[-4, -2, 0, 2, 4], xlabel='Change in proving time (%)')
+    text(fig, 11, 58.5, 'About 1% fewer instructions; the padded proof tables are unchanged.', size=6.5, color=MUTED)
+
+    title(fig, 'c', 'Some timing drift remains despite stable power settings', 51)
+    deviations=[]
+    for mode in MODES:
         for variant in VARIANTS:
-            group=sorted((row for row in measured if row['mode']==mode and row['variant']==variant),key=lambda row:row['block'])
-            median=st.median(row['prove_s'] for row in group)
-            c.plot([row['block'] for row in group],[100*(row['prove_s']/median-1) for row in group],
-                   color=color,linestyle='--' if variant=='baseline' else '-',marker='o',markersize=2.4,
-                   markerfacecolor='white' if variant=='baseline' else color,linewidth=.8,alpha=.85)
-    c.axhline(0,color=MUTED,lw=.5)
-    c.set(xticks=[1,2,3,4,5,6,7,8],xlabel='Measured block',ylabel='Change from condition median (%)')
-    c.legend(handles=[Line2D([],[],color=color,lw=1,label=label) for color,label in zip(COLORS,('Direct','RLP','SSZ*'))],
-             loc='upper left',bbox_to_anchor=(-.13,-.27),ncol=3,frameon=False,fontsize=6,handlelength=1)
-    fig.text(.035,.08,'Phase clocks are exclusive. Hash instruction counts are not an additive breakdown of proof-construction time.',fontsize=6.3,color=MUTED)
-    footer(fig,'B, baseline (dashed in c); O, optimized (solid). 8 fresh processes per condition; AC power; 11 Rayon workers.')
-    export(fig,destination/STEMS[2],'Exclusive proving phases, guest hash instruction share and within-batch timing variation')
+            rows=measured_rows(samples, mode, variant)
+            median=st.median(row['prove_s'] for row in rows)
+            deviations.extend(100*(row['prove_s']/median-1) for row in rows)
+    drift_limits=(min(-5, math.floor(min(deviations)/5)*5), max(5, math.ceil(max(deviations)/5)*5))
+    for i, (mode, name, color) in enumerate(zip(MODES, NAMES, COLORS)):
+        c=axes(fig, (27+i*51, 17, 43, 24))
+        c.set_title(name, fontsize=7, pad=5, fontweight='bold')
+        for variant in VARIANTS:
+            rows=measured_rows(samples, mode, variant)
+            median=st.median(row['prove_s'] for row in rows)
+            original=variant=='baseline'
+            c.plot([row['block'] for row in rows], [100*(row['prove_s']/median-1) for row in rows],
+                   color=MUTED if original else color, lw=.8,
+                   linestyle='--' if original else '-', marker='o' if original else 's',
+                   markersize=3.1, markerfacecolor='white' if original else color, markeredgewidth=.65)
+        c.axhline(0, color=RULE, lw=.6, zorder=0)
+        c.set(xticks=[1, 4, 8], xlim=(.7, 8.3), ylim=drift_limits, xlabel='Measurement round')
+        if i==0:
+            c.set_ylabel('From median (%)')
+        else:
+            c.tick_params(axis='y', labelleft=False)
+    compiler_key(fig, 35, 3.5)
+    text(fig, 149, 2.7, '*Hypothetical SSZ', size=6.5, color=MUTED)
+    export(fig, destination/STEMS[2], 'Exclusive proof costs, compiler comparisons and timing drift in three readable small multiples')
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--run',type=Path,required=True)
-    parser.add_argument('--output',type=Path,default=HERE/'figures')
-    parser.add_argument('--check',action='store_true')
+    parser.add_argument('--run', type=Path, required=True)
+    parser.add_argument('--output', type=Path, default=HERE/'figures')
+    parser.add_argument('--check', action='store_true')
     args=parser.parse_args()
-    samples,_,summary=analyze(args.run)
+    samples, _, summary=analyze(args.run)
     with tempfile.TemporaryDirectory(prefix='owner-figures-') as temporary:
         destination=Path(temporary) if args.check else args.output
-        destination.mkdir(parents=True,exist_ok=True)
+        destination.mkdir(parents=True, exist_ok=True)
         schematic(destination)
-        proving(destination,samples,summary)
-        costs(destination,samples,summary)
+        proving(destination, samples, summary)
+        costs(destination, samples, summary)
         if args.check:
-            # SVG encodes plot data and typography deterministically; PDF/PNG
-            # binary encodings can vary across plotting/library platforms.
             for stem in STEMS:
                 if (destination/(stem+'.svg')).read_bytes() != (args.output/(stem+'.svg')).read_bytes():
                     raise ValueError(f'figure differs: {stem}')

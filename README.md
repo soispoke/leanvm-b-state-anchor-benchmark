@@ -10,6 +10,8 @@ The fixture is a Safe account's slot 0 at mainnet block **25,939,968**. Its sing
 
 ## Results
 
+**Both block anchors add about 10% proving time over a direct state root; an SSZ advantage over RLP is unresolved.** With the optimized compiler, the paired changes are +10.4% for RLP (95% within-batch interval +6.6 to +14.4%) and +10.3% for SSZ (+7.0 to +13.7%).
+
 **Hash optimization removes 1.08–1.22% of instructions, but a proving-speed improvement is not established.** Every optimization interval includes no change. Positive timing changes below mean slower.
 
 | Anchor | Baseline median | Optimized median | Paired time change (95% interval) |
@@ -27,11 +29,13 @@ For optimized programs, mean VM execution is **0.44–0.79 s** and witness const
 *The SSZ summary is hypothetical and retains the same Keccak state tries. A secondary paired SSZ/RLP comparison also does not establish an SSZ timing advantage.
 
 
-![All measured proof times, paired optimization effects, instruction counts and commitments](owner_state/figures/figure-2-proving-results.png)
+![All 48 proof times and paired comparisons between the three anchors](owner_state/figures/figure-2-proving-results.png)
 
-![Execution, witness construction and cryptographic proving phases](owner_state/figures/figure-3-cost-breakdown.png)
+The supporting figure explains proof costs, compiler effects and remaining timing drift.
 
-The [figure gallery](owner_state/figures/README.md) contains full captions, editable SVGs, vector PDFs with embedded fonts, 600 dpi PNGs and source data. The [full report](owner_state/README.md) documents the relation, optimization, exact setup and statistical limits. [Privacy inspection](owner_state/PRIVACY.md) explains why witness inputs alone do not establish owner hiding.
+![Proof costs, compiler comparisons and timing drift](owner_state/figures/figure-3-cost-breakdown.png)
+
+For a short follow-up, attach Figure 2 alone, or Figures 1 and 2 together. The [figure gallery](owner_state/figures/README.md) contains full captions, editable SVGs, vector PDFs with embedded fonts, 600 dpi PNGs and source data. The [full report](owner_state/README.md) documents the relation, optimization, exact setup and statistical limits. [Privacy inspection](owner_state/PRIVACY.md) explains why witness inputs alone do not establish owner hiding.
 
 ## Verify and reproduce
 

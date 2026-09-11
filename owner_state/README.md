@@ -47,9 +47,9 @@ Verification medians below are measured immediately after proving. Independent w
 
 All 54 proofs passed their public-input and serialized-proof tamper checks. The six saved proofs also verified in fresh processes containing no witness files. All 85 altered-witness checks and 49 native/compiler/measurement tests passed. [Raw evidence and source hashes](evidence.json) preserve these checks.
 
-![All proving measurements and paired effects](figures/figure-2-proving-results.png)
+![All 48 proof times and paired anchor comparisons](figures/figure-2-proving-results.png)
 
-![Exclusive proving phases and observed batch drift](figures/figure-3-cost-breakdown.png)
+![Supporting figure: proof costs, compiler effects and observed timing drift](figures/figure-3-cost-breakdown.png)
 
 ## Exact statement
 
