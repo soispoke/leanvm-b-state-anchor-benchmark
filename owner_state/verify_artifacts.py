@@ -23,8 +23,8 @@ def check(*, generated=False):
     collection = reports['collect']
     if reports['verify']['source_report_sha256'] != digest(inside(ROOT, manifest['reports']['collect'])/'report.json'):
         raise ValueError('independent verification refers to a different collection')
-    if len(reports['verify']['runs']) != 6 or len(reports['negative']['runs']) != 85:
-        raise ValueError('expected six witness-free verifications and 85 altered-witness checks')
+    if len(reports['verify']['runs']) != len(collection['cases']) or len(reports['negative']['runs']) != 85:
+        raise ValueError('expected one witness-free verification per condition and 85 altered-witness checks')
     if {row['condition'] for row in reports['verify']['runs']} != set(collection['cases']):
         raise ValueError('saved-proof verification has duplicate or missing conditions')
     for row in reports['verify']['runs']:
@@ -67,8 +67,10 @@ def check(*, generated=False):
             for filename in ('program.bin', 'public.bin', 'witness.bin'):
                 if digest(LOCAL/condition/filename) != case['sha256'][filename]:
                     raise ValueError(f'regenerated {condition}/{filename} differs from measured input')
-    print(json.dumps({'validated': 'owner binding', 'measured_proofs': 48, 'warmup_proofs': 6,
-                      'saved_proof_verifications': 6, 'altered_witness_checks': 85, 'hash_execution_diagnostics': 200,
+    print(json.dumps({'validated': 'owner binding',
+                      'measured_proofs': sum(row['kind']=='measured' for row in collection['runs']),
+                      'warmup_proofs': sum(row['kind']=='warmup' for row in collection['runs']),
+                      'saved_proof_verifications': len(reports['verify']['runs']), 'altered_witness_checks': 85, 'hash_execution_diagnostics': 200,
                       'generated_inputs_checked': generated}))
     return manifest
 

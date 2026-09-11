@@ -30,26 +30,45 @@ class PairedRatioTests(unittest.TestCase):
         variance = sum((value - average) ** 2 for value in logs) / 7
         self.assertAlmostEqual(forward['ci95_high'], math.exp(average + 2.3646242510103 * math.sqrt(variance / 8)))
 
-    def test_requires_exactly_eight_positive_pairs(self):
-        for first, second in (([1.0]*7, [1.0]*8), ([1.0]*8, [1.0]*7), ([0.0]+[1.0]*7, [1.0]*8)):
+    def test_eighty_pair_interval_uses_the_79_df_critical_value(self):
+        numerator = [math.exp(.01*i) for i in range(80)]
+        result = analyze.paired_ratio(numerator, [1.0]*80)
+        # Population of 0, .01, ..., .79: sample variance = .0001*n*(n+1)/12.
+        radius = 1.9904502102301282 * math.sqrt(.0001*81/12)
+        self.assertAlmostEqual(result['ci95_high'], math.exp(.395+radius))
+        self.assertAlmostEqual(result['ci95_low'], math.exp(.395-radius))
+        # Independent Simpson integration of the t density checks the constant.
+        df, steps = 79, 4096
+        endpoint = analyze.T_975_DF79
+        scale = math.exp(math.lgamma((df+1)/2)-math.lgamma(df/2))/math.sqrt(df*math.pi)
+        density = lambda x: scale*(1+x*x/df)**(-(df+1)/2)
+        h = endpoint/steps
+        integral = h/3*(density(0)+density(endpoint)
+                        +4*math.fsum(density(j*h) for j in range(1,steps,2))
+                        +2*math.fsum(density(j*h) for j in range(2,steps,2)))
+        self.assertAlmostEqual(.5+integral, .975, places=12)
+
+    def test_requires_a_declared_number_of_positive_pairs(self):
+        for first, second in (([1.0]*7, [1.0]*8), ([1.0]*8, [1.0]*7), ([0.0]+[1.0]*7, [1.0]*8),
+                              ([1.0]*79, [1.0]*79), ([1.0]*80, [1.0]*8)):
             with self.assertRaises(ValueError):
                 analyze.paired_ratio(first, second)
 
 
-def synthetic_report():
-    conditions = [f'{variant}/{mode}' for variant in analyze.VARIANTS for mode in analyze.MODES]
+def synthetic_report(variants=analyze.VARIANTS, count=8):
+    conditions = [f'{variant}/{mode}' for variant in variants for mode in analyze.MODES]
     sections = [
         {'kind': 'keccak256', 'length_bytes': 52, 'after': {'xor': 2, 'mul': 3}},
         {'kind': 'relation', 'length_bytes': None, 'after': {'set': 4}},
     ]
-    report = {'command': 'collect', 'blocks': 8, 'variants': list(analyze.VARIANTS),
+    report = {'command': 'collect', 'blocks': count, 'variants': list(variants),
               'warmups_per_condition': 1, 'cases': {
                   condition: {'metadata': {'optimization': {'sections': sections}}}
                   for condition in conditions}, 'runs': []}
-    for kind, blocks in (('warmup', [1]), ('measured', range(1, 9))):
+    for kind, blocks in (('warmup', [1]), ('measured', range(1, count+1))):
         for block in blocks:
             # Deliberately change chronological condition order every block.
-            order = conditions[block % 6:] + conditions[:block % 6]
+            order = conditions[block % len(conditions):] + conditions[:block % len(conditions)]
             if block % 2:
                 order = list(reversed(order))
             for position, condition in enumerate(order, 1):
@@ -94,6 +113,23 @@ class AnalysisPipelineTests(unittest.TestCase):
             self.assertLess(condition['prove_max_s'], 100)
             self.assertEqual(sum(condition['instruction_sections'].values()), condition['instructions'])
         self.assertEqual(len(costs), 12)
+
+    def test_eighty_rounds_have_240_samples_and_only_anchor_comparisons(self):
+        samples, costs, summary = self.run_analysis(synthetic_report(('cse_dce',), 80))
+        self.assertEqual(len(samples), 243)
+        self.assertEqual(summary['measured_proofs'], 240)
+        self.assertEqual(summary['warmup_proofs'], 3)
+        self.assertEqual(len(summary['comparisons']), 3)
+        self.assertIn('df=79', summary['scope'])
+        for comparison, ratio in zip(summary['comparisons'], (1.1, 1.2, 1.2/1.1)):
+            self.assertEqual(comparison['pairs'], 80)
+            self.assertAlmostEqual(comparison['ratio'], ratio)
+        for condition in summary['conditions'].values():
+            self.assertEqual(condition['n'], 80)
+        report = synthetic_report(('cse_dce',), 80)
+        report['runs'][-1]['block'] = 79
+        with self.assertRaisesRegex(ValueError, 'incomplete or duplicate'):
+            self.run_analysis(report)
 
     def test_missing_or_duplicate_block_is_rejected(self):
         report = synthetic_report()

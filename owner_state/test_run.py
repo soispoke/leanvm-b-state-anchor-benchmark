@@ -39,6 +39,22 @@ class SchedulingTests(unittest.TestCase):
         self.assertEqual((warmup, orders), run.balanced_orders(conditions, 8, 1, 20260910))
         self.assertNotEqual(orders, run.balanced_orders(conditions, 8, 1, 42)[1])
 
+    def test_three_conditions_balance_positions_and_predecessors_in_six_rounds(self):
+        conditions = ['cse_dce/'+mode for mode in run.MODES]
+        warmups, orders = run.balanced_orders(conditions, 80, 1, 20260911)
+        self.assertEqual(len(warmups), 1)
+        self.assertEqual(len(orders), 80)
+        for order in orders:
+            self.assertEqual(sorted(order), sorted(conditions))
+        for start in range(0, 78, 6):
+            cycle = orders[start:start+6]
+            predecessors = Counter(pair for order in cycle for pair in zip(order, order[1:]))
+            self.assertEqual(len(predecessors), 6)
+            self.assertEqual(set(predecessors.values()), {2})
+            for position in range(3):
+                self.assertEqual(set(Counter(row[position] for row in cycle).values()), {2})
+        self.assertEqual((warmups, orders), run.balanced_orders(conditions, 80, 1, 20260911))
+
     def test_invalid_schedule(self):
         for conditions, blocks, warmups in (([], 8, 1), (['a', 'a'], 8, 1), (['a'], 0, 1), (['a'], 8, -1)):
             with self.assertRaises(ValueError):

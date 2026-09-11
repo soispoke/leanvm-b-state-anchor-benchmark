@@ -251,7 +251,7 @@ def check_environment(observed, reference=None):
 
 
 def balanced_orders(conditions, blocks, warmups, seed):
-    """Randomized Williams rows: full even-size cycles balance order/position."""
+    """Randomized Williams rows; odd sizes include reversed rows for balance."""
     if blocks < 1 or warmups < 0 or not conditions or len(set(conditions)) != len(conditions):
         raise ValueError('positive blocks, nonnegative warmups, and distinct conditions required')
     rng = random.Random(seed)
@@ -262,9 +262,11 @@ def balanced_orders(conditions, blocks, warmups, seed):
     for i in range(1, n):
         pattern.append((i + 1) // 2 if i % 2 else n - i // 2)
     rows = [[labels[(value + shift) % n] for value in pattern] for shift in range(n)]
+    if n > 1 and n % 2:
+        rows += [list(reversed(row)) for row in rows]
     orders = []
     while len(orders) < blocks:
-        indices = list(range(n))
+        indices = list(range(len(rows)))
         rng.shuffle(indices)
         orders.extend(rows[i] for i in indices[:blocks-len(orders)])
     warmup_orders = []
@@ -583,6 +585,10 @@ def validate_evidence(directory):
         if case.get('saved_proof') and digest(inside(directory, case['saved_proof'])) != case['proof_sha256']:
             raise ValueError(f'saved proof changed: {condition}')
     if report['command'] == 'collect':
+        conditions = [f'{variant}/{mode}' for variant in report['variants'] for mode in MODES]
+        warmups, orders = balanced_orders(conditions, report['blocks'], report['warmups_per_condition'], report['seed'])
+        if report['warmup_orders'] != warmups or report['measured_orders'] != orders or set(report['cases']) != set(conditions):
+            raise ValueError('recorded conditions or schedule differ from the declared design')
         observed = [('warmup', index+1, condition) for index, order in enumerate(report['warmup_orders']) for condition in order]
         observed += [('measured', index+1, condition) for index, order in enumerate(report['measured_orders']) for condition in order]
         actual = [(entry['kind'], entry['block'], entry['condition']) for entry in report['runs']]

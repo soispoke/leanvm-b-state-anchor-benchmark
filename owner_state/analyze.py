@@ -19,6 +19,10 @@ HERE = ROOT / 'owner_state'
 VARIANTS = ('baseline', 'cse_dce')
 DIAGNOSTICS = HERE / 'diagnostics/20260911-full-restart'
 T_975_DF7 = 2.3646242510103
+# Fixed before the 80-round collection; independently checked by integrating
+# the Student-t density. Keeping the historical constant preserves old exports.
+T_975_DF79 = 1.9904502102301282
+T_CRITICAL = {8: T_975_DF7, 80: T_975_DF79}
 PHASE_GROUPS = {
     'execution_s': ('execute_ms',),
     'witness_build_s': ('build_ms',),
@@ -32,13 +36,14 @@ PHASE_GROUPS = {
 
 
 def paired_ratio(numerator, denominator):
-    """Predeclared two-sided t interval on eight paired block log ratios."""
-    if len(numerator) != 8 or len(denominator) != 8 or any(not math.isfinite(x) or x<=0 for x in [*numerator,*denominator]):
-        raise ValueError('this analysis contract requires eight positive paired observations')
+    """Predeclared two-sided t interval on 8 or 80 paired block log ratios."""
+    n = len(numerator)
+    if n not in T_CRITICAL or len(denominator) != n or any(not math.isfinite(x) or x<=0 for x in [*numerator,*denominator]):
+        raise ValueError('this analysis contract requires 8 or 80 positive paired observations')
     logs = [math.log(a / b) for a, b in zip(numerator, denominator)]
     center = st.mean(logs)
-    radius = T_975_DF7 * st.stdev(logs) / math.sqrt(8)
-    return {'pairs': 8, 'ratio': math.exp(center), 'ci95_low': math.exp(center - radius),
+    radius = T_CRITICAL[n] * st.stdev(logs) / math.sqrt(n)
+    return {'pairs': n, 'ratio': math.exp(center), 'ci95_low': math.exp(center - radius),
             'ci95_high': math.exp(center + radius),
             'block_ratios': [math.exp(value) for value in logs]}
 
@@ -72,9 +77,14 @@ def csv_text(rows):
 def analyze(directory):
     directory = directory.resolve()
     report = validate_evidence(directory)
-    if (report['command'] != 'collect' or report['blocks'] != 8
-            or report['variants'] != list(VARIANTS) or report['warmups_per_condition'] != 1):
-        raise ValueError('the report differs from the predeclared six-condition, eight-block design')
+    variants = tuple(report['variants'])
+    blocks = report['blocks']
+    if (report['command'] != 'collect' or report['warmups_per_condition'] != 1
+            or (variants, blocks) not in ((VARIANTS, 8), (('cse_dce',), 80))):
+        raise ValueError('the report differs from the predeclared 8-round or 80-round design')
+    expected = {f'{variant}/{mode}' for variant in variants for mode in MODES}
+    if set(report['cases']) != expected or any(row['condition'] not in expected for row in report['runs']):
+        raise ValueError('unexpected or missing condition in analysis')
     samples = []
     for sequence, entry in enumerate(report['runs'], 1):
         result, phases = entry['result'], entry['phases']
@@ -104,7 +114,7 @@ def analyze(directory):
     costs = []
     for condition, case in report['cases'].items():
         group = sorted((row for row in measured if row['condition'] == condition), key=lambda row: row['block'])
-        if [row['block'] for row in group] != list(range(1, 9)):
+        if [row['block'] for row in group] != list(range(1, blocks+1)):
             raise ValueError('incomplete or duplicate measured block')
         for key in ('instructions', 'memory_cells', 'log_mem', 'xor', 'mul', 'committed_cells', 'proof_bytes'):
             if len({row[key] for row in group}) != 1:
@@ -140,9 +150,10 @@ def analyze(directory):
     comparisons = []
     for mode in MODES:
         numerator, denominator = f'cse_dce/{mode}', f'baseline/{mode}'
-        comparisons.append({'comparison': 'optimization', 'numerator': numerator, 'denominator': denominator,
-                            **paired_ratio(values(numerator), values(denominator))})
-    for variant in VARIANTS:
+        if numerator in conditions and denominator in conditions:
+            comparisons.append({'comparison': 'optimization', 'numerator': numerator, 'denominator': denominator,
+                                **paired_ratio(values(numerator), values(denominator))})
+    for variant in variants:
         for mode in ('rlp', 'ssz'):
             numerator, denominator = f'{variant}/{mode}', f'{variant}/direct'
             comparisons.append({'comparison': 'anchor', 'numerator': numerator, 'denominator': denominator,
@@ -151,7 +162,7 @@ def analyze(directory):
         comparisons.append({'comparison': 'ssz_vs_rlp_secondary', 'numerator': numerator, 'denominator': denominator,
                             **paired_ratio(values(numerator), values(denominator))})
     summary = {'source_run': str(directory.relative_to(ROOT)), 'source_report_sha256': digest(directory/'report.json'),
-               'scope': 'within this batch; 95% t intervals on paired block log ratios, df=7, exploratory',
+               'scope': f'within this batch; 95% t intervals on paired block log ratios, df={blocks-1}, exploratory',
                'measured_proofs': len(measured), 'warmup_proofs': len(samples)-len(measured),
                'conditions': conditions, 'comparisons': comparisons}
     return samples, costs, summary
