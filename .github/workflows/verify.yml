@@ -18,26 +18,17 @@ jobs:
         with:
           python-version: '3.13'
           cache: pip
-          cache-dependency-path: requirements-lock.txt
-      - run: python -m pip install -r requirements-lock.txt
-      - run: python verify_evidence.py
-      - run: python -m real_state.verify_artifacts
+          cache-dependency-path: requirements.txt
+      - run: python -m pip install -r requirements.txt
       - run: python -m owner_state.verify_artifacts
       - name: Regenerate publication figures from raw evidence
-        run: |
-          python -m pip install -r real_state/figure-requirements.txt
-          python -m real_state.plot_figures --check
-          python - <<'PY'
-          import json, subprocess, sys
-          from pathlib import Path
-          report = json.loads(Path('owner_state/evidence.json').read_text())['reports']['collect']
-          subprocess.run([sys.executable, '-m', 'owner_state.plot_figures', '--run', report, '--check'], check=True)
-          PY
+        run: python -m owner_state.plot_figures --check
       - name: Check native hashes and inclusion relations
         run: |
           git clone https://github.com/ethereum/remerkleable.git local-runs/remerkleable
           git -C local-runs/remerkleable checkout --detach 2f0baeef0082d4278acaef7d822deb7009d7db7e
           PYTHONPATH=local-runs/remerkleable python -m unittest discover -s real_state -p 'test_*.py' -v
+          python -m unittest test_analyze_fixtures -v
           python -m unittest discover -s owner_state -p 'test_*.py' -v
       - name: Check that verification leaves the evidence unchanged
         run: git diff --exit-code
@@ -53,8 +44,8 @@ jobs:
         with:
           python-version: '3.13'
           cache: pip
-          cache-dependency-path: requirements-lock.txt
-      - run: python -m pip install -r requirements-lock.txt
+          cache-dependency-path: requirements.txt
+      - run: python -m pip install -r requirements.txt
       - name: Install the recorded Rust version
         run: |
           rustup default 1.97.1
@@ -62,19 +53,13 @@ jobs:
       - run: python -m real_state.run setup
       - name: Exercise the small Rust runner tests
         run: cargo test --manifest-path vendor/leanVM-b/Cargo.toml --locked --release --test real_state_bench
-      - name: Regenerate public programs and compare their hashes
-        run: |
-          python -m real_state.run generate
-          python -m real_state.verify_artifacts --generated
-      - name: Verify saved proofs without witness files
-        run: python -m real_state.run verify --saved-proof real_state/proofs
       - name: Build the profiled backend and check that the patch preserves proof work
         run: |
           python -m owner_state.run setup
           python -m unittest owner_state.test_instrumentation -v
       - name: Regenerate owner-binding inputs and verify the selected saved proofs
         run: |
-          python -m owner_state.run generate --variants baseline cse_dce
+          python -m owner_state.run generate
           python -m owner_state.verify_artifacts --generated
           python - <<'PY'
           import json, subprocess, sys

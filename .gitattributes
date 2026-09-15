@@ -1,6 +1,7 @@
-# Preserve exact evidence bytes, including CSV line endings, on every platform.
+# Preserve exact source and evidence bytes on every platform.
 * -text
-real_state/results/** -whitespace
+owner_state/results/** -whitespace
+owner_state/collection/** -whitespace
 real_state/leanvm-witness-api.patch -whitespace
-# The recorded CSV exports include CRLF and a historical final blank line.
+owner_state/profile.patch -whitespace
 *.csv whitespace=cr-at-eol,-blank-at-eof

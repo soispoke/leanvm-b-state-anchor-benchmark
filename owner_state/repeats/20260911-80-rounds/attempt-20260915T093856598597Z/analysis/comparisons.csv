@@ -1,4 +1,0 @@
-comparison,numerator,denominator,pairs,ratio,ci95_low,ci95_high
-anchor,cse_dce/rlp,cse_dce/direct,80,1.0909181101,1.08614118092,1.09571604856
-anchor,cse_dce/ssz,cse_dce/direct,80,1.08802229556,1.08153801631,1.09454545082
-ssz_vs_rlp_secondary,cse_dce/ssz,cse_dce/rlp,80,0.997345525292,0.993631310025,1.00107362438

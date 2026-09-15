@@ -10,6 +10,6 @@ At pinned leanVM-b commit `8494c5d5df323f2b97ed89272942a4bee6247078`, the provin
 
 Independent verification without loading witness files demonstrates that verification needs only the program, public input and proof. It does not demonstrate that the proof hides the witness. This code inspection is not a demonstrated recovery of an account address from a benchmark proof, and no such recovery is claimed.
 
-A private-owner proof requires a justified zero-knowledge construction covering the commitment and proof messages, or a suitable established zero-knowledge wrapper, plus consideration of the public encoding shape. Merely hiding fields in the API or adding random unused witness cells is insufficient. Implementing that protection is separate cryptographic work; it does not require adding signature verification or recursive authorization, item (ii).
+A private-owner proof requires a justified zero-knowledge construction covering the commitment and proof messages, or a suitable established zero-knowledge wrapper, plus consideration of the public encoding shape. Merely hiding fields in the API or adding random unused witness cells is insufficient. Implementing that protection is separate cryptographic work; it does not require adding signature verification or recursive authorization.
 
 The present timings therefore measure the owner-binding relation on this backend. They do not measure a completed private transaction proof or the additional cost of a future privacy layer.

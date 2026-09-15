@@ -42,7 +42,7 @@ PROFILE_PATCH_SHA256 = '38a63917808288f5e720f79f1b1bad723710fe50a7db03f2098489e8
 CPU_SHA256 = 'e6264ca07d7ddb16c2b4a618dfd80dc65870dbebbb0f2c359c3f7b06bdaaff82'
 WRAPPER = '#[path = "../../../real_state/real_state_bench.rs"]\nmod real_state_bench;\n'
 MODES = ('direct', 'rlp', 'ssz')
-DEFAULT_VARIANTS = ('baseline', 'cse_dce')
+DEFAULT_VARIANTS = ('cse_dce',)
 SOURCE_NAMES = (
     'owner_state/run.py', 'owner_state/relation.py', 'owner_state/circuit.py',
     'owner_state/hashes.py', 'owner_state/instrumentation.py', 'owner_state/profile.patch',
@@ -442,7 +442,7 @@ def generate(variants, modes=MODES):
     return destination
 
 
-def collect(variants=DEFAULT_VARIANTS, *, blocks=8, warmups=1, seed=20260910):
+def collect(variants=DEFAULT_VARIANTS, *, blocks=80, warmups=1, seed=20260911):
     binary, runner = load_runner()
     conditions = [f'{variant}/{mode}' for variant in variants for mode in MODES]
     warmup_orders, orders = balanced_orders(conditions, blocks, warmups, seed)
@@ -675,9 +675,9 @@ def main():
     parser.add_argument('--variants', nargs='+', default=list(DEFAULT_VARIANTS))
     parser.add_argument('--variant', default='cse_dce', help='compiler variant for negative checks')
     parser.add_argument('--mode', choices=(*MODES, 'all'), default='all')
-    parser.add_argument('--blocks', type=int, default=8)
+    parser.add_argument('--blocks', type=int, default=80)
     parser.add_argument('--warmups', type=int, default=1)
-    parser.add_argument('--seed', type=int, default=20260910)
+    parser.add_argument('--seed', type=int, default=20260911)
     parser.add_argument('--run', type=Path)
     args = parser.parse_args()
     modes = MODES if args.mode == 'all' else (args.mode,)

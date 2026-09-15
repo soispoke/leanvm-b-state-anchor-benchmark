@@ -1,11 +1,6 @@
-"""Reproduce the fixed-profile state proof experiment using fresh processes.
+"""Shared native runner setup, output parsing and malformed-witness targets.
 
-Examples (from the repository root, with Python dependencies installed):
-  python -m real_state.run setup
-  python -m real_state.run generate
-  RAYON_NUM_THREADS=11 python -m real_state.run prove --measure-memory
-  python -m real_state.run verify --saved-proof real_state/proofs
-  python -m real_state.run negative --mode direct
+python -m real_state.run setup
 """
 from __future__ import annotations
 
@@ -13,13 +8,8 @@ import argparse
 import hashlib
 import json
 import os
-import platform
 import re
-import shutil
 import subprocess
-import sys
-import tempfile
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -77,7 +67,7 @@ def validate_checkout():
         raise ValueError('unexpected witness API patch contents')
     if tracked_changes() != ['src/cpu/mod.rs']:
         raise ValueError('leanVM-b must contain only the known witness API change')
-    actual = git('diff', '--no-ext-diff', '--no-color', '--unified=3',
+    actual = git('diff', '--no-ext-diff', '--no-color', '--unified=3', '--abbrev=8',
                  '--src-prefix=a/', '--dst-prefix=b/', 'HEAD', '--', 'src/cpu/mod.rs').stdout
     if actual != PATCH.read_text():
         raise ValueError('tracked leanVM-b changes do not exactly match the known API patch')
@@ -151,38 +141,6 @@ def setup():
     print(json.dumps(manifest, indent=2))
 
 
-def load_runner():
-    path = RUNS / 'runner.json'
-    if not path.exists():
-        raise ValueError('runner.json is missing; run python -m real_state.run setup')
-    manifest = json.loads(path.read_text())
-    validate_checkout()
-    binary = (ROOT / manifest['binary']).resolve()
-    if (manifest.get('schema') != 'leanvm-real-state-runner-v1'
-            or manifest.get('upstream_commit') != PIN
-            or manifest.get('cargo_lock_sha256') != LOCK_SHA256
-            or manifest.get('source_sha256') != source_identity()
-            or manifest.get('vm_cpu_sha256') != digest(VM / 'src/cpu/mod.rs')
-            or manifest.get('wrapper_sha256') != digest(VM / 'tests/real_state_bench.rs')
-            or not binary.is_relative_to(VM / 'target')
-            or not binary.is_file() or not os.access(binary, os.X_OK)
-            or manifest.get('binary_sha256') != digest(binary)):
-        raise ValueError('runner or source identity changed; rerun setup and regenerate circuits before collecting results')
-    return binary, manifest
-
-
-def case_metadata(mode):
-    directory = RUNS / mode
-    meta = json.loads((directory / 'program.json').read_text())
-    profile = json.loads((ROOT / 'real_state/profile.json').read_text())
-    profile_hash = hashlib.sha256(json.dumps(profile, sort_keys=True).encode()).hexdigest()
-    if meta['mode'] != mode or meta['profile_sha256'] != profile_hash:
-        raise ValueError(f'{mode}: generated metadata differs from the fixed profile; regenerate')
-    files = {name: digest(directory / name)
-             for name in ('program.bin', 'public.bin', 'program.json')}
-    return directory, meta, profile, files
-
-
 def parse_output(text):
     # libtest can print the test name and our first message on the same line.
     prefix = r'^(?:test real_state_bench::real_state_benchmark \.\.\. )?'
@@ -192,28 +150,6 @@ def parse_output(text):
     rejected = re.findall(prefix + r'(REJECTED [^\r\n]*)$', text, re.MULTILINE)
     return (json.loads(records[0]) if records else None,
             rejected[0] if rejected else None)
-
-
-def run_process(binary, directory, action, log, *, measure_memory=False, mutation=None):
-    environment = {key: value for key, value in os.environ.items() if not key.startswith('REAL_STATE_')}
-    environment.update(REAL_STATE_DIR=str(directory), REAL_STATE_ACTION=action)
-    if mutation:
-        environment['REAL_STATE_MUTATE_CELL'] = str(mutation['cell'])
-        if mutation.get('replacement') is not None:
-            environment['REAL_STATE_MUTATE_VALUE'] = str(mutation['replacement'])
-    argv = [str(binary), 'real_state_bench::real_state_benchmark',
-            '--exact', '--nocapture', '--test-threads=1']
-    measured = measure_memory and platform.system() == 'Darwin'
-    if measured:
-        argv = ['/usr/bin/time', '-l', *argv]
-    started = time.perf_counter()
-    with log.open('w') as stream:
-        completed = subprocess.run(argv, cwd=ROOT, env=environment, stdout=stream, stderr=subprocess.STDOUT)
-    text = log.read_text()
-    result, rejected = parse_output(text)
-    return {'exit_code': completed.returncode, 'process_seconds': time.perf_counter() - started,
-            'memory_measurement': 'macos-time-l' if measured else None,
-            'log': log.name, 'result': result, 'rejection': rejected}
 
 
 def targets(meta, profile):
@@ -275,126 +211,11 @@ def targets(meta, profile):
     return result
 
 
-def saved_proof(option, mode, selected_modes):
-    if option is None:
-        return RUNS / mode / 'proof.bin'
-    value = str(option).replace('{mode}', mode)
-    path = Path(value)
-    path = path if path.is_absolute() else ROOT / path
-    if path.is_dir():
-        return path / f'{mode}.bin'
-    if len(selected_modes) > 1 and '{mode}' not in str(option):
-        raise ValueError('--saved-proof with multiple modes requires a directory or {mode} template')
-    return path
-
-
-def collect(args):
-    modes = MODES if args.mode == 'all' else (args.mode,)
-    if args.command == 'generate':
-        binary, runner = None, None
-    else:
-        binary, runner = load_runner()
-    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
-    destination = args.results if args.results.is_absolute() else ROOT / args.results
-    destination = destination / f'{args.command}-{stamp}'
-    destination.mkdir(parents=True, exist_ok=False)
-    report = {'schema': 'leanvm-real-state-run-v1', 'command': args.command,
-              'started_at': datetime.now(timezone.utc).isoformat(),
-              'source_sha256': source_identity(), 'runner': runner,
-              'platform': platform.platform(), 'python': sys.version,
-              'rayon_num_threads': os.environ.get('RAYON_NUM_THREADS'),
-              'measure_memory_requested': args.measure_memory,
-              'negative_scope': 'interpreter execution rejection; not forged-proof verification',
-              'cases': {}, 'runs': []}
-    try:
-        for mode in modes:
-            directory = RUNS / mode
-            if args.command == 'generate':
-                log = destination / f'{mode}-generate.log'
-                started = time.perf_counter()
-                with log.open('w') as stream:
-                    process = subprocess.run([sys.executable, '-m', 'real_state.statement', mode,
-                                              '--output', str(directory)], cwd=ROOT,
-                                             stdout=stream, stderr=subprocess.STDOUT)
-                entry = {'mode': mode, 'exit_code': process.returncode, 'log': log.name,
-                         'process_seconds': time.perf_counter() - started}
-                report['runs'].append(entry)
-                if process.returncode:
-                    raise ValueError(f'{mode} generation failed; see {log}')
-            directory, meta, profile, files = case_metadata(mode)
-            report['cases'][mode] = {'metadata': meta, 'sha256': files}
-            if args.command in ('prove', 'negative'):
-                report['cases'][mode]['sha256']['witness.bin'] = digest(directory / 'witness.bin')
-            if args.command == 'generate':
-                continue
-            mutations = targets(meta, profile) if args.command == 'negative' else [None]
-            for repeat in range(1, args.repeats + 1):
-                for mutation in mutations:
-                    tag = mutation['tag'] if mutation else args.command
-                    log = destination / f'{mode}-{repeat:02}-{tag}.log'
-                    if args.command == 'verify':
-                        proof = saved_proof(args.saved_proof, mode, modes)
-                        # A fresh verifier process sees exactly these three files.
-                        with tempfile.TemporaryDirectory(prefix='leanvm-state-verify-') as temporary:
-                            clean = Path(temporary)
-                            for name in ('program.bin', 'public.bin'):
-                                shutil.copyfile(directory / name, clean / name)
-                            shutil.copyfile(proof, clean / 'proof.bin')
-                            entry = run_process(binary, clean, 'verify', log, measure_memory=args.measure_memory)
-                            entry['verifier_files'] = sorted(path.name for path in clean.iterdir())
-                            entry['proof_sha256'] = digest(clean / 'proof.bin')
-                    else:
-                        action = 'execute' if mutation else 'prove'
-                        entry = run_process(binary, directory, action, log,
-                                            measure_memory=args.measure_memory, mutation=mutation)
-                    entry.update(mode=mode, repeat=repeat, mutation=mutation)
-                    if mutation:
-                        entry['passed'] = entry['exit_code'] == 0 and entry['rejection'] is not None
-                    else:
-                        result = entry['result'] or {}
-                        entry['passed'] = entry['exit_code'] == 0 and result.get('action') == args.command
-                        if args.command == 'verify':
-                            entry['passed'] &= result.get('witness_loaded') is False
-                        else:
-                            entry['passed'] &= result.get('wrong_public_rejected') is True and result.get('mutated_proof_rejected') is True
-                    if args.command == 'prove' and entry['passed']:
-                        saved = destination / f'{mode}-{repeat:02}-proof.bin'
-                        shutil.copyfile(directory / 'proof.bin', saved)
-                        entry.update(proof=saved.name, proof_sha256=digest(saved))
-                    report['runs'].append(entry)
-                    write_json(destination / 'report.json', report)
-                    print(json.dumps(entry), flush=True)
-                    if not entry['passed'] and not mutation:
-                        raise ValueError(f'{mode} {args.command} failed; see {log}')
-        if args.command == 'negative' and not all(entry['passed'] for entry in report['runs']):
-            raise ValueError('one or more witness mutations were not rejected; inspect report.json')
-    finally:
-        report['finished_at'] = datetime.now(timezone.utc).isoformat()
-        write_json(destination / 'report.json', report)
-        print(f'Report: {destination / "report.json"}', flush=True)
-
-
 def main():
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('command', choices=('setup', 'generate', 'prove', 'verify', 'negative'))
-    parser.add_argument('--mode', choices=(*MODES, 'all'), default='all')
-    parser.add_argument('--results', type=Path, default=Path('local-runs/real-state/results'))
-    parser.add_argument('--repeats', type=int, default=1, help='fresh process repetitions (default: 1)')
-    parser.add_argument('--measure-memory', action='store_true', help='wrap each VM process with macOS /usr/bin/time -l')
-    parser.add_argument('--saved-proof', type=Path, help='verification proof file, directory of <mode>.bin files, or {mode} path template')
-    args = parser.parse_args()
-    if args.repeats < 1:
-        parser.error('--repeats must be positive')
-    if args.saved_proof and args.command != 'verify':
-        parser.error('--saved-proof applies only to verify')
-    try:
-        setup() if args.command == 'setup' else collect(args)
-    except (OSError, ValueError, KeyError, subprocess.CalledProcessError) as error:
-        if isinstance(error, subprocess.CalledProcessError):
-            print(error.stderr or str(error), file=sys.stderr)
-        else:
-            print(str(error), file=sys.stderr)
-        raise SystemExit(1) from error
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('command', choices=('setup',))
+    parser.parse_args()
+    setup()
 
 
 if __name__ == '__main__':

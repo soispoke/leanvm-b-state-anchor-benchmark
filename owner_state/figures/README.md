@@ -2,9 +2,9 @@
 
 **For a short discussion follow-up, attach Figure 2. Add Figure 1 if readers need the relation and anchor paths.** Figure 3 supplies proof costs and timing drift.
 
-The figures use **all 240 measured proofs from the optimized programs**, 80 per anchor, collected on September 15. This compiler cleanup is applied consistently to all three anchors; it is not a claim of the fastest possible implementation. Three labeled warmups are excluded from the estimates. The earlier eight-round compiler comparison remains separate in the [full report](../README.md#what-was-optimized) and [archived analysis](../repeats/20260911-full-restart/analysis/summary.json).
+The figures use **all 240 measured proofs from the optimized programs**, 80 per anchor, collected on September 15. This compiler cleanup is applied consistently to all three anchors; it is not a claim of the fastest possible implementation. Three labeled warmups are excluded from the estimates.
 
-A measurement round is one randomized block containing each of the three anchors once. These figures describe the note opening plus authenticated account/storage lookup; earlier owner-binding and state-only batches remain separate evidence.
+A measurement round is one randomized block containing each of the three anchors once. These figures describe the note opening plus authenticated account/storage lookup.
 
 ## Figure 1. One owner relation through three anchors
 
@@ -36,7 +36,7 @@ Figures are **180 mm wide**, with heights of **139, 136 and 112 mm**. Body text 
 
 The layout follows the dimensions and typography in Nature's [current formatting guide](https://www.nature.com/nature/for-authors/formatting-guide) and [figure specifications](https://research-figure-guide.nature.com/figures/preparing-figures-our-specifications/), checked September 11, 2026. PDF renders are checked for label spacing, clipping and font embedding. This is an artwork specification check, not a claim of journal acceptance. Retain the captions when reusing the figures, and use the vector exports at their intended print width.
 
-The collection uses one Apple M5 Max with 128 GiB RAM, macOS 26.5, eleven Rayon workers, AC power and the same pinned native-target executable. Each condition has one fresh-process warmup, then 80 measured fresh processes in randomized Williams order. Thirteen complete six-round cycles balance positions and predecessors; two additional rows complete the schedule. The same binary, programs and inputs were checked byte for byte against September 11. Three consecutive preflight snapshots were at least 90% CPU idle on AC. No local build, diagnostic or figure work ran during collection. All 243 proofs verified and all recorded environment checks passed. The three saved proofs also verified in fresh processes without witness files. Earlier collections remain separate. Temperature and CPU frequency were not measured; the visible early timing drift is retained. The intervals describe this batch, not reproducibility across machines or independent batches.
+The collection uses one Apple M5 Max with 128 GiB RAM, macOS 26.5, eleven Rayon workers, AC power and the same pinned native-target executable. Each condition has one fresh-process warmup, then 80 measured fresh processes in randomized Williams order. Thirteen complete six-round cycles balance positions and predecessors; two additional rows complete the schedule. Three consecutive preflight snapshots were at least 90% CPU idle on AC. No local build, diagnostic or figure work ran during collection. All 243 proofs verified and all recorded environment checks passed. The three saved proofs also verified in fresh processes without witness files. Temperature and CPU frequency were not measured; the visible early timing drift is retained. The intervals describe this batch, not reproducibility across machines or independent batches.
 
 - [All proof samples and seven exclusive phase groups, including labeled warmups](../analysis/source-data.csv)
 - [Paired comparisons](../analysis/comparisons.csv)
@@ -52,9 +52,9 @@ The collection uses one Apple M5 Max with 128 GiB RAM, macOS 26.5, eleven Rayon 
 Hash execution diagnostics are reused from September 11 with the identical binary. They include input/output constraints. They are not additive proof-construction costs and are not subtracted from complete proving times.
 
 ```bash
-python -m pip install -r real_state/figure-requirements.txt
-python -m owner_state.plot_figures --run owner_state/results/collect-20260915T094023087152Z
-python -m owner_state.plot_figures --run owner_state/results/collect-20260915T094023087152Z --check
+python -m pip install -r requirements.txt
+python -m owner_state.plot_figures
+python -m owner_state.plot_figures --check
 ```
 
 Use the collection path from `evidence.json`. Verification recomputes SVGs deterministically from raw measurements; PDF and PNG encoders can vary between library/platform builds. See the [full report](../README.md) for the statement, validation and limits.

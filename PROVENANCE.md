@@ -1,49 +1,21 @@
-# Evidence provenance
+# Evidence and provenance
 
-The original experiment and its independent repeat were collected on September 9, 2026. This standalone repository was prepared on September 10, 2026.
+The published comparison is one complete collection from **15 September 2026**: 240 measured proofs and three warmups. No earlier timing batch is pooled into it. [The evidence manifest](owner_state/evidence.json) selects the records and hashes every retained source, log and result needed to check them.
 
-`evidence-sha256.txt` records the byte-for-byte export of 28 original files: all Rust programs, the fixture, measurements and validation transcripts, CSVs, SVG/PNG figures, Python fixture and timing sources, the figure generator, and the direct dependency pins. In particular, the timing program, runner, and analyzer still match the SHA-256 values recorded in both timing transcripts. These hashes establish file integrity, not an independent attestation of the experiment.
+| Record | Contents |
+| --- | --- |
+| [Collection](owner_state/results/collect-20260915T094023087152Z/report.json) | All 243 proof processes, environment snapshots, timing phases and three saved proofs |
+| [Generation](owner_state/results/generate-20260915T093651868962Z/report.json) | Program and input hashes, metadata and source snapshots |
+| [Independent verification](owner_state/results/verify-20260915T101414770576Z/report.json) | Three saved proofs verified without witness files |
+| [Malformed-witness checks](owner_state/results/negative-20260911T073927482435Z/report.json) | 85 rejected mutations, reused from 11 September with identical measured programs |
+| [Hash diagnostics](owner_state/diagnostics/20260911-full-restart/report.json) | 200 standalone execution samples, reused from 11 September with the same executable |
+| [Collection plan and preflight](owner_state/collection/README.md) | Frozen schedule, analysis plan, source hashes and quiet-load checks |
+| [Build](owner_state/build.json) | Native executable identity and toolchain; [Cargo logs](owner_state/build/) |
 
-The reports were adapted for GitHub: vault frontmatter and internal links were removed, the main report became `REPORT.md`, and reproduction commands now use repository-relative paths. Historical transcripts retain their original command paths and temporary build directory names. Those paths are context, not installation requirements.
+The measurement machine was an Apple M5 Max with 128 GB memory, macOS 26.5, Homebrew Rust/Cargo 1.97.1, Python 3.13.15 and 11 Rayon workers on AC power. The backend is [leanVM-b `8494c5d`](https://github.com/leanEthereum/leanVM-b/tree/8494c5d5df323f2b97ed89272942a4bee6247078). Its witness API patch and exclusive-timing patch leave the ISA and proof constraints unchanged. Exact identities are recorded rather than inferred from these version labels.
 
-The export changes two support tools. `check_artifacts.py` now compares regenerated content in a temporary directory, rejects stale CSV or SVG data, and ignores modification times. `render_figures.py` accepts an ordinary Node/Sharp installation or browser instead of depending on an application-bundled runtime. Neither tool is one of the three sources hashed in the timing transcripts.
+The [saved mainnet fixture](fixtures/mainnet-0x18bd000.json) contains the block and account/storage proofs. Verification is offline. The hypothetical SSZ root has an [independent reference](real_state/ssz-reference.json); it is not a historical Ethereum block root.
 
-`verify_evidence.py`, the SHA-256 manifest, the complete Python dependency lock, and CI were added for this export. Verification recomputes the two timing summaries and the comparison, checks that all paired deterministic sample fields match, and regenerates all four SVGs. It reads the recorded proof success and tamper checks; it does not replace a live proof rerun or a cryptographic audit of leanVM-b.
+Recorded source snapshots are immutable evidence, including their original paths and comments. Active documentation and runners may be simplified without rewriting those snapshots. The frozen collection contract predates measurement; the run-order diagnostic was added afterward and reveals drift that questions nominal interval coverage.
 
-The preserved timing collector uses macOS hardware and power commands and does not capture temperature, frequency, system load, or power mode. All confidence intervals remain labeled as within-batch intervals. No claim of exact environmental equivalence has been added.
-
-The September 10 real account-and-storage experiment lives separately under `real_state/`. Its actual Keccak/RLP/MPT/SHA-256 VM programs, three serialized proofs, nine proving logs, environment records, and adversarial checks do not replace the original calibration. `real_state/evidence-sha256.txt` covers the new experiment, and `real_state/programs.json` records the large generated programs' hashes so the bytecode need not be stored in Git. The new measurements were taken on battery power and are not a third batch of the AC-powered BLAKE3 calibration.
-
-The first separate verification succeeded in Rust but the Python collector failed to recognize a result printed after libtest's progress prefix. Both that attempt and the successful three-path repeat are preserved. `real_state/results/measurement-run.py.txt` preserves the collector before this output-parsing fix; the guest, VM patch, Rust runner, compiled binary, and saved proofs did not change. `verify_artifacts.py` checks the recorded source identities against the appropriate collector version.
-
-## Owner-state figure focus
-
-The September 10 presentation update focuses the report on the authenticated account-and-storage lookup needed for note-owner binding. Figure 1 marks note-commitment opening as context. Figure 2 isolates net anchor instruction overhead, padded commitment size and all nine proving samples. Supplementary Figure S1 retains verification, size and memory measurements. The root README links the earlier calibration as background. Only documentation and figure-generation artifacts changed; the measured programs, saved proofs, raw logs and source-data CSV are unchanged.
-
-## Complete note opening and profiled measurements
-
-The later September 10 implementation under `owner_state/` connects the same address to `H = Keccak256(owner_addr || secret)` and the authenticated account/storage lookup. It adds compiler optimization and an opt-in timing patch in a separate pinned VM checkout. The patch preserves the prover's work and transcript calls, adding exclusive clocks and one output record. The witness and ISA patches remain unchanged. This is a different relation from `real_state/`, whose programs and evidence remain preserved.
-
-`owner_state/CONTRACT.md` records the comparison and analysis choices before measurement. `owner_state/build.json` records the native-target executable and Cargo fingerprint; `owner_state/build/` preserves its build output. Each collection snapshots the exact source files, program metadata, public inputs and hashes. Large generated programs remain reproducible in ignored local directories. The evidence manifest selects the completed collection, separate witness-free verification, negative checks, and hash diagnostics, and hashes the published artifacts. These hashes are integrity checks, not independent attestation.
-
-Two collection attempts were interrupted by AC-to-battery transitions, during measured proofs 1 and 16. A third stopped at the user's request after 20 completed measured proofs. Their records remain under `owner_state/results/`; none supplies the selected estimates. Collection restarted on September 11. The initial smoke proof also succeeded cryptographically but its `/usr/bin/time -l` wrapper failed on a sandboxed resource query, so it is excluded. The first standalone hash diagnostics used a non-native build; later diagnostics use the same native executable as the primary comparison. Each set is retained and distinguished explicitly.
-
-Public statements omit the address and secret, but the pinned backend has no demonstrated zero-knowledge layer. The benchmark publishes its synthetic note secret. The owner-binding result and its timings must not be described as a completed private transaction proof or as a measurement of owner privacy.
-
-The fresh Linux evidence check exposed last-bit differences in regenerated floating-point comparisons. Derived CSV/JSON exports now use twelve significant digits, with a regression check for adjacent floating-point values. Raw measurements, statistical calculations and figure geometry are unchanged.
-
-At the user's request, the entire owner-binding suite ran again sequentially on September 11, from setup and generation through all checks and measurements. `owner_state/repeats/20260911-full-restart/` preserves the orchestration, logs and CPU-idle preflights. Collection `collect-20260911T074413358669Z` was selected; the earlier complete collection remains intact and is not pooled into the new estimates. The executable hash is unchanged. Each timing stage began after three snapshots above 90% CPU idle, but background activity and thermal equilibrium are not guaranteed. Those figures retained all 48 measured proofs and their remaining drift.
-
-The September 11 figure redesign presents the same selected evidence as two main figures and one supporting figure. The main comparison now pairs all 48 observations with the anchor time ratios; compiler comparisons, grouped exclusive phase costs and three timing-drift panels form the supporting figure. Captions define every plotted estimate and interval. This presentation update changes no measured program, proof, raw observation, analysis export or statistical method.
-
-The subsequent presentation simplification uses only the 24 optimized-program measurements, eight per anchor, in the figures and headline table. Compiler-variant rows, connecting lines and optimization-effect panels were removed. The baseline data and comparisons remain in the detailed report and unchanged analysis exports. The selection is consistent across all anchors, and every optimized-program measurement is shown.
-
-## September 15 tenfold expansion
-
-At the user's request, a new batch collected 80 rounds of the three optimized programs, 240 measured proofs plus three warmups. The design, seed and 79-degree-of-freedom paired intervals were fixed in the September 11 expansion contract before this collection. The initial September 11 attempt stopped at preflight with no proofs; that record remains unchanged.
-
-The temporary checkout had disappeared. Recovery restored the exact published Git tree and commit through GitHub, rebuilt the pinned VM to the identical executable hash, restored all exact Python dependency pins, regenerated byte-identical inputs and passed all 52 precollection tests. `owner_state/repeats/20260915-recovery/` records these steps. The September 15 attempt passed three qualifying quiet-AC snapshots and ran sequentially without concurrent local benchmark/build/figure work. All 243 proofs, their tamper checks and all recorded environment checks passed. Three saved proofs verified in fresh witness-free processes. The original 85 altered-witness checks and 200 hash diagnostics are reused, not remeasured, against the same programs and executable.
-
-`collect-20260915T094023087152Z` is now selected. Its source data, 80-pair intervals and figures use all 240 observations without pooling earlier batches or discarding early drift. The earlier eight-round analysis is archived under `owner_state/repeats/20260911-full-restart/analysis/`; its compiler comparison remains explicitly historical. The figures show each anchor's full empirical time distribution, paired anchor contrasts, exclusive mean phases and all 80 chronological measurements per anchor. CPU temperature and frequency remain unmeasured, and within-batch intervals do not establish exact environmental equivalence or broader reproducibility.
-
-A separate post-collection diagnostic records first/last-quarter paired effects and lag-one log-ratio correlations. Positive correlation and changing anchor/direct ratios question the independence premise of the predeclared t intervals. The report and figure identify those intervals as nominal. The diagnostic does not replace the interval method or remove any observations.
+Superseded calibration experiments, exploratory figures and interrupted attempts are available in the [full-history archive](https://github.com/soispoke/leanvm-b-state-anchor-benchmark/tree/archive/full-history-2026-09-15), at commit `f084c33e1902d8f624aeeb025cf90a98b56c2f19`. They are kept out of the current working tree so there is one current benchmark to read and reproduce.

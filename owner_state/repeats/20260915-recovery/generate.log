@@ -1,7 +1,0 @@
-{"variant": "baseline", "mode": "direct", "generation_seconds": 6.320722208999996}
-{"variant": "baseline", "mode": "rlp", "generation_seconds": 6.6774496660000295}
-{"variant": "baseline", "mode": "ssz", "generation_seconds": 6.668414958000085}
-{"variant": "cse_dce", "mode": "direct", "generation_seconds": 9.303019500000119}
-{"variant": "cse_dce", "mode": "rlp", "generation_seconds": 10.260284542000136}
-{"variant": "cse_dce", "mode": "ssz", "generation_seconds": 10.38302504100011}
-Report: /Volumes/PrivateAI/WorkRepos/HardnessVault/prototypes/leanvm-b-state-anchor-benchmark/repository/owner_state/results/generate-20260915T093651868962Z/report.json

@@ -1,3 +1,0 @@
-
-running 1 test
-test real_state_bench::real_state_benchmark ... PHASES {"profile_schema":1,"scope":"cpu_prove_before_logging_and_local_drops","execute_ms":850.251750000,"build_ms":733.499333000,"transcript_setup_ms":0.004500000,"commit_ms":3476.214416000,"bus_ms":6485.893875000,"constraints_ms":366.260792000,"claim_prep_ms":0.020916000,"reduction_ms":8.741500000,"pcs_open_ms":3236.291250000,"finalize_ms":0.025042000,"internal_total_ms":15157.227459000,"internal_residual_ms":0.024085000}

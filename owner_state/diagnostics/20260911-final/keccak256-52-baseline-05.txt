@@ -1,7 +1,0 @@
-
-running 1 test
-test real_state_bench::real_state_benchmark ... RESULT {"action":"execute","cycles":190783,"counts":[151578, 39072, 132, 0, 1, 0],"cells":190782,"mem_used":190782,"assembly_ms":15.982,"execute_ms":11.534}
-ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.03s
-

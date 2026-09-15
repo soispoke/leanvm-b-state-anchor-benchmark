@@ -1,141 +1,63 @@
-# Reproducing the benchmark
+# Verify and reproduce
 
-Run the commands below from this repository's root unless a command explicitly changes directory. The recorded measurements are from September 9, 2026. Checking those records is separate from collecting a new batch.
+Run commands from the repository root. Python 3.13 and the pinned packages below reproduce the analysis and figures. Building the backend additionally requires Git, Rust 1.97.1 and rustfmt. The measured setup is recorded in [provenance](PROVENANCE.md).
 
-## Verify the recorded evidence
-
-Use Python 3.11 or newer:
+## Check the published evidence
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements-lock.txt
-python verify_evidence.py
+python -m pip install -r requirements.txt
+python -m owner_state.verify_artifacts
+python -m owner_state.plot_figures --check
+python -m unittest test_analyze_fixtures -v
+python -m unittest discover -s real_state -p 'test_*.py' -v
+python -m unittest discover -s owner_state -p 'test_*.py' -v
 ```
 
-`requirements.txt` preserves the experiment's two direct dependency pins. `requirements-lock.txt` additionally pins the transitive Python dependencies resolved for this repository's verification environment. The latter is an export-time lock, not a claim about unrecorded original transitive versions.
+The evidence checker validates raw logs, hashes, the collection schedule, environment records, phase accounting and derived data. Figure checking regenerates SVGs without changing the committed artwork. Some optional reference and native-patch tests skip until their dependencies are installed below. No Ethereum RPC request is needed.
 
-Verification uses the saved RPC fixture and does not call Ethereum RPC providers. Regenerated outputs go to temporary directories and are compared with the committed files. File timestamps are ignored because they do not survive Git clones. The PNG copies are checked against their recorded SHA-256 hashes and dimensions; the SVG masters are regenerated from the data.
-
-For individual checks:
+## Regenerate programs and verify saved proofs
 
 ```bash
-python test_analyze_fixtures.py -q
-python analyze_fixtures.py
-python check_artifacts.py
+python -m owner_state.run setup
+python -m owner_state.run generate
+python -m owner_state.verify_artifacts --generated
+python -m owner_state.run verify --run owner_state/results/collect-20260915T094023087152Z
 ```
 
-## Prepare leanVM-b for live runs
+Setup checks out pinned leanVM-b, validates its Cargo lock and patches, then builds the profiled runner. `generate` defaults to the three measured `cse_dce` programs. Regenerated program, public-input and witness bytes must match the recorded hashes. Each saved proof is verified in a fresh directory containing only the program, public input and proof. Building and verification are portable; timings depend on the machine and toolchain.
 
-The recorded environment was Apple M5 Max, 128 GB RAM, macOS 26.5, Homebrew Rust and Cargo 1.97.1, and 11 Rayon workers on AC power. Exact compiler details and source hashes appear at the beginning of both timing transcripts. Other machines and toolchains can produce different timings.
-
-Clone the pinned upstream source into an ignored directory:
+For all independent reference and instrumentation checks:
 
 ```bash
-mkdir -p vendor
-git clone https://github.com/leanEthereum/leanVM-b.git vendor/leanVM-b
-git -C vendor/leanVM-b checkout --detach 8494c5d5df323f2b97ed89272942a4bee6247078
-python - <<'PY'
-from pathlib import Path
-import hashlib
-expected = "0c60e536366da5198d5536c3fdade9a7f20d48d070ee3093758f4b73712a2bf6"
-actual = hashlib.sha256(Path("vendor/leanVM-b/Cargo.lock").read_bytes()).hexdigest()
-if actual != expected:
-    raise SystemExit(f"Cargo.lock mismatch: {actual}")
-print("Pinned Cargo.lock verified")
-PY
-rustc -Vv
-cargo -V
+git clone https://github.com/ethereum/remerkleable.git local-runs/remerkleable
+git -C local-runs/remerkleable checkout --detach 2f0baeef0082d4278acaef7d822deb7009d7db7e
+PYTHONPATH=local-runs/remerkleable python -m unittest discover -s real_state -p 'test_*.py' -v
+python -m real_state.run setup
+cargo test --manifest-path vendor/leanVM-b/Cargo.toml --locked --release --test real_state_bench
+python -m unittest discover -s owner_state -p 'test_*.py' -v
 ```
 
-The pinned upstream tree includes its local `vendor/flock-core`, `vendor/flock-prover`, and `xmss` dependencies. Cargo downloads the remaining dependencies according to its committed lock. Install Rust separately and select the recorded toolchain if matching the original setup is your goal.
+The separate unprofiled checkout supplies the reference for instrumentation tests. The [CI workflow](.github/workflows/verify.yml) runs these checks and verifies saved proofs on Linux; it does not collect comparison timings.
 
-Execute all 24 structural calibration programs:
+## Collect a new batch
+
+Use macOS, AC power and enough free memory for a process footprint of about 42 GiB. Finish setup and generation first, then leave the machine free of other demanding work during collection:
 
 ```bash
-cp usecase_hash_bench.rs vendor/leanVM-b/tests/usecase_hash_bench.rs
-(
-  cd vendor/leanVM-b
-  RAYON_NUM_THREADS=11 cargo test --locked --release --test usecase_hash_bench -- --nocapture --test-threads=1
-)
+python -m owner_state.collect
 ```
 
-This runs real leanVM-b proving, verification, and tamper checks for the counted serial hash programs. It does not implement Ethereum proof semantics inside the VM.
+The collector waits for three consecutive CPU-idle snapshots of at least 90% on AC, records the complete schedule, and runs one warmup per anchor followed by 80 randomized rounds with 11 workers. It verifies saved proofs after collection. Each attempt has a unique record under `local-runs/collections/`; proof logs and reports go to a new `owner_state/results/` directory. Failed and interrupted attempts are retained, and no measured observation is discarded.
 
-## Collect a new timing batch
+The collector requires the published guest programs and inputs. It records the local executable and enforces a single build throughout the batch; rebuilding on another machine need not reproduce the published executable hash. Compare results as a separate batch. CPU temperature and frequency are unmeasured, and preflight checks do not guarantee constant load throughout collection.
 
-The original collector is preserved unchanged because its hash is recorded in both batches. It invokes macOS `system_profiler` and `pmset`, so use macOS for this command. The fixture and evidence checks are portable. Put new results under `local-runs/` to preserve the published evidence:
+Use the collection path printed in the attempt record to analyze new results without overwriting published outputs:
 
 ```bash
-mkdir -p local-runs/new-batch
-python run_timings.py vendor/leanVM-b \
-  --sessions 6 --repeats 10 --warmups 3 --threads 11 \
-  --output local-runs/new-batch/timing-raw.txt
-python - <<'PY'
-from pathlib import Path
-import analyze_timings
-analyze_timings.RAW = Path("local-runs/new-batch/timing-raw.txt")
-analyze_timings.OUTPUT = Path("local-runs/new-batch/timing-results.csv")
-analyze_timings.main()
-PY
+python -m owner_state.analyze --run owner_state/results/YOUR_COLLECTION --output local-runs/new-analysis
+python -m owner_state.plot_figures --run owner_state/results/YOUR_COLLECTION --output local-runs/new-figures
 ```
 
-The collector checks the upstream commit, refuses tracked upstream changes, uses `cargo --locked`, and verifies that the dependency lock is unchanged. It creates an untracked test wrapper in the leanVM-b checkout. Its default output would overwrite the original transcript, so keep the explicit `--output` above.
-
-Keep AC power and the recorded settings fixed when comparing with the saved batches. Record temperature, CPU frequency, system load, and power mode separately if you need evidence about those conditions. The original collector does not capture them. Repeating a setup cannot guarantee identical ambient conditions or wall clock results.
-
-To analyze the saved repeat in isolation without overwriting it:
-
-```bash
-mkdir -p local-runs/reanalysis
-python - <<'PY'
-from pathlib import Path
-import analyze_timings
-analyze_timings.RAW = Path("reruns/2026-09-09-independent-repeat/timing-raw.txt")
-analyze_timings.OUTPUT = Path("local-runs/reanalysis/timing-results.csv")
-analyze_timings.main()
-PY
-```
-
-## Regenerate figures
-
-SVG generation uses only the Python standard library:
-
-```bash
-python make_figures.py
-```
-
-PNG export needs Chrome, Chromium, or Brave. Alternatively, install Node.js and the `sharp` package locally (`npm install --no-save --package-lock=false sharp`):
-
-```bash
-python render_figures.py
-```
-
-For a separately installed Sharp package, set `SHARP_NODE` to the Node executable and `SHARP_MODULE` to the package directory. PNG rendering can vary with renderer and installed fonts. The recorded PNGs are included for sharing; regenerating a different rasterization will intentionally fail the evidence hash check until an explicitly documented new artifact is added.
-
-Generate the repeat's SVG into an ignored output directory:
-
-```bash
-mkdir -p local-runs/repeat-figure
-python - <<'PY'
-from pathlib import Path
-import make_figures
-make_figures.TIMING_RAW = Path("reruns/2026-09-09-independent-repeat/timing-raw.txt")
-make_figures.TIMING_RESULTS = Path("reruns/2026-09-09-independent-repeat/timing-results.csv")
-make_figures.FIGURES = Path("local-runs/repeat-figure")
-make_figures.make_timing_figure()
-PY
-```
-
-## Earlier 400-chain calibration
-
-The older harness combines representative paths in a serial chain. Its three samples per program are sanity checks and should not be substituted for the repeated timing experiment:
-
-```bash
-cp state_anchor_bench.rs vendor/leanVM-b/tests/state_anchor_bench.rs
-(
-  cd vendor/leanVM-b
-  RAYON_NUM_THREADS=11 STATE_ANCHOR_BATCH=400 STATE_ANCHOR_REPEAT=3 \
-    cargo test --locked --release --test state_anchor_bench -- --nocapture
-)
-```
+To regenerate the published artwork, run `python -m owner_state.plot_figures`. Numeric exports use twelve significant digits for deterministic comparisons; raw logs retain their original precision. PDF and PNG encoding may differ across platforms.

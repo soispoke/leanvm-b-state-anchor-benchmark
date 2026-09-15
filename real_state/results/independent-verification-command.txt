@@ -1,3 +1,0 @@
-{"exit_code": 0, "process_seconds": 1.2258338749998074, "memory_measurement": null, "log": "direct-01-verify.log", "result": null, "rejection": null, "verifier_files": ["program.bin", "proof.bin", "public.bin"], "proof_sha256": "14503543d4674e52d87a0cc4f69486112b65af750b312b2c5e73b01aaed16657", "mode": "direct", "repeat": 1, "mutation": null, "passed": false}
-Report: /private/tmp/leanvm-b-state-anchor-benchmark-publish-20260910/real_state/results/verify-20260910T084013381207Z/report.json
-direct verify failed; see /private/tmp/leanvm-b-state-anchor-benchmark-publish-20260910/real_state/results/verify-20260910T084013381207Z/direct-01-verify.log

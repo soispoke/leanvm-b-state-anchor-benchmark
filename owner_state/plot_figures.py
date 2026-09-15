@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import argparse
 import math
+import json
 from pathlib import Path
 import statistics as st
 import tempfile
@@ -17,7 +18,6 @@ from matplotlib.patches import FancyArrowPatch, Patch, Rectangle
 from matplotlib.ticker import MaxNLocator
 
 from owner_state.analyze import HERE, MODES, analyze
-from real_state.plot_figures import export as export_base
 
 MM = 1 / 25.4
 WIDTH = 180
@@ -27,6 +27,7 @@ NAMES = ('Direct state root', 'RLP block hash', 'SSZ summary*')
 STEMS = ('figure-1-owner-binding', 'figure-2-proving-results', 'figure-3-cost-breakdown')
 plt.rcParams.update({
     'font.family': ['DejaVu Sans', 'sans-serif'], 'font.size': 7,
+    'axes.titlesize': 7, 'hatch.linewidth': .4,
     'axes.labelsize': 7, 'xtick.labelsize': 7, 'ytick.labelsize': 7,
     'text.color': INK, 'axes.labelcolor': INK,
     'xtick.color': INK, 'ytick.color': INK,
@@ -36,6 +37,28 @@ plt.rcParams.update({
     'pdf.fonttype': 42, 'ps.fonttype': 42,
     'savefig.facecolor': 'white', 'figure.facecolor': 'white',
 })
+
+
+def export_base(fig, path, description):
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    width, height = fig.canvas.get_width_height()
+    for text in fig.findobj(matplotlib.text.Text):
+        if not text.get_visible() or not text.get_text():
+            continue
+        box = text.get_window_extent(renderer)
+        if box.x0 < -1 or box.y0 < -1 or box.x1 > width+1 or box.y1 > height+1:
+            raise ValueError(f'Text exceeds figure bounds: {text.get_text()!r}')
+    fig.savefig(path.with_suffix('.svg'), metadata={'Date': None, 'Description': description})
+    # Matplotlib leaves trailing spaces in multiline SVG path attributes.
+    svg = path.with_suffix('.svg')
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
+    fig.savefig(path.with_suffix('.pdf'), metadata={
+        'Title': description, 'Creator': 'owner_state.plot_figures; Matplotlib',
+        'CreationDate': None, 'ModDate': None,
+    })
+    fig.savefig(path.with_suffix('.png'), dpi=600, metadata={'Description': description})
+    plt.close(fig)
 
 
 def figure(height):
@@ -246,7 +269,8 @@ def costs(destination, samples, summary):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--run', type=Path, required=True)
+    parser.add_argument('--run', type=Path, default=HERE.parent / json.loads(
+        (HERE/'evidence.json').read_text())['reports']['collect'])
     parser.add_argument('--output', type=Path, default=HERE/'figures')
     parser.add_argument('--check', action='store_true')
     args=parser.parse_args()

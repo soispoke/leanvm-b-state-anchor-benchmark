@@ -20,7 +20,7 @@ def environment(power='AC Power', mode='2'):
 
 class SchedulingTests(unittest.TestCase):
     def test_six_conditions_have_balanced_positions_and_predecessors(self):
-        conditions = [f'{v}/{m}' for v in run.DEFAULT_VARIANTS for m in run.MODES]
+        conditions = [f'{v}/{m}' for v in ('baseline', 'cse_dce') for m in run.MODES]
         warmup, orders = run.balanced_orders(conditions, 8, 1, 20260910)
         self.assertEqual(len(warmup), 1)
         self.assertEqual(sorted(warmup[0]), sorted(conditions))
