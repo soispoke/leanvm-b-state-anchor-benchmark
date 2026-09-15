@@ -1,0 +1,26 @@
+
+running 1 test
+test real_state_bench::real_state_benchmark ... PHASES {"profile_schema":1,"scope":"cpu_prove_before_logging_and_local_drops","execute_ms":780.905375000,"build_ms":697.721125000,"transcript_setup_ms":0.004792000,"commit_ms":1888.654042000,"bus_ms":2107.103792000,"constraints_ms":412.017709000,"claim_prep_ms":0.015792000,"reduction_ms":2.257000000,"pcs_open_ms":1106.637291000,"finalize_ms":0.007125000,"internal_total_ms":6995.353250000,"internal_residual_ms":0.029207000}
+RESULT {"action":"prove","cycles":8462089,"counts":[6722637, 1739319, 132, 0, 1, 0],"cells":8456073,"mem_used":8456073,"log_mem":24,"committed":207621052,"proof_bytes":835712,"assembly_ms":1045.274,"prove_including_execute_ms":7097.725,"verify_ms":299.722,"negative_checks_ms":179.664,"wrong_public_rejected":true,"mutated_proof_rejected":true}
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 8.62s
+
+        8.73 real        35.73 user        10.86 sys
+         44140478464  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             3415740  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+              164303  involuntary context switches
+        601595411449  instructions retired
+        193056700499  cycles elapsed
+         44160155328  peak memory footprint

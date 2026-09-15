@@ -72,7 +72,7 @@ jobs:
         run: |
           python -m owner_state.run setup
           python -m unittest owner_state.test_instrumentation -v
-      - name: Regenerate owner-binding inputs and verify all six saved proofs
+      - name: Regenerate owner-binding inputs and verify the selected saved proofs
         run: |
           python -m owner_state.run generate --variants baseline cse_dce
           python -m owner_state.verify_artifacts --generated

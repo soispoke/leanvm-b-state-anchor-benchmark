@@ -10,26 +10,26 @@ The fixture is a Safe account's slot 0 at mainnet block **25,939,968**. Its sing
 
 ## Results
 
-**Both block anchors add about 10% proving time over a direct state root; an SSZ advantage over RLP is unresolved.** With the optimized compiler, the paired changes are +10.4% for RLP (95% within-batch interval +6.6 to +14.4%) and +10.3% for SSZ (+7.0 to +13.7%).
+**Both block anchors add about 9% proving time over a direct state root; an SSZ advantage over RLP is unresolved.** With 80 measurements per anchor, the paired changes are +9.1% for RLP (95% within-batch interval +8.6 to +9.6%) and +8.8% for SSZ (+8.2 to +9.5%).
 
-The table and figures show **all 24 measured runs of the optimized programs**, eight per anchor. The compiler cleanup is applied consistently across anchors; the [full compiler comparison](owner_state/README.md#what-was-optimized) remains available.
+The table and figures show **all 240 measured runs of the optimized programs**, 80 per anchor, ten times the earlier sample count. The compiler cleanup is applied consistently across anchors; the [full compiler comparison](owner_state/README.md#what-was-optimized) remains available.
 
-| Anchor | Median proving time | Paired change vs direct state (95% interval) |
+| Anchor | Median proving time | Paired change vs direct state (nominal 95% interval) |
 | --- | ---: | ---: |
-| Direct state root | 6.51 s | Reference |
-| RLP block hash | 7.31 s | +10.4% [+6.6, +14.4] |
-| SSZ summary* | 7.19 s | +10.3% [+7.0, +13.7] |
+| Direct state root | 6.41 s | Reference |
+| RLP block hash | 7.05 s | +9.1% [+8.6, +9.6] |
+| SSZ summary* | 7.03 s | +8.8% [+8.2, +9.5] |
 
-The complete September 11 restart contains **48 measured proofs across eight randomized blocks**, plus six warmups, on an Apple M5 Max with eleven Rayon workers and AC power. All proofs verified. Observations span **6.32–8.29 s**, with residual drift during the batch; the intervals describe paired differences within this batch, not general machine variability.
+The September 15 collection contains **240 measured proofs across 80 randomized rounds**, plus three warmups, on an Apple M5 Max with eleven Rayon workers and AC power. All proofs verified, and all recorded environment checks passed. Observations span **6.13–7.96 s**, with visible early drift; the intervals describe paired differences within this batch, not general machine variability. The earlier eight-round batch remains separate. The paired ratios also change over the run: early and late quarters give different overheads. The narrow t intervals assume independent rounds, so their nominal coverage is not established by this batch.
 
-All stages ran sequentially, after CPU-idle checks and with no concurrent local benchmark work. [Restart record](owner_state/repeats/20260911-full-restart/README.md).
+Collection ran sequentially after three qualifying CPU-idle checks, with no concurrent local benchmark, build or figure work. The binary, generated programs and inputs match the September 11 setup byte for byte. [Expanded-batch record](owner_state/repeats/20260911-80-rounds/README.md).
 
-For optimized programs, mean VM execution is **0.44–0.79 s** and witness construction **0.64–0.78 s**. The remaining **79–84%** of complete proving time is proof work and cleanup. Keccak and SHA account for **98.6–98.8% of guest instructions**, but their proof-construction costs cannot be separated by subtracting standalone hash timings.
+Mean VM execution is **0.43–0.77 s** and witness construction **0.58–0.71 s**. The remaining **79–84%** of complete proving time is proof work and cleanup. Keccak and SHA account for **98.6–98.8% of guest instructions**, but their proof-construction costs cannot be separated by subtracting standalone hash timings.
 
-*The SSZ summary is hypothetical and retains the same Keccak state tries. A secondary paired SSZ/RLP comparison also does not establish an SSZ timing advantage.
+*The SSZ summary is hypothetical and retains the same Keccak state tries. The secondary SSZ/RLP comparison is **−0.27% [−0.64%, +0.11%]**: this batch does not resolve a difference or establish equivalence.
 
 
-![All 24 optimized-program proof times and paired comparisons between the three anchors](owner_state/figures/figure-2-proving-results.png)
+![All 240 optimized-program proof times and paired comparisons between the three anchors](owner_state/figures/figure-2-proving-results.png)
 
 The supporting figure explains proof costs and remaining timing drift.
 

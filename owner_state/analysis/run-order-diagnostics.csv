@@ -1,0 +1,4 @@
+numerator,denominator,pairs,quarter_size,first_quarter_change_pct,last_quarter_change_pct,lag1_log_ratio_correlation
+cse_dce/rlp,cse_dce/direct,80,20,6.75348641435,10.2128445289,0.439393414874
+cse_dce/ssz,cse_dce/direct,80,20,6.2305783464,10.3288828753,0.336447837605
+cse_dce/ssz,cse_dce/rlp,80,20,-0.489827625784,0.105285683246,-0.183404527295

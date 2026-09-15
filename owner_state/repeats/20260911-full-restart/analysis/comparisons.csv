@@ -1,0 +1,10 @@
+comparison,numerator,denominator,pairs,ratio,ci95_low,ci95_high
+optimization,cse_dce/direct,baseline/direct,8,0.993276843895,0.969184244687,1.01796835228
+optimization,cse_dce/rlp,baseline/rlp,8,0.985013128872,0.959263109923,1.01145436952
+optimization,cse_dce/ssz,baseline/ssz,8,0.996250088691,0.969728975204,1.02349652799
+anchor,baseline/rlp,baseline/direct,8,1.11331189049,1.07045157002,1.15788831575
+anchor,baseline/ssz,baseline/direct,8,1.09946122453,1.07141937206,1.12823700577
+ssz_vs_rlp_secondary,baseline/ssz,baseline/rlp,8,0.987559042465,0.964932839275,1.01071579561
+anchor,cse_dce/rlp,cse_dce/direct,8,1.10404952597,1.065807762,1.14366342529
+anchor,cse_dce/ssz,cse_dce/direct,8,1.10275231844,1.06981236162,1.1367065099
+ssz_vs_rlp_secondary,cse_dce/ssz,cse_dce/rlp,8,0.998825045886,0.963276874416,1.035685065

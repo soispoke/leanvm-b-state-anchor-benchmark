@@ -10,30 +10,30 @@ This experiment opens `H = Keccak256(owner_addr || secret)` and authenticates th
 
 The complete measurement table and figures are generated from the collection selected in [evidence.json](evidence.json). The original [state-lookup measurements](../real_state/README.md) remain preserved as an earlier, different relation.
 
-**Both block anchors add about 10% proving time over a direct state root; the SSZ/RLP difference remains unresolved.** The table and figures use all 24 optimized-program measurements, eight per anchor. Baseline results are retained under [What was optimized](#what-was-optimized).
+**Both block anchors add about 9% proving time over a direct state root; the SSZ/RLP difference remains unresolved.** The table and figures use all 240 optimized-program measurements, 80 per anchor. The earlier paired compiler comparison is retained under [What was optimized](#what-was-optimized).
 
-| Anchor | Median proving time | Paired change vs direct state (95% interval) |
+| Anchor | Median proving time | Paired change vs direct state (nominal 95% interval) |
 | --- | ---: | ---: |
-| Direct state root | 6.51 s | Reference |
-| RLP block hash | 7.31 s | +10.4% [+6.6, +14.4] |
-| SSZ summary* | 7.19 s | +10.3% [+7.0, +13.7] |
+| Direct state root | 6.41 s | Reference |
+| RLP block hash | 7.05 s | +9.1% [+8.6, +9.6] |
+| SSZ summary* | 7.03 s | +8.8% [+8.2, +9.5] |
 
-The complete September 11 restart contains **48 measured proofs across eight randomized blocks**, plus six warmups, on an Apple M5 Max with eleven Rayon workers and AC power. All proofs verified. Observations span **6.32–8.29 s**, with residual drift during the batch; the intervals describe paired differences within this batch, not general machine variability.
+The September 15 collection contains **240 measured proofs across 80 randomized rounds**, plus three warmups, on an Apple M5 Max with eleven Rayon workers and AC power. All proofs verified, and all recorded environment checks passed. Observations span **6.13–7.96 s**, with visible early drift; the intervals describe paired differences within this batch, not general machine variability. The earlier eight-round batch remains separate. The paired ratios also change over the run: early and late quarters give different overheads. The narrow t intervals assume independent rounds, so their nominal coverage is not established by this batch.
 
-For optimized programs, mean VM execution is **0.44–0.79 s** and witness construction **0.64–0.78 s**. The remaining **79–84%** of complete proving time is proof work and cleanup. Keccak and SHA account for **98.6–98.8% of guest instructions**, but their proof-construction costs cannot be separated by subtracting standalone hash timings.
+Mean VM execution is **0.43–0.77 s** and witness construction **0.58–0.71 s**. The remaining **79–84%** of complete proving time is proof work and cleanup. Keccak and SHA account for **98.6–98.8% of guest instructions**, but their proof-construction costs cannot be separated by subtracting standalone hash timings.
 
-*The SSZ summary is hypothetical and retains the same Keccak state tries. A secondary paired SSZ/RLP comparison also does not establish an SSZ timing advantage.
+*The SSZ summary is hypothetical and retains the same Keccak state tries. The secondary SSZ/RLP comparison is **−0.27% [−0.64%, +0.11%]**: this batch does not resolve a difference or establish equivalence.
 
 
 ### Optimized phase costs
 
-Arithmetic means in seconds; rows add to the complete prove call.
+Arithmetic means in seconds; the unrounded phases add to the complete prove call.
 
 | Anchor | Execution | Witness build | Remaining prove work and cleanup | Complete prove call |
 | --- | ---: | ---: | ---: | ---: |
-| Direct state root | 0.443 | 0.644 | 5.607 | 6.694 |
-| RLP block hash | 0.790 | 0.780 | 5.812 | 7.382 |
-| SSZ summary* | 0.791 | 0.777 | 5.813 | 7.380 |
+| Direct state root | 0.427 | 0.584 | 5.463 | 6.475 |
+| RLP block hash | 0.774 | 0.707 | 5.580 | 7.061 |
+| SSZ summary* | 0.773 | 0.705 | 5.563 | 7.042 |
 
 ### Proof size and process memory
 
@@ -41,13 +41,13 @@ Verification medians below are measured immediately after proving. Independent w
 
 | Anchor | Proof bytes | Median verification | Maximum peak footprint |
 | --- | ---: | ---: | ---: |
-| Direct state root | 834,752 | 148.8 ms | 38.77 GiB |
-| RLP block hash | 835,712 | 301.6 ms | 42.07 GiB |
-| SSZ summary* | 836,384 | 296.4 ms | 41.70 GiB |
+| Direct state root | 834,752 | 152.1 ms | 38.78 GiB |
+| RLP block hash | 835,712 | 299.5 ms | 41.22 GiB |
+| SSZ summary* | 836,384 | 299.3 ms | 41.27 GiB |
 
-All 54 proofs passed their public-input and serialized-proof tamper checks. The six saved proofs also verified in fresh processes containing no witness files. All 85 altered-witness checks and 49 native/compiler/measurement tests passed. [Raw evidence and source hashes](evidence.json) preserve these checks.
+All 243 proofs passed their public-input and serialized-proof tamper checks. Three saved proofs, one per anchor, also verified in fresh processes containing no witness files. All 52 precollection tests passed after regeneration. The 85 altered-witness checks from September 11 are reused against byte-identical programs. [Raw evidence and source hashes](evidence.json) preserve these checks.
 
-![All 24 optimized-program proof times and paired anchor comparisons](figures/figure-2-proving-results.png)
+![All 240 optimized-program proof times and paired anchor comparisons](figures/figure-2-proving-results.png)
 
 ![Supporting figure: proof costs and observed timing drift](figures/figure-3-cost-breakdown.png)
 
@@ -68,7 +68,7 @@ All canonical RLP checks, secure trie key hashing, account and storage traversal
 
 ## What was optimized
 
-**Hash optimization removes 1.08–1.22% of instructions, but a proving-speed improvement is not established.** Every optimization interval includes no change. Positive timing changes below mean slower.
+**Hash optimization removes 1.08–1.22% of instructions, but a proving-speed improvement was not established in the September 11 compiler comparison.** The table below belongs to that earlier eight-round batch; it is not pooled with the new 80-round anchor comparison. Every optimization interval includes no change. Positive timing changes mean slower. [Earlier analysis](repeats/20260911-full-restart/analysis/summary.json).
 
 | Anchor | Baseline median | Optimized median | Paired time change (95% interval) |
 | --- | ---: | ---: | ---: |
@@ -84,19 +84,19 @@ Adding the note commitment also changes the comparison with the earlier state-on
 
 ## Measurements and interpretation
 
-The [experiment contract](CONTRACT.md) fixed the analysis before collection. Each of six conditions has one warmup in a fresh process and eight measured fresh processes. Eight blocks cover all conditions in randomized Williams order: one complete six-row balanced cycle and two rows of a second cycle. Every measured sample is retained. The user requested this complete restart before its timing outcome was known. The earlier completed batch remains preserved and is not pooled into these estimates.
+The [expanded experiment contract](CONTRACT.md#september-11-expansion-80-rounds-of-the-selected-programs) fixed the 80-round design before collection. Each of three optimized anchor programs has one fresh-process warmup and 80 measured fresh processes. Seed `20260911` fixes randomized Williams order with forward and reverse rows: thirteen complete six-round cycles and two additional rows. Every measurement is retained. The native executable, programs, public inputs, witness files and metadata match the earlier collection byte for byte. Earlier batches are preserved and are not pooled into these estimates.
 
 The machine is an Apple M5 Max with 128 GiB RAM, running macOS 26.5, Rust 1.97.1, eleven Rayon workers and recorded AC power. The pinned upstream Cargo configuration builds with `-C target-cpu=native`; [build.json](build.json) records the executable, dependency lock, patches and build fingerprint. The collector records power source/settings, load, hardware, toolchain and thermal-warning status before and after every proof. CPU temperature and frequency are **not measured**, and stable settings do not imply constant environmental conditions.
 
 Two initial batches stopped when power changed from AC to battery, during measured proofs 1 and 16 respectively. A third batch was stopped at the user's request after 20 completed measured proofs. All three attempts remain preserved, including completed proofs and warmups. None enters the selected timing estimates. The first complete September 11 batch is also retained as earlier evidence. At the user's request, the entire suite then restarted: setup, generation, native tests, malformed-witness checks, hash diagnostics, all proof warmups/measurements and witness-free verification. The restart uses the same executable and predeclared schedule.
 
-The [restart log](repeats/20260911-full-restart/README.md) records sequential execution with no concurrent local builds, diagnostics or figure generation during proof collection. Each timing stage required three consecutive snapshots at least 90% CPU idle on AC power, spaced by 20 seconds plus probe time. Immediately before the proofs, CPU idle was 92.3%, 91.0% and 92.5%. This controls our workload, not every macOS background process or thermal state. Block mean proving time still ranges from 6.88 to 7.84 seconds, so exact equal load is not claimed.
+The [September 15 attempt](repeats/20260911-80-rounds/attempt-20260915T093856598597Z/experiment.json) records sequential collection with no concurrent local builds, diagnostics or figure generation. Its last three preflight snapshots were 90.6%, 92.0% and 92.2% CPU idle on AC, spaced by 20 seconds plus probe time. Collection took about 34 minutes. This controls our workload, not every macOS background process or thermal state. Round mean proving times range from 6.53 to 7.69 seconds, with visible early drift. Exact equal load is not claimed, and no early observations were discarded.
 
 The primary timer covers the complete `prove()` call, including VM execution, witness-table construction, proof construction and return cleanup. Program loading/assembly and verification are timed separately. Witness loading and serialization are outside the prove timer and have no separate timers. The [profiling patch](profile.patch) adds exclusive phase clocks and prints once after internal timing ends. Its work and transcript operations otherwise retain their original order. Phase stacks use arithmetic means so they sum to the mean outer time; absolute headline times use medians.
 
-Each optimization or anchor/direct comparison pairs observations by block. The SSZ/RLP comparisons remain secondary: they were introduced after the earlier batch and retained before this restart, using the same pairing and interval method. The reported ratio is the geometric mean of eight time ratios. Its 95% Student-t interval is computed on their logarithms with seven degrees of freedom. These **within-batch, exploratory, unadjusted** intervals assume approximately independent, normally distributed block log ratios. They do not estimate variability across machines or independent batches, and an interval spanning no change does not establish equivalence.
+Each optimization or anchor/direct comparison pairs observations by block. The SSZ/RLP comparisons remain secondary: they were introduced after the earlier batch and retained before this restart, using the same pairing and interval method. The new anchor ratios are geometric means of 80 within-round time ratios, with 95% Student-t intervals on their logarithms and 79 degrees of freedom. The historical compiler comparisons retain eight pairs and seven degrees of freedom. These **within-batch, exploratory, unadjusted** intervals assume approximately independent, normally distributed block log ratios. They do not estimate variability across machines or independent batches, and an interval spanning no change does not establish equivalence. A post-collection [run-order diagnostic](analysis/run-order-diagnostics.csv) finds lag-one correlations of 0.44 for RLP/direct and 0.34 for SSZ/direct. Their first-20 versus last-20 geometric mean overheads are 6.75% versus 10.21%, and 6.23% versus 10.33%, respectively. This descriptive check questions the independence assumption; the original intervals remain reported as nominal, without replacing the analysis or discarding observations. The SSZ/RLP first and last quarter changes are −0.49% and +0.11%. More measurements make the batch better described, but do not by themselves establish its interval coverage.
 
-Hashing is attributed by exact retained instruction counts, with [200 standalone execution diagnostics](diagnostics/20260911-full-restart/report.json) covering every actual hash input length, both selected implementations and the hybrid SHA candidate. Those diagnostics use the same native executable as the selected proof batch, but record environment at batch endpoints rather than per sample. They include witness Booleanity and public-output binding. They are not additive proving costs and are never subtracted from complete proofs: shared tables, padding and polynomial commitments make such subtraction invalid. The earlier non-native diagnostic batch is retained separately.
+Hashing is attributed by exact retained instruction counts, with [200 standalone execution diagnostics](diagnostics/20260911-full-restart/report.json) covering every actual hash input length, both selected implementations and the hybrid SHA candidate. Those September 11 diagnostics are reused, not remeasured. They use the same native executable as the selected proof batch, but record environment at batch endpoints rather than per sample. They include witness Booleanity and public-output binding. They are not additive proving costs and are never subtracted from complete proofs: shared tables, padding and polynomial commitments make such subtraction invalid. The earlier non-native diagnostic batch is retained separately.
 
 ## Validation and reproduction
 
@@ -107,26 +107,22 @@ python -m owner_state.verify_artifacts
 python -m unittest discover -s owner_state -p 'test_*.py' -v
 ```
 
-The recorded Rust installation must include `rustfmt` for the patch syntax check (with rustup: `rustup component add rustfmt --toolchain 1.97.1`). With that version installed, regenerate the programs and cryptographically verify the six saved proofs in fresh directories containing only the program, public input and proof:
+The recorded Rust installation must include `rustfmt` for the patch syntax check (with rustup: `rustup component add rustfmt --toolchain 1.97.1`). With that version installed, regenerate the programs and cryptographically verify the three saved proofs in fresh directories containing only the program, public input and proof:
 
 ```bash
 python -m owner_state.run setup
 python -m owner_state.run generate --variants baseline cse_dce
 python -m owner_state.verify_artifacts --generated
-python -m owner_state.run verify --run owner_state/results/collect-20260911T074413358669Z
+python -m owner_state.run verify --run owner_state/results/collect-20260915T094023087152Z
 ```
 
 `evidence.json` supplies the selected collection path. Setup uses a separate `vendor/leanVM-b-profiled` checkout and leaves the original baseline checkout intact. Generated binaries and programs stay in ignored local directories. The preserved proofs are under the selected collection's `proofs/` directory.
 
-To collect a new batch on macOS with ample memory and AC power:
+To repeat the 80-round anchor comparison on macOS with ample memory and AC power, first regenerate and validate the programs as above, then use the orchestrator. It enforces the original binary/input identities and quiet-load preflight:
 
 ```bash
-python -m owner_state.run negative --variant cse_dce
-OWNER_BENCH_BIN="$(python -c 'import json; print(json.load(open("local-runs/owner-state/runner.json"))["binary"])')"
-python -m owner_state.microbench --binary "$OWNER_BENCH_BIN" --output local-runs/new-hash-diagnostics
-python -m owner_state.run collect --blocks 8 --warmups 1 --variants baseline cse_dce
-python -m owner_state.run verify --run owner_state/results/YOUR_COLLECTION
-python -m owner_state.analyze --run owner_state/results/YOUR_COLLECTION --diagnostics local-runs/new-hash-diagnostics --output local-runs/new-analysis
+python owner_state/repeats/20260911-80-rounds/orchestrate.py
+python -m owner_state.analyze --run owner_state/results/YOUR_COLLECTION --output local-runs/new-analysis
 python -m pip install -r real_state/figure-requirements.txt
 python -m owner_state.plot_figures --run owner_state/results/YOUR_COLLECTION --output local-runs/new-figures
 ```

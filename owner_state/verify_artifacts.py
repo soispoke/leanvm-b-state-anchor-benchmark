@@ -54,6 +54,11 @@ def check(*, generated=False):
     for name, text in products(inside(ROOT, manifest['reports']['collect']),diagnostics).items():
         if (HERE/'analysis'/name).read_text() != text:
             raise ValueError(f'derived analysis differs: {name}')
+    if 'run_order_diagnostics' in manifest:
+        from owner_state.run_order_diagnostics import products as run_order_products
+        if inside(ROOT, manifest['run_order_diagnostics']).read_text() != run_order_products(
+                inside(ROOT, manifest['reports']['collect'])):
+            raise ValueError('run-order diagnostics differ from the selected collection')
     micro = json.loads((diagnostics/'report.json').read_text())
     if len(micro['runs']) != 200 or len(micro['cases']) != 25:
         raise ValueError('incomplete standalone hash diagnostics')

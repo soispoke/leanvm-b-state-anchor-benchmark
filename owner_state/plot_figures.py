@@ -14,6 +14,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, Patch, Rectangle
+from matplotlib.ticker import MaxNLocator
 
 from owner_state.analyze import HERE, MODES, analyze
 from real_state.plot_figures import export as export_base
@@ -77,6 +78,13 @@ def measured_rows(samples, mode, variant):
                   key=lambda row: row['block'])
 
 
+def measurement_count(summary):
+    counts = {summary['conditions'][f'cse_dce/{mode}']['n'] for mode in MODES}
+    if len(counts) != 1:
+        raise ValueError('anchor sample counts differ')
+    return counts.pop()
+
+
 def schematic(destination):
     fig = figure(139)
     ax = fig.add_axes([0, 0, 1, 1], xlim=(0, WIDTH), ylim=(0, 139))
@@ -123,46 +131,35 @@ def schematic(destination):
 
 
 def proving(destination, samples, summary):
+    n = measurement_count(summary)
     fig = figure(136)
-    title(fig, 'a', 'Proving time for the same note-owner claim', 129)
-    text(fig, 11, 122.5, '24 measured proofs: 8 per anchor. Dots are runs; black ticks mark medians.', color=MUTED)
-    text(fig, 6, 113, 'Anchor', bold=True)
-    text(fig, 165, 113, 'Median (s)', bold=True, ha='center')
-    a = axes(fig, (50, 77, 97, 30))
-    a.spines['left'].set_visible(False)
-    a.tick_params(axis='y', left=False, labelleft=False)
+    title(fig, 'a', 'Distribution of complete proving times', 129)
+    text(fig, 11, 122.5, f'All {3*n} measured proofs: {n} per anchor. Each curve includes every run.', color=MUTED)
     times = [row['prove_s'] for row in samples
              if row['kind']=='measured' and row['variant']=='cse_dce']
-    time_lo = math.floor((min(times)-.15)*2)/2
-    time_hi = math.ceil((max(times)+.15)*2)/2
-    a.set(xlim=(time_lo, time_hi+.1), ylim=(-.5, 2.5),
-          xticks=[time_lo+j*.5 for j in range(round((time_hi-time_lo)*2)+1)],
-          xlabel='Complete proving time (s)')
-    # Separate nearby dots in physical units, without changing their time values.
-    x_scale = a.bbox.width / fig.dpi * 72 / (time_hi+.1-time_lo)
-    y_scale = a.bbox.height / fig.dpi * 72 / 3
+    time_lo = math.floor((min(times)-.05)*2)/2
+    time_hi = math.ceil((max(times)+.05)*2)/2
     for i, (mode, color, name) in enumerate(zip(MODES, COLORS, NAMES)):
+        a = axes(fig, (27+i*51, 79, 43, 29))
         values = sorted(row['prove_s'] for row in measured_rows(samples, mode, 'cse_dce'))
-        placed = []
-        for value in values:
-            for level in (0, 1, -1, 2, -2, 3, -3, 4):
-                offset = level * 5 / y_scale
-                if all(((value-x)*x_scale)**2 + ((offset-y)*y_scale)**2 >= 25
-                       for x, y in placed):
-                    break
-            if abs(offset) > .4:
-                raise ValueError('Insufficient row height to show every proof marker')
-            placed.append((value, offset))
-        a.scatter([value for value, _ in placed], [2-i+offset for _, offset in placed],
-                  s=18, facecolor=color, edgecolor='white', linewidth=.4, zorder=3)
+        a.step([time_lo, *values, time_hi], [0, *[100*j/n for j in range(1,n+1)], 100],
+               where='post', color=color, lw=1)
         median = summary['conditions'][f'cse_dce/{mode}']['prove_median_s']
-        a.plot([median, median], [2-i-.3, 2-i+.3], color=INK, lw=1, zorder=5)
-        ym = 77+(2-i+.5)/3*30
-        text(fig, 6, ym, name, bold=True, va='center')
-        text(fig, 165, ym, f'{median:.2f}', bold=True, va='center', ha='center')
+        a.axhline(50, color=RULE, lw=.6, zorder=0)
+        a.plot([median, median], [0, 50], color=INK, lw=.7, linestyle=(0,(3,2)))
+        a.plot(median, 50, 'o', color=INK, markersize=3, zorder=4)
+        a.set(xlim=(time_lo, time_hi), ylim=(0, 104), yticks=[0, 50, 100],
+              xlabel='Proving time (s)')
+        a.xaxis.set_major_locator(MaxNLocator(nbins=4, min_n_ticks=3))
+        if i==0:
+            a.set_ylabel('Proofs at or below time (%)')
+        else:
+            a.tick_params(axis='y', labelleft=False)
+        text(fig, 48.5+i*51, 115, name, bold=True, ha='center')
+        text(fig, 48.5+i*51, 110.5, f'Median {median:.2f} s', ha='center', size=6.5)
 
-    title(fig, 'b', 'Both block anchors add about 10%; SSZ has no resolved advantage', 62)
-    text(fig, 11, 55.5, 'Points: paired time change. Bars: 95% within-batch intervals (8 pairs).', size=6.5, color=MUTED)
+    title(fig, 'b', 'Additional proving time from block anchoring', 62)
+    text(fig, 11, 55.5, f'Points: paired time change. Bars: nominal 95% t intervals ({n} pairs).', size=6.5, color=MUTED)
     b = axes(fig, (50, 21, 97, 29))
     b.spines['left'].set_visible(False)
     b.tick_params(axis='y', left=False, labelleft=False)
@@ -170,9 +167,11 @@ def proving(destination, samples, summary):
     comparisons = [('cse_dce/rlp', 'cse_dce/direct', 'RLP vs direct state', COLORS[1]),
                    ('cse_dce/ssz', 'cse_dce/direct', 'SSZ vs direct state', COLORS[2]),
                    ('cse_dce/ssz', 'cse_dce/rlp', 'SSZ vs RLP', INK)]
+    limits = [0]
     for i, (num, den, label, color) in enumerate(comparisons):
         result = next(row for row in summary['comparisons'] if row['numerator']==num and row['denominator']==den)
         center, lo, hi = [100*(result[key]-1) for key in ('ratio', 'ci95_low', 'ci95_high')]
+        limits.extend((lo, hi))
         y=2-i
         b.errorbar(center, y, xerr=[[center-lo], [hi-center]], fmt='o', color=color,
                    markersize=4.5, elinewidth=1, capsize=2.5, capthick=.8)
@@ -180,17 +179,21 @@ def proving(destination, samples, summary):
         text(fig, 6, ym, label, va='center')
         text(fig, 165, ym+1.5, f'{center:+.1f}%', ha='center', va='center', bold=True)
         text(fig, 165, ym-2.2, f'[{lo:+.1f}, {hi:+.1f}]', ha='center', va='center', size=6.5, color=MUTED)
-    b.set(xlim=(-5, 17), ylim=(-.5, 2.5), xticks=[-5, 0, 5, 10, 15],
+    margin = max(.5, .1*(max(limits)-min(limits)))
+    b.set(xlim=(min(limits)-margin, max(limits)+margin), ylim=(-.5, 2.5),
           xlabel='Change in proving time (%)')
+    b.xaxis.set_major_locator(MaxNLocator(nbins=6, min_n_ticks=4))
+    text(fig, 6, 10.4, 'Early drift affects paired ratios; intervals assume independent rounds.', size=6.5, color=MUTED)
     text(fig, 6, 6.3, 'Apple M5 Max · 11 workers · AC power. One mainnet fixture with a fixed proof shape.', size=6.5)
     text(fig, 6, 2.2, '*Hypothetical SSZ summary; both state tries remain Keccak.', size=6.5, color=MUTED)
-    export(fig, destination/STEMS[1], 'All 24 optimized-program proof measurements and paired anchor comparisons')
+    export(fig, destination/STEMS[1], f'All {3*n} optimized-program proof measurements and paired anchor comparisons')
 
 
 def costs(destination, samples, summary):
+    n = measurement_count(summary)
     fig = figure(112)
     title(fig, 'a', 'Most time is spent constructing the proof', 106)
-    text(fig, 11, 99.5, 'Arithmetic means of 8 runs per anchor. Phase times do not overlap.', color=MUTED)
+    text(fig, 11, 99.5, f'Arithmetic means of {n} runs per anchor. Phase times do not overlap.', color=MUTED)
     phase_colors=('#5DAB97', '#BDC7CE', '#3D6F95')
     fig.legend(handles=[Patch(facecolor=color, label=name) for color, name in zip(phase_colors,
                ('VM execution', 'Witness tables', 'Proof work + cleanup'))],
@@ -215,7 +218,7 @@ def costs(destination, samples, summary):
     a.set(yticks=[2, 1, 0], yticklabels=NAMES, ylim=(-.5, 2.5),
           xlim=(0, math.ceil(max_mean/2)*2), xlabel='Mean complete proving time (s)')
 
-    title(fig, 'b', 'Some timing drift remains despite stable power settings', 50)
+    title(fig, 'b', 'Timing variation across the measurement rounds', 50)
     deviations=[]
     for mode in MODES:
         rows=measured_rows(samples, mode, 'cse_dce')
@@ -228,15 +231,17 @@ def costs(destination, samples, summary):
         rows=measured_rows(samples, mode, 'cse_dce')
         median=st.median(row['prove_s'] for row in rows)
         b.plot([row['block'] for row in rows], [100*(row['prove_s']/median-1) for row in rows],
-               color=color, lw=.8, marker='o', markersize=3.1, markeredgewidth=.65)
+               color=color, lw=.6, marker='o', markersize=1.8 if n>8 else 3.1, markeredgewidth=.3)
         b.axhline(0, color=RULE, lw=.6, zorder=0)
-        b.set(xticks=[1, 4, 8], xlim=(.7, 8.3), ylim=drift_limits, xlabel='Measurement round')
+        b.set(xticks=[1, 20, 40, 60, 80] if n==80 else [1, 4, 8],
+              xlim=(.7, n+.3), ylim=drift_limits, xlabel='Measurement round')
+        b.set_yticks(range(int(drift_limits[0]), int(drift_limits[1])+1, 5))
         if i==0:
             b.set_ylabel('From median (%)')
         else:
             b.tick_params(axis='y', labelleft=False)
     text(fig, 6, 2.2, '*Hypothetical SSZ summary; both state tries remain Keccak.', size=6.5, color=MUTED)
-    export(fig, destination/STEMS[2], 'Exclusive proof costs and timing drift for the 24 optimized-program proofs')
+    export(fig, destination/STEMS[2], f'Exclusive proof costs and timing drift for the {3*n} optimized-program proofs')
 
 
 def main():

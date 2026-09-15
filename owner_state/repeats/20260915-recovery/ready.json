@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-09-15T09:38:56.562306+00:00",
+  "status": "ready-for-fresh-preflight",
+  "generate": "owner_state/results/generate-20260915T093651868962Z",
+  "all_six_cases_match_previous": true,
+  "validation_files": {
+    "dependency-restoration.json": "cfa734b7b084625926eb33340d3cfb6f049393f71bd074944d045570450632fd",
+    "generated-validation.txt": "76586ab95593528a7c8dfda267e823bca646fe3153ad9be670a3883ddc01f6ca",
+    "full-tests.txt": "39178ac6f1e3b25928166ab0329ddc282c5cb690bade83c182a64bf7a99f6ef8"
+  },
+  "measured_proofs_at_start": 0,
+  "warmup_proofs_at_start": 0
+}

@@ -1,0 +1,1 @@
+{"validated": "owner binding", "measured_proofs": 48, "warmup_proofs": 6, "saved_proof_verifications": 6, "altered_witness_checks": 85, "hash_execution_diagnostics": 200, "generated_inputs_checked": false}
